@@ -1,0 +1,721 @@
+@prefix be: <http://data.europa.eu/949/example/be/> .
+@prefix nl: <http://data.europa.eu/949/example/nl/> .
+@prefix era: <http://data.europa.eu/949/> .
+@prefix org: <http://data.europa.eu/949/body/organisation/> .
+@prefix orgrole: <http://data.europa.eu/949/body/organisation/organisationRole/> .
+@prefix era-tdssc: <http://data.europa.eu/949/concepts/train-detection-specific-checks/> .
+@prefix era-ldia: <http://data.europa.eu/949/concepts/lineside-distance-indication-appearance/> .
+@prefix era-ldip: <http://data.europa.eu/949/concepts/lineside-distance-indication-positioning/> .
+@prefix era-rsf: <http://data.europa.eu/949/concepts/rolling-stock-fire/> .
+@prefix era-nv: <http://data.europa.eu/949/concepts/navigabilities/> .
+@prefix era-orient: <http://data.europa.eu/949/concepts/orientations/> .
+@prefix era-op-types: <http://data.europa.eu/949/concepts/op-types/> .
+@prefix era-sn: <http://data.europa.eu/949/concepts/sol-natures/> .
+@prefix era-trd: <http://data.europa.eu/949/concepts/track-running-directions/> .
+@prefix era-sigtypes: <http://data.europa.eu/949/concepts/signal-types/> .
+@prefix era-cls: <http://data.europa.eu/949/concepts/contact-line-systems/> .
+@prefix era-ess: <http://data.europa.eu/949/concepts/energy-supply-systems/> .
+@prefix era-etcslevel: <http://data.europa.eu/949/concepts/etcs-levels/> .
+@prefix era-etcsbaseline: <http://data.europa.eu/949/concepts/etcs-baselines/> .
+@prefix era-tds: <http://data.europa.eu/949/concepts/train-detection/> .
+@prefix era-ntg: <http://data.europa.eu/949/concepts/nominal-track-gauges/> .
+@prefix era-lclc: <http://data.europa.eu/949/concepts/load-capability-line-categories/> .
+@prefix era-subloctype: <http://data.europa.eu/949/concepts/subsidiary-location-types/> .
+@prefix era-org-roles: <http://data.europa.eu/949/concepts/organisation-roles/> .
+@prefix country: <http://publications.europa.eu/resource/authority/country/> .
+@prefix gsp: <http://www.opengis.net/ont/geosparql#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# RINF reference example - infrastructure manager "Beta Spoor" (NLD).
+# Fictive data on ERA ontology v3.3.4. Everything except the country is invented.
+# Geometries are schematic and lie in the North Sea.
+
+##############################################################################
+# 1. Infrastructure manager
+# era:infrastructureManager on every element points to the OrganisationRole, not to the Body.
+##############################################################################
+
+# The shapes require organisation IRIs in the ERA namespace; code 99xx is not a real organisation code.
+org:9902 a era:Body ;
+    era:organisationCode "9902" ;
+    rdfs:label "Beta Spoor"@en ;
+    era:role orgrole:9902_IM .
+
+orgrole:9902_IM a era:OrganisationRole ;
+    era:hasOrganisationRole era-org-roles:IM ;
+    era:roleOf org:9902 .
+
+
+##############################################################################
+# 2. Topology: linear elements
+# Each element runs from its origin to its end. The WKT is written in that same direction,
+# so the first coordinate is the origin. Offsets on an element are metres from the origin.
+##############################################################################
+
+nl:le_B1 a era:LinearElement ;
+    rdfs:label "B1 (We1 to BORD)"@en ;
+    era:lengthOfNetLinearElement "4800.0"^^xsd:double ;
+    gsp:hasGeometry nl:le_B1_geom .
+
+nl:le_B1_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.48800 52.60000, 3.42800 52.60000)"^^gsp:wktLiteral .
+
+nl:le_B2 a era:LinearElement ;
+    rdfs:label "B2 (We2 to We1)"@en ;
+    era:lengthOfNetLinearElement "800.0"^^xsd:double ;
+    gsp:hasGeometry nl:le_B2_geom .
+
+nl:le_B2_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.58800 52.60000, 3.48800 52.60000)"^^gsp:wktLiteral .
+
+nl:le_B3 a era:LinearElement ;
+    rdfs:label "B3 (We2 to We1)"@en ;
+    era:lengthOfNetLinearElement "820.0"^^xsd:double ;
+    gsp:hasGeometry nl:le_B3_geom .
+
+nl:le_B3_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.58800 52.60000, 3.57800 52.60480, 3.49800 52.60480, 3.48800 52.60000)"^^gsp:wktLiteral .
+
+nl:le_B4 a era:LinearElement ;
+    rdfs:label "B4 (END to We2)"@en ;
+    era:lengthOfNetLinearElement "400.0"^^xsd:double ;
+    gsp:hasGeometry nl:le_B4_geom .
+
+nl:le_B4_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.62000 52.60000, 3.58800 52.60000)"^^gsp:wktLiteral .
+
+
+##############################################################################
+# 3. Topology: net relations
+# One relation per pair of elements that meet in a point.
+# isOnOriginOfElementA/B says which end of each element is at that point.
+# A simple switch has three: two navigable (Both) and one between its two legs (None).
+##############################################################################
+
+# --- switch 101 at node We1: common branch B1, legs B2 and B3
+nl:nr_We1_B1_B2 a era:NetRelation ;
+    era:elementA nl:le_B1 ;
+    era:isOnOriginOfElementA true ;
+    era:elementB nl:le_B2 ;
+    era:isOnOriginOfElementB false ;
+    era:navigability era-nv:Both .
+
+nl:nr_We1_B1_B3 a era:NetRelation ;
+    era:elementA nl:le_B1 ;
+    era:isOnOriginOfElementA true ;
+    era:elementB nl:le_B3 ;
+    era:isOnOriginOfElementB false ;
+    era:navigability era-nv:Both .
+
+nl:nr_We1_B2_B3 a era:NetRelation ;
+    era:elementA nl:le_B2 ;
+    era:isOnOriginOfElementA false ;
+    era:elementB nl:le_B3 ;
+    era:isOnOriginOfElementB false ;
+    era:navigability era-nv:None .
+
+# --- switch 102 at node We2: common branch B4, legs B2 and B3
+nl:nr_We2_B4_B2 a era:NetRelation ;
+    era:elementA nl:le_B4 ;
+    era:isOnOriginOfElementA false ;
+    era:elementB nl:le_B2 ;
+    era:isOnOriginOfElementB true ;
+    era:navigability era-nv:Both .
+
+nl:nr_We2_B4_B3 a era:NetRelation ;
+    era:elementA nl:le_B4 ;
+    era:isOnOriginOfElementA false ;
+    era:elementB nl:le_B3 ;
+    era:isOnOriginOfElementB true ;
+    era:navigability era-nv:Both .
+
+nl:nr_We2_B2_B3 a era:NetRelation ;
+    era:elementA nl:le_B2 ;
+    era:isOnOriginOfElementA true ;
+    era:elementB nl:le_B3 ;
+    era:isOnOriginOfElementB true ;
+    era:navigability era-nv:None .
+
+
+##############################################################################
+# 4. Line referencing
+# A linear positioning system per line, with kilometric posts placed on the topology.
+##############################################################################
+
+nl:line_7 a era:LinearPositioningSystem ;
+    rdfs:label "Line 7"@en ;
+    era:lineId "7" .
+
+nl:kp_line_7_0 a era:KilometricPost ;
+    rdfs:label "km 0"@en ;
+    era:hasLRS nl:line_7 ;
+    era:kilometer "0.0"^^xsd:double ;
+    era:inCountry country:NLD ;
+    era:infrastructureManager orgrole:9902_IM ;
+    era:netReference nl:kp_line_7_0_ref .
+
+nl:kp_line_7_0_ref a era:NetPointReference ;
+    era:hasTopoCoordinate nl:kp_line_7_0_ref_tc ;
+    gsp:hasGeometry nl:kp_line_7_0_ref_geom .
+
+nl:kp_line_7_0_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.62000 52.60000)"^^gsp:wktLiteral .
+
+nl:kp_line_7_0_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement nl:le_B4 ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+nl:kp_line_7_1 a era:KilometricPost ;
+    rdfs:label "km 1"@en ;
+    era:hasLRS nl:line_7 ;
+    era:kilometer "1.0"^^xsd:double ;
+    era:inCountry country:NLD ;
+    era:infrastructureManager orgrole:9902_IM ;
+    era:netReference nl:kp_line_7_1_ref .
+
+nl:kp_line_7_1_ref a era:NetPointReference ;
+    era:hasTopoCoordinate nl:kp_line_7_1_ref_tc ;
+    gsp:hasGeometry nl:kp_line_7_1_ref_geom .
+
+nl:kp_line_7_1_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.51300 52.60000)"^^gsp:wktLiteral .
+
+nl:kp_line_7_1_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement nl:le_B2 ;
+    era:offsetFromOrigin "600.0"^^xsd:double .
+
+nl:kp_line_7_3 a era:KilometricPost ;
+    rdfs:label "km 3"@en ;
+    era:hasLRS nl:line_7 ;
+    era:kilometer "3.0"^^xsd:double ;
+    era:inCountry country:NLD ;
+    era:infrastructureManager orgrole:9902_IM ;
+    era:netReference nl:kp_line_7_3_ref .
+
+nl:kp_line_7_3_ref a era:NetPointReference ;
+    era:hasTopoCoordinate nl:kp_line_7_3_ref_tc ;
+    gsp:hasGeometry nl:kp_line_7_3_ref_geom .
+
+nl:kp_line_7_3_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.46550 52.60000)"^^gsp:wktLiteral .
+
+nl:kp_line_7_3_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement nl:le_B1 ;
+    era:offsetFromOrigin "1800.0"^^xsd:double .
+
+nl:kp_line_7_6 a era:KilometricPost ;
+    rdfs:label "km 6"@en ;
+    era:hasLRS nl:line_7 ;
+    era:kilometer "6.0"^^xsd:double ;
+    era:inCountry country:NLD ;
+    era:infrastructureManager orgrole:9902_IM ;
+    era:netReference nl:kp_line_7_6_ref .
+
+nl:kp_line_7_6_ref a era:NetPointReference ;
+    era:hasTopoCoordinate nl:kp_line_7_6_ref_tc ;
+    gsp:hasGeometry nl:kp_line_7_6_ref_geom .
+
+nl:kp_line_7_6_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.42800 52.60000)"^^gsp:wktLiteral .
+
+nl:kp_line_7_6_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement nl:le_B1 ;
+    era:offsetFromOrigin "4800.0"^^xsd:double .
+
+
+##############################################################################
+# 5. Subsystems that tracks point to
+# Contact line system and train detection are not infrastructure elements in v3.3.4:
+# they have no net reference. Their extent is the set of tracks that point to them.
+##############################################################################
+
+nl:cls_1500 a era:ContactLineSystem ;
+    rdfs:label "Overhead contact line 1.5 kV DC"@en ;
+    era:contactLineSystemType era-cls:10 ;
+    era:energySupplySystem era-ess:DC40 ;
+    era:maxTrainCurrent "4000"^^xsd:integer ;
+    era:umax2 "1950"^^xsd:integer ;
+    era:maxCurrentStandstillPantograph "300"^^xsd:integer ;
+    era:minimumContactWireHeight "4.9"^^xsd:double ;
+    era:maximumContactWireHeight "5.8"^^xsd:double .
+
+nl:ldi_km a era:LinesideDistanceIndication ;
+    rdfs:label "Kilometre posts every 1000 m"@en ;
+    era:linesideDistanceIndicationAppearance era-ldia:00 ;
+    era:linesideDistanceIndicationFrequency "1000"^^xsd:integer ;
+    era:linesideDistanceIndicationPositioning era-ldip:00 .
+
+nl:tds_tc a era:TrainDetectionSystem ;
+    rdfs:label "Track circuits"@en ;
+    era:trainDetectionSystemType era-tds:10 ;
+    era:trainDetectionSystemSpecificCheck era-tdssc:NotApplicable .
+
+
+##############################################################################
+# 6. Operational points and their tracks
+# An operational point covers an area: its net reference includes the linear references of its tracks.
+# A track is a sequence of linear elements with a start and an end, which may lie inside an element.
+##############################################################################
+
+# ---------- Eastgate (NLEGT)
+nl:op_EGT_validity a era:TemporalFeature, time:Interval ;
+    time:hasBeginning nl:op_EGT_validity_begin .
+
+nl:op_EGT_validity_begin a time:Instant ;
+    time:inXSDDate "2026-01-01"^^xsd:date .
+
+nl:op_EGT a era:OperationalPoint ;
+    rdfs:label "Eastgate"@en ;
+    era:opName "Eastgate"@en ;
+    era:uopid "NLEGT" ;
+    era:opType era-op-types:20 ;
+    era:inCountry country:NLD ;
+    era:infrastructureManager orgrole:9902_IM ;
+    era:netReference nl:op_EGT_ref ;
+    era:hasPart nl:trk_EGT_1, nl:trk_EGT_2 ;
+    era:validity nl:op_EGT_validity .
+
+nl:op_EGT_ref a era:NetAreaReference ;
+    era:includes ( nl:trk_EGT_1_ref nl:trk_EGT_2_ref ) ;
+    gsp:hasGeometry nl:op_EGT_ref_geom .
+
+nl:op_EGT_ref_geom a gsp:Geometry ;
+    gsp:asWKT "MULTILINESTRING((3.62000 52.60000, 3.58800 52.60000, 3.48800 52.60000, 3.48425 52.60000), (3.58800 52.60000, 3.57800 52.60480, 3.49800 52.60480, 3.48800 52.60000))"^^gsp:wktLiteral .
+
+nl:trk_EGT_1 a era:RunningTrack ;
+    rdfs:label "Eastgate track 1"@en ;
+    era:trackId "1" ;
+    era:inCountry country:NLD ;
+    era:infrastructureManager orgrole:9902_IM ;
+    era:netReference nl:trk_EGT_1_ref ;
+    era:wheelSetGauge era-ntg:30 ;
+    era:contactLineSystem nl:cls_1500 ;
+    era:trainDetectionSystem nl:tds_tc ;
+    era:notYetAvailable era:etcs ;
+    era:maximumPermittedSpeed "80"^^xsd:integer .
+
+nl:trk_EGT_1_ref a era:NetLinearReference ;
+    era:hasSequence ( nl:le_B4 nl:le_B2 nl:le_B1 ) ;
+    era:startsAt nl:trk_EGT_1_ref_start ;
+    era:endsAt nl:trk_EGT_1_ref_end ;
+    gsp:hasGeometry nl:trk_EGT_1_ref_geom .
+
+nl:trk_EGT_1_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.62000 52.60000, 3.58800 52.60000, 3.48800 52.60000, 3.48425 52.60000)"^^gsp:wktLiteral .
+
+nl:trk_EGT_1_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate nl:trk_EGT_1_ref_start_tc .
+
+nl:trk_EGT_1_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement nl:le_B4 ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+nl:trk_EGT_1_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate nl:trk_EGT_1_ref_end_tc .
+
+nl:trk_EGT_1_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement nl:le_B1 ;
+    era:offsetFromOrigin "300.0"^^xsd:double .
+
+nl:trk_EGT_2 a era:RunningTrack ;
+    rdfs:label "Eastgate track 2"@en ;
+    era:trackId "2" ;
+    era:inCountry country:NLD ;
+    era:infrastructureManager orgrole:9902_IM ;
+    era:netReference nl:trk_EGT_2_ref ;
+    era:wheelSetGauge era-ntg:30 ;
+    era:contactLineSystem nl:cls_1500 ;
+    era:trainDetectionSystem nl:tds_tc ;
+    era:notYetAvailable era:etcs ;
+    era:maximumPermittedSpeed "40"^^xsd:integer .
+
+nl:trk_EGT_2_ref a era:NetLinearReference ;
+    era:hasSequence ( nl:le_B3 ) ;
+    era:startsAt nl:trk_EGT_2_ref_start ;
+    era:endsAt nl:trk_EGT_2_ref_end ;
+    gsp:hasGeometry nl:trk_EGT_2_ref_geom .
+
+nl:trk_EGT_2_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.58800 52.60000, 3.57800 52.60480, 3.49800 52.60480, 3.48800 52.60000)"^^gsp:wktLiteral .
+
+nl:trk_EGT_2_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate nl:trk_EGT_2_ref_start_tc .
+
+nl:trk_EGT_2_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement nl:le_B3 ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+nl:trk_EGT_2_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate nl:trk_EGT_2_ref_end_tc .
+
+nl:trk_EGT_2_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement nl:le_B3 ;
+    era:offsetFromOrigin "820.0"^^xsd:double .
+
+# ---------- Border point (EU99901)
+nl:op_BORD_validity a era:TemporalFeature, time:Interval ;
+    time:hasBeginning nl:op_BORD_validity_begin .
+
+nl:op_BORD_validity_begin a time:Instant ;
+    time:inXSDDate "2026-01-01"^^xsd:date .
+
+# Both IMs deliver a record for the border point, with the same UOPID (prefix EU, not a country code),
+# the same reference border point and the same canonical URI. It is a point on this IM's last element.
+nl:op_BORD a era:OperationalPoint ;
+    rdfs:label "Westhaven border"@en ;
+    era:opName "Westhaven border"@en ;
+    era:uopid "EU99901" ;
+    era:opType era-op-types:90 ;
+    era:inCountry country:NLD ;
+    era:infrastructureManager orgrole:9902_IM ;
+    era:netReference nl:op_BORD_ref ;
+    era:referenceBorderPoint <http://data.europa.eu/949/referenceBorderPoints/EU99901> ;
+    era:canonicalURI <http://data.europa.eu/949/example/operationalPoint/EU99901> ;
+    era:validity nl:op_BORD_validity .
+
+nl:op_BORD_ref a era:NetPointReference ;
+    era:hasTopoCoordinate nl:op_BORD_ref_tc ;
+    era:hasLrsCoordinate nl:op_BORD_ref_lrs ;
+    gsp:hasGeometry nl:op_BORD_ref_geom .
+
+nl:op_BORD_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.42800 52.60000)"^^gsp:wktLiteral .
+
+nl:op_BORD_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement nl:le_B1 ;
+    era:offsetFromOrigin "4800.0"^^xsd:double .
+
+nl:op_BORD_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost nl:kp_line_7_6 ;
+    era:offsetFromKilometricPost "0.0"^^xsd:double .
+
+
+##############################################################################
+# 7. Sections of line and their tracks
+# A section of line runs from opStart to opEnd. era:trackDirection on its tracks is relative to that:
+# N (10) = same direction, O (20) = opposite, B (30) = both.
+##############################################################################
+
+nl:sol_EGT_BORD_validity a era:TemporalFeature, time:Interval ;
+    time:hasBeginning nl:sol_EGT_BORD_validity_begin .
+
+nl:sol_EGT_BORD_validity_begin a time:Instant ;
+    time:inXSDDate "2026-01-01"^^xsd:date .
+
+nl:sol_EGT_BORD a era:SectionOfLine ;
+    rdfs:label "EGT - BORD"@en ;
+    era:opStart nl:op_EGT ;
+    era:opEnd nl:op_BORD ;
+    era:solNature era-sn:10 ;
+    era:lengthOfSectionOfLine "4.5"^^xsd:double ;
+    era:nationalLine nl:line_7 ;
+    era:inCountry country:NLD ;
+    era:infrastructureManager orgrole:9902_IM ;
+    era:netReference nl:sol_EGT_BORD_ref ;
+    era:hasPart nl:trk_EGT_BORD_1 ;
+    era:validity nl:sol_EGT_BORD_validity .
+
+nl:sol_EGT_BORD_ref a era:NetAreaReference ;
+    era:includes ( nl:trk_EGT_BORD_1_ref ) ;
+    gsp:hasGeometry nl:sol_EGT_BORD_ref_geom .
+
+nl:sol_EGT_BORD_ref_geom a gsp:Geometry ;
+    gsp:asWKT "MULTILINESTRING((3.48425 52.60000, 3.42800 52.60000))"^^gsp:wktLiteral .
+
+nl:trk_EGT_BORD_1 a era:RunningTrack ;
+    rdfs:label "Eastgate - border"@en ;
+    era:trackId "1" ;
+    era:inCountry country:NLD ;
+    era:infrastructureManager orgrole:9902_IM ;
+    era:netReference nl:trk_EGT_BORD_1_ref ;
+    era:wheelSetGauge era-ntg:30 ;
+    era:contactLineSystem nl:cls_1500 ;
+    era:trainDetectionSystem nl:tds_tc ;
+    era:notYetAvailable era:etcs ;
+    era:maximumPermittedSpeed "100"^^xsd:integer ;
+    era:trackDirection era-trd:30 ;
+    era:linesideDistanceIndication nl:ldi_km .
+
+nl:trk_EGT_BORD_1_ref a era:NetLinearReference ;
+    era:hasSequence ( nl:le_B1 ) ;
+    era:startsAt nl:trk_EGT_BORD_1_ref_start ;
+    era:endsAt nl:trk_EGT_BORD_1_ref_end ;
+    gsp:hasGeometry nl:trk_EGT_BORD_1_ref_geom .
+
+nl:trk_EGT_BORD_1_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.48425 52.60000, 3.42800 52.60000)"^^gsp:wktLiteral .
+
+nl:trk_EGT_BORD_1_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate nl:trk_EGT_BORD_1_ref_start_tc .
+
+nl:trk_EGT_BORD_1_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement nl:le_B1 ;
+    era:offsetFromOrigin "300.0"^^xsd:double .
+
+nl:trk_EGT_BORD_1_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate nl:trk_EGT_BORD_1_ref_end_tc .
+
+nl:trk_EGT_BORD_1_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement nl:le_B1 ;
+    era:offsetFromOrigin "4800.0"^^xsd:double .
+
+
+##############################################################################
+# 8. Switches
+# A switch has one net point reference, at the point where its elements meet, given on the common branch.
+# v3.3.4 has no switch properties: facing or trailing follows from the net relations at that point.
+##############################################################################
+
+nl:sw_101 a era:Switch ;
+    rdfs:label "Switch 101"@en ;
+    era:inCountry country:NLD ;
+    era:infrastructureManager orgrole:9902_IM ;
+    era:netReference nl:sw_101_ref .
+
+nl:sw_101_ref a era:NetPointReference ;
+    era:hasTopoCoordinate nl:sw_101_ref_tc ;
+    era:appliesToDirection era-orient:02 ;
+    era:hasLrsCoordinate nl:sw_101_ref_lrs ;
+    gsp:hasGeometry nl:sw_101_ref_geom .
+
+nl:sw_101_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.48800 52.60000)"^^gsp:wktLiteral .
+
+nl:sw_101_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement nl:le_B1 ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+nl:sw_101_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost nl:kp_line_7_1 ;
+    era:offsetFromKilometricPost "200.0"^^xsd:double .
+
+nl:sw_102 a era:Switch ;
+    rdfs:label "Switch 102"@en ;
+    era:inCountry country:NLD ;
+    era:infrastructureManager orgrole:9902_IM ;
+    era:netReference nl:sw_102_ref .
+
+nl:sw_102_ref a era:NetPointReference ;
+    era:hasTopoCoordinate nl:sw_102_ref_tc ;
+    era:appliesToDirection era-orient:02 ;
+    era:hasLrsCoordinate nl:sw_102_ref_lrs ;
+    gsp:hasGeometry nl:sw_102_ref_geom .
+
+nl:sw_102_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.58800 52.60000)"^^gsp:wktLiteral .
+
+nl:sw_102_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement nl:le_B4 ;
+    era:offsetFromOrigin "400.0"^^xsd:double .
+
+nl:sw_102_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost nl:kp_line_7_0 ;
+    era:offsetFromKilometricPost "400.0"^^xsd:double .
+
+
+##############################################################################
+# 9. Signals
+# Three statements about direction, each in its own frame:
+#  - era:appliesToDirection on the net point reference: relative to the linear element (origin to end);
+#  - era:hasOrientation: direction and side relative to the carrier linear element;
+#  - era:signalOrientation: relative to the direction of the line (rising kilometrage).
+# On an element that runs against the line they give different values.
+##############################################################################
+
+nl:sig_EH a era:Signal ;
+    rdfs:label "Eastgate home signal west"@en ;
+    era:signalId "EH" ;
+    era:signalType era-sigtypes:01 ;
+    era:signalOrientation era-orient:01 ;
+    era:hasOrientation nl:sig_EH_orientation ;
+    era:inCountry country:NLD ;
+    era:infrastructureManager orgrole:9902_IM ;
+    era:netReference nl:sig_EH_ref .
+
+nl:sig_EH_orientation a era:Orientation ;
+    era:carrierLinearElement nl:le_B1 ;
+    era:direction era-orient:01 ;
+    era:side era-orient:Left .
+
+nl:sig_EH_ref a era:NetPointReference ;
+    era:hasTopoCoordinate nl:sig_EH_ref_tc ;
+    era:appliesToDirection era-orient:01 ;
+    era:hasLrsCoordinate nl:sig_EH_ref_lrs ;
+    gsp:hasGeometry nl:sig_EH_ref_geom .
+
+nl:sig_EH_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.48425 52.60000)"^^gsp:wktLiteral .
+
+nl:sig_EH_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement nl:le_B1 ;
+    era:offsetFromOrigin "300.0"^^xsd:double .
+
+nl:sig_EH_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost nl:kp_line_7_1 ;
+    era:offsetFromKilometricPost "500.0"^^xsd:double .
+
+nl:sig_EX1 a era:Signal ;
+    rdfs:label "Eastgate exit signal track 1"@en ;
+    era:signalId "EX1" ;
+    era:signalType era-sigtypes:04 ;
+    era:signalOrientation era-orient:00 ;
+    era:hasOrientation nl:sig_EX1_orientation ;
+    era:inCountry country:NLD ;
+    era:infrastructureManager orgrole:9902_IM ;
+    era:netReference nl:sig_EX1_ref .
+
+nl:sig_EX1_orientation a era:Orientation ;
+    era:carrierLinearElement nl:le_B2 ;
+    era:direction era-orient:00 ;
+    era:side era-orient:Right .
+
+nl:sig_EX1_ref a era:NetPointReference ;
+    era:hasTopoCoordinate nl:sig_EX1_ref_tc ;
+    era:appliesToDirection era-orient:00 ;
+    era:hasLrsCoordinate nl:sig_EX1_ref_lrs ;
+    gsp:hasGeometry nl:sig_EX1_ref_geom .
+
+nl:sig_EX1_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.50050 52.60000)"^^gsp:wktLiteral .
+
+nl:sig_EX1_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement nl:le_B2 ;
+    era:offsetFromOrigin "700.0"^^xsd:double .
+
+nl:sig_EX1_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost nl:kp_line_7_1 ;
+    era:offsetFromKilometricPost "100.0"^^xsd:double .
+
+nl:sig_EX2 a era:Signal ;
+    rdfs:label "Eastgate exit signal track 2"@en ;
+    era:signalId "EX2" ;
+    era:signalType era-sigtypes:04 ;
+    era:signalOrientation era-orient:00 ;
+    era:hasOrientation nl:sig_EX2_orientation ;
+    era:inCountry country:NLD ;
+    era:infrastructureManager orgrole:9902_IM ;
+    era:netReference nl:sig_EX2_ref .
+
+nl:sig_EX2_orientation a era:Orientation ;
+    era:carrierLinearElement nl:le_B3 ;
+    era:direction era-orient:00 ;
+    era:side era-orient:Right .
+
+nl:sig_EX2_ref a era:NetPointReference ;
+    era:hasTopoCoordinate nl:sig_EX2_ref_tc ;
+    era:appliesToDirection era-orient:00 ;
+    era:hasLrsCoordinate nl:sig_EX2_ref_lrs ;
+    gsp:hasGeometry nl:sig_EX2_ref_geom .
+
+nl:sig_EX2_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.49807 52.60480)"^^gsp:wktLiteral .
+
+nl:sig_EX2_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement nl:le_B3 ;
+    era:offsetFromOrigin "720.0"^^xsd:double .
+
+nl:sig_EX2_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost nl:kp_line_7_1 ;
+    era:offsetFromKilometricPost "100.0"^^xsd:double .
+
+nl:sig_EHE a era:Signal ;
+    rdfs:label "Eastgate home signal east"@en ;
+    era:signalId "EHE" ;
+    era:signalType era-sigtypes:01 ;
+    era:signalOrientation era-orient:00 ;
+    era:hasOrientation nl:sig_EHE_orientation ;
+    era:inCountry country:NLD ;
+    era:infrastructureManager orgrole:9902_IM ;
+    era:netReference nl:sig_EHE_ref .
+
+nl:sig_EHE_orientation a era:Orientation ;
+    era:carrierLinearElement nl:le_B4 ;
+    era:direction era-orient:00 ;
+    era:side era-orient:Right .
+
+nl:sig_EHE_ref a era:NetPointReference ;
+    era:hasTopoCoordinate nl:sig_EHE_ref_tc ;
+    era:appliesToDirection era-orient:00 ;
+    era:hasLrsCoordinate nl:sig_EHE_ref_lrs ;
+    gsp:hasGeometry nl:sig_EHE_ref_geom .
+
+nl:sig_EHE_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.61200 52.60000)"^^gsp:wktLiteral .
+
+nl:sig_EHE_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement nl:le_B4 ;
+    era:offsetFromOrigin "100.0"^^xsd:double .
+
+nl:sig_EHE_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost nl:kp_line_7_0 ;
+    era:offsetFromKilometricPost "100.0"^^xsd:double .
+
+
+##############################################################################
+# 10. Platform edge
+##############################################################################
+
+nl:pe_EGT_2 a era:PlatformEdge ;
+    rdfs:label "Platform 2"@en ;
+    era:platformId "2" ;
+    era:lengthOfPlatform "400.0"^^xsd:double ;
+    era:inCountry country:NLD ;
+    era:infrastructureManager orgrole:9902_IM ;
+    era:netReference nl:pe_EGT_2_ref .
+
+nl:pe_EGT_2_ref a era:NetLinearReference ;
+    era:hasSequence ( nl:le_B3 ) ;
+    era:startsAt nl:pe_EGT_2_ref_start ;
+    era:endsAt nl:pe_EGT_2_ref_end ;
+    gsp:hasGeometry nl:pe_EGT_2_ref_geom .
+
+nl:pe_EGT_2_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.56505 52.60480, 3.51353 52.60480)"^^gsp:wktLiteral .
+
+nl:pe_EGT_2_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate nl:pe_EGT_2_ref_start_tc .
+
+nl:pe_EGT_2_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement nl:le_B3 ;
+    era:offsetFromOrigin "200.0"^^xsd:double .
+
+nl:pe_EGT_2_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate nl:pe_EGT_2_ref_end_tc .
+
+nl:pe_EGT_2_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement nl:le_B3 ;
+    era:offsetFromOrigin "600.0"^^xsd:double .
+
+
+##############################################################################
+# 11. Primary and subsidiary locations
+# Location codes for the telematics messages. An operational point points to its primary location;
+# a subsidiary location points to the primary location it belongs to.
+##############################################################################
+
+nl:pl_EGT a era:PrimaryLocation ;
+    rdfs:label "Eastgate"@en ;
+    era:primaryLocationCode "NL99001" ;
+    era:primaryLocationName "Eastgate"@en ;
+    era:passengerFlag true ;
+    era:freightFlag false ;
+    era:inCountry country:NLD ;
+    era:infrastructureManager orgrole:9902_IM ;
+    era:netReference nl:pl_EGT_ref .
+
+nl:pl_EGT_ref a era:NetPointReference ;
+    era:hasTopoCoordinate nl:pl_EGT_ref_tc ;
+    gsp:hasGeometry nl:pl_EGT_ref_geom .
+
+nl:pl_EGT_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.53800 52.60000)"^^gsp:wktLiteral .
+
+nl:pl_EGT_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement nl:le_B2 ;
+    era:offsetFromOrigin "400.0"^^xsd:double .
+
+nl:op_EGT era:primaryLocation nl:pl_EGT .

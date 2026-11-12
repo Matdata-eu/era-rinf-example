@@ -1,0 +1,41 @@
+@prefix be: <http://data.europa.eu/949/example/be/> .
+@prefix nl: <http://data.europa.eu/949/example/nl/> .
+@prefix era: <http://data.europa.eu/949/> .
+@prefix org: <http://data.europa.eu/949/body/organisation/> .
+@prefix orgrole: <http://data.europa.eu/949/body/organisation/organisationRole/> .
+@prefix era-tdssc: <http://data.europa.eu/949/concepts/train-detection-specific-checks/> .
+@prefix era-ldia: <http://data.europa.eu/949/concepts/lineside-distance-indication-appearance/> .
+@prefix era-ldip: <http://data.europa.eu/949/concepts/lineside-distance-indication-positioning/> .
+@prefix era-rsf: <http://data.europa.eu/949/concepts/rolling-stock-fire/> .
+@prefix era-nv: <http://data.europa.eu/949/concepts/navigabilities/> .
+@prefix era-orient: <http://data.europa.eu/949/concepts/orientations/> .
+@prefix era-op-types: <http://data.europa.eu/949/concepts/op-types/> .
+@prefix era-sn: <http://data.europa.eu/949/concepts/sol-natures/> .
+@prefix era-trd: <http://data.europa.eu/949/concepts/track-running-directions/> .
+@prefix era-sigtypes: <http://data.europa.eu/949/concepts/signal-types/> .
+@prefix era-cls: <http://data.europa.eu/949/concepts/contact-line-systems/> .
+@prefix era-ess: <http://data.europa.eu/949/concepts/energy-supply-systems/> .
+@prefix era-etcslevel: <http://data.europa.eu/949/concepts/etcs-levels/> .
+@prefix era-etcsbaseline: <http://data.europa.eu/949/concepts/etcs-baselines/> .
+@prefix era-tds: <http://data.europa.eu/949/concepts/train-detection/> .
+@prefix era-ntg: <http://data.europa.eu/949/concepts/nominal-track-gauges/> .
+@prefix era-lclc: <http://data.europa.eu/949/concepts/load-capability-line-categories/> .
+@prefix era-subloctype: <http://data.europa.eu/949/concepts/subsidiary-location-types/> .
+@prefix era-org-roles: <http://data.europa.eu/949/concepts/organisation-roles/> .
+@prefix country: <http://publications.europa.eu/resource/authority/country/> .
+@prefix gsp: <http://www.opengis.net/ont/geosparql#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Stand-in for data that ERA manages. An IM does not deliver this; it is here so that the example is complete.
+
+<http://data.europa.eu/949/referenceBorderPoints/EU99901> a era:ReferenceBorderPoint ;
+    rdfs:label "Westhaven border (fictive reference border point)"@en ;
+    era:borderPointId "EU99901" ;
+    gsp:hasGeometry <http://data.europa.eu/949/referenceBorderPoints/EU99901/geometry> .
+
+<http://data.europa.eu/949/referenceBorderPoints/EU99901/geometry> a gsp:Geometry ;
+    gsp:asWKT "POINT(3.42800 52.60000)"^^gsp:wktLiteral .

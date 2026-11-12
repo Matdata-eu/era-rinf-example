@@ -1,0 +1,22 @@
+:root {
+  --font: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "Cascadia Code", "SFMono-Regular", Menlo, Consolas, monospace;
+  --c-era: #004494;      /* ERA / EU blue */
+  --c-era-yellow: #ffd617;
+  --c-bg: #f3f5f8;
+  --c-panel: #ffffff;
+  --c-ink: #1b2330;
+  --c-ink-soft: #55607a;
+  --c-stroke: #d8dde6;
+  --c-be: #004494;
+  --c-nl: #c8500a;
+  --c-sig: #d0021b;
+  --c-hl: #ffd617;
+  --c-code-bg: #14213b;
+  --c-code: #dfe7f5;
+}
+* { box-sizing: border-box; }
+html, body, #app { height: 100%; margin: 0; }
+body { font-family: var(--font); color: var(--c-ink); background: var(--c-bg); }
+code { font-family: var(--mono); font-size: 0.92em; background: #e9edf4; padding: 0 4px; border-radius: 3px; }
+b.be { color: var(--c-be); } b.nl { color: var(--c-nl); }

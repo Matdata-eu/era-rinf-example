@@ -1,0 +1,2791 @@
+@prefix be: <http://data.europa.eu/949/example/be/> .
+@prefix nl: <http://data.europa.eu/949/example/nl/> .
+@prefix era: <http://data.europa.eu/949/> .
+@prefix org: <http://data.europa.eu/949/body/organisation/> .
+@prefix orgrole: <http://data.europa.eu/949/body/organisation/organisationRole/> .
+@prefix era-tdssc: <http://data.europa.eu/949/concepts/train-detection-specific-checks/> .
+@prefix era-ldia: <http://data.europa.eu/949/concepts/lineside-distance-indication-appearance/> .
+@prefix era-ldip: <http://data.europa.eu/949/concepts/lineside-distance-indication-positioning/> .
+@prefix era-rsf: <http://data.europa.eu/949/concepts/rolling-stock-fire/> .
+@prefix era-nv: <http://data.europa.eu/949/concepts/navigabilities/> .
+@prefix era-orient: <http://data.europa.eu/949/concepts/orientations/> .
+@prefix era-op-types: <http://data.europa.eu/949/concepts/op-types/> .
+@prefix era-sn: <http://data.europa.eu/949/concepts/sol-natures/> .
+@prefix era-trd: <http://data.europa.eu/949/concepts/track-running-directions/> .
+@prefix era-sigtypes: <http://data.europa.eu/949/concepts/signal-types/> .
+@prefix era-cls: <http://data.europa.eu/949/concepts/contact-line-systems/> .
+@prefix era-ess: <http://data.europa.eu/949/concepts/energy-supply-systems/> .
+@prefix era-etcslevel: <http://data.europa.eu/949/concepts/etcs-levels/> .
+@prefix era-etcsbaseline: <http://data.europa.eu/949/concepts/etcs-baselines/> .
+@prefix era-tds: <http://data.europa.eu/949/concepts/train-detection/> .
+@prefix era-ntg: <http://data.europa.eu/949/concepts/nominal-track-gauges/> .
+@prefix era-lclc: <http://data.europa.eu/949/concepts/load-capability-line-categories/> .
+@prefix era-subloctype: <http://data.europa.eu/949/concepts/subsidiary-location-types/> .
+@prefix era-org-roles: <http://data.europa.eu/949/concepts/organisation-roles/> .
+@prefix country: <http://publications.europa.eu/resource/authority/country/> .
+@prefix gsp: <http://www.opengis.net/ont/geosparql#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# RINF reference example - infrastructure manager "Infra Alfa" (BEL).
+# Fictive data on ERA ontology v3.3.4. Everything except the country is invented.
+# Geometries are schematic and lie in the North Sea.
+
+##############################################################################
+# 1. Infrastructure manager
+# era:infrastructureManager on every element points to the OrganisationRole, not to the Body.
+##############################################################################
+
+# The shapes require organisation IRIs in the ERA namespace; code 99xx is not a real organisation code.
+org:9901 a era:Body ;
+    era:organisationCode "9901" ;
+    rdfs:label "Infra Alfa"@en ;
+    era:role orgrole:9901_IM .
+
+orgrole:9901_IM a era:OrganisationRole ;
+    era:hasOrganisationRole era-org-roles:IM ;
+    era:roleOf org:9901 .
+
+
+##############################################################################
+# 2. Topology: linear elements
+# Each element runs from its origin to its end. The WKT is written in that same direction,
+# so the first coordinate is the origin. Offsets on an element are metres from the origin.
+##############################################################################
+
+be:le_a1 a era:LinearElement ;
+    rdfs:label "a1 (A1 to W1)"@en ;
+    era:lengthOfNetLinearElement "400.0"^^xsd:double ;
+    gsp:hasGeometry be:le_a1_geom .
+
+be:le_a1_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(2.90000 52.60480, 2.94160 52.60480)"^^gsp:wktLiteral .
+
+be:le_a2 a era:LinearElement ;
+    rdfs:label "a2 (W1 to W6)"@en ;
+    era:lengthOfNetLinearElement "200.0"^^xsd:double ;
+    gsp:hasGeometry be:le_a2_geom .
+
+be:le_a2_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(2.94160 52.60480, 2.96240 52.60480)"^^gsp:wktLiteral .
+
+be:le_a3 a era:LinearElement ;
+    rdfs:label "a3 (W6 to W2)"@en ;
+    era:lengthOfNetLinearElement "150.0"^^xsd:double ;
+    gsp:hasGeometry be:le_a3_geom .
+
+be:le_a3_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(2.96240 52.60480, 2.97800 52.60480)"^^gsp:wktLiteral .
+
+be:le_a4 a era:LinearElement ;
+    rdfs:label "a4 (W2 to W3)"@en ;
+    era:lengthOfNetLinearElement "500.0"^^xsd:double ;
+    gsp:hasGeometry be:le_a4_geom .
+
+be:le_a4_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(2.97800 52.60480, 3.03000 52.60480)"^^gsp:wktLiteral .
+
+be:le_a5 a era:LinearElement ;
+    rdfs:label "a5 (W3 to W7)"@en ;
+    era:lengthOfNetLinearElement "1250.0"^^xsd:double ;
+    gsp:hasGeometry be:le_a5_geom .
+
+be:le_a5_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.03000 52.60480, 3.16000 52.60480)"^^gsp:wktLiteral .
+
+be:le_a7 a era:LinearElement ;
+    rdfs:label "a7 (W7 to Xa)"@en ;
+    era:lengthOfNetLinearElement "300.0"^^xsd:double ;
+    gsp:hasGeometry be:le_a7_geom .
+
+be:le_a7_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.16000 52.60480, 3.19120 52.60480)"^^gsp:wktLiteral .
+
+be:le_a6 a era:LinearElement ;
+    rdfs:label "a6 (Xa to Wg)"@en ;
+    era:lengthOfNetLinearElement "5400.0"^^xsd:double ;
+    gsp:hasGeometry be:le_a6_geom .
+
+be:le_a6_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.19120 52.60480, 3.38800 52.60480, 3.40000 52.60000)"^^gsp:wktLiteral .
+
+be:le_b1 a era:LinearElement ;
+    rdfs:label "b1 (A2 to DS)"@en ;
+    era:lengthOfNetLinearElement "450.0"^^xsd:double ;
+    gsp:hasGeometry be:le_b1_geom .
+
+be:le_b1_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(2.90000 52.60000, 2.94680 52.60000)"^^gsp:wktLiteral .
+
+be:le_b2 a era:LinearElement ;
+    rdfs:label "b2 (W4 to DS)"@en ;
+    era:lengthOfNetLinearElement "1950.0"^^xsd:double ;
+    gsp:hasGeometry be:le_b2_geom .
+
+be:le_b2_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.14960 52.60000, 2.94680 52.60000)"^^gsp:wktLiteral .
+
+be:le_b6 a era:LinearElement ;
+    rdfs:label "b6 (Xb to W4)"@en ;
+    era:lengthOfNetLinearElement "500.0"^^xsd:double ;
+    gsp:hasGeometry be:le_b6_geom .
+
+be:le_b6_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.20160 52.60000, 3.14960 52.60000)"^^gsp:wktLiteral .
+
+be:le_x2 a era:LinearElement ;
+    rdfs:label "x2 (W4 to W7)"@en ;
+    era:lengthOfNetLinearElement "110.0"^^xsd:double ;
+    gsp:hasGeometry be:le_x2_geom .
+
+be:le_x2_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.14960 52.60000, 3.16000 52.60480)"^^gsp:wktLiteral .
+
+be:le_b3 a era:LinearElement ;
+    rdfs:label "b3 (Xb to Wm)"@en ;
+    era:lengthOfNetLinearElement "450.0"^^xsd:double ;
+    gsp:hasGeometry be:le_b3_geom .
+
+be:le_b3_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.20160 52.60000, 3.24840 52.60000)"^^gsp:wktLiteral .
+
+be:le_b4 a era:LinearElement ;
+    rdfs:label "b4 (Wm to Wg)"@en ;
+    era:lengthOfNetLinearElement "4850.0"^^xsd:double ;
+    gsp:hasGeometry be:le_b4_geom .
+
+be:le_b4_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.24840 52.60000, 3.40000 52.60000)"^^gsp:wktLiteral .
+
+be:le_b5 a era:LinearElement ;
+    rdfs:label "b5 (Wg to BORD)"@en ;
+    era:lengthOfNetLinearElement "600.0"^^xsd:double ;
+    gsp:hasGeometry be:le_b5_geom .
+
+be:le_b5_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.40000 52.60000, 3.42800 52.60000)"^^gsp:wktLiteral .
+
+be:le_c1 a era:LinearElement ;
+    rdfs:label "c1 (W3 to W2)"@en ;
+    era:lengthOfNetLinearElement "520.0"^^xsd:double ;
+    gsp:hasGeometry be:le_c1_geom .
+
+be:le_c1_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.03000 52.60480, 3.02600 52.60960, 2.98200 52.60960, 2.97800 52.60480)"^^gsp:wktLiteral .
+
+be:le_x1 a era:LinearElement ;
+    rdfs:label "x1 (DS to W6)"@en ;
+    era:lengthOfNetLinearElement "160.0"^^xsd:double ;
+    gsp:hasGeometry be:le_x1_geom .
+
+be:le_x1_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(2.94680 52.60000, 2.96240 52.60480)"^^gsp:wktLiteral .
+
+be:le_d0 a era:LinearElement ;
+    rdfs:label "d0 (Wd to W1)"@en ;
+    era:lengthOfNetLinearElement "120.0"^^xsd:double ;
+    gsp:hasGeometry be:le_d0_geom .
+
+be:le_d0_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(2.92600 52.60960, 2.93400 52.60960, 2.94160 52.60480)"^^gsp:wktLiteral .
+
+be:le_d1 a era:LinearElement ;
+    rdfs:label "d1 (Wd to D1)"@en ;
+    era:lengthOfNetLinearElement "150.0"^^xsd:double ;
+    gsp:hasGeometry be:le_d1_geom .
+
+be:le_d1_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(2.92600 52.60960, 2.90000 52.60960)"^^gsp:wktLiteral .
+
+be:le_d2 a era:LinearElement ;
+    rdfs:label "d2 (Wd to D2)"@en ;
+    era:lengthOfNetLinearElement "160.0"^^xsd:double ;
+    gsp:hasGeometry be:le_d2_geom .
+
+be:le_d2_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(2.92600 52.60960, 2.91400 52.61440, 2.90000 52.61440)"^^gsp:wktLiteral .
+
+be:le_y0 a era:LinearElement ;
+    rdfs:label "y0 (Wy to DS)"@en ;
+    era:lengthOfNetLinearElement "100.0"^^xsd:double ;
+    gsp:hasGeometry be:le_y0_geom .
+
+be:le_y0_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(2.92400 52.59520, 2.93600 52.59520, 2.94680 52.60000)"^^gsp:wktLiteral .
+
+be:le_y1 a era:LinearElement ;
+    rdfs:label "y1 (Wy to Y1)"@en ;
+    era:lengthOfNetLinearElement "400.0"^^xsd:double ;
+    gsp:hasGeometry be:le_y1_geom .
+
+be:le_y1_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(2.92400 52.59520, 2.90000 52.59520)"^^gsp:wktLiteral .
+
+be:le_y2 a era:LinearElement ;
+    rdfs:label "y2 (Wy to Y2)"@en ;
+    era:lengthOfNetLinearElement "420.0"^^xsd:double ;
+    gsp:hasGeometry be:le_y2_geom .
+
+be:le_y2_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(2.92400 52.59520, 2.91600 52.59040, 2.90000 52.59040)"^^gsp:wktLiteral .
+
+be:le_cx a era:LinearElement ;
+    rdfs:label "cx (Xa to Xb)"@en ;
+    era:lengthOfNetLinearElement "110.0"^^xsd:double ;
+    gsp:hasGeometry be:le_cx_geom .
+
+be:le_cx_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.19120 52.60480, 3.20160 52.60000)"^^gsp:wktLiteral .
+
+be:le_br a era:LinearElement ;
+    rdfs:label "br (Wm to HIL)"@en ;
+    era:lengthOfNetLinearElement "800.0"^^xsd:double ;
+    gsp:hasGeometry be:le_br_geom .
+
+be:le_br_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.24840 52.60000, 3.26600 52.59160, 3.32000 52.59160)"^^gsp:wktLiteral .
+
+
+##############################################################################
+# 3. Topology: net relations
+# One relation per pair of elements that meet in a point.
+# isOnOriginOfElementA/B says which end of each element is at that point.
+# A simple switch has three: two navigable (Both) and one between its two legs (None).
+##############################################################################
+
+# --- switch W1 at node W1: common branch a2, legs a1 and d0
+be:nr_W1_a2_a1 a era:NetRelation ;
+    era:elementA be:le_a2 ;
+    era:isOnOriginOfElementA true ;
+    era:elementB be:le_a1 ;
+    era:isOnOriginOfElementB false ;
+    era:navigability era-nv:Both .
+
+be:nr_W1_a2_d0 a era:NetRelation ;
+    era:elementA be:le_a2 ;
+    era:isOnOriginOfElementA true ;
+    era:elementB be:le_d0 ;
+    era:isOnOriginOfElementB false ;
+    era:navigability era-nv:Both .
+
+be:nr_W1_a1_d0 a era:NetRelation ;
+    era:elementA be:le_a1 ;
+    era:isOnOriginOfElementA false ;
+    era:elementB be:le_d0 ;
+    era:isOnOriginOfElementB false ;
+    era:navigability era-nv:None .
+
+# --- switch W6 at node W6: common branch a3, legs a2 and x1
+be:nr_W6_a3_a2 a era:NetRelation ;
+    era:elementA be:le_a3 ;
+    era:isOnOriginOfElementA true ;
+    era:elementB be:le_a2 ;
+    era:isOnOriginOfElementB false ;
+    era:navigability era-nv:Both .
+
+be:nr_W6_a3_x1 a era:NetRelation ;
+    era:elementA be:le_a3 ;
+    era:isOnOriginOfElementA true ;
+    era:elementB be:le_x1 ;
+    era:isOnOriginOfElementB false ;
+    era:navigability era-nv:Both .
+
+be:nr_W6_a2_x1 a era:NetRelation ;
+    era:elementA be:le_a2 ;
+    era:isOnOriginOfElementA false ;
+    era:elementB be:le_x1 ;
+    era:isOnOriginOfElementB false ;
+    era:navigability era-nv:None .
+
+# --- switch W2 at node W2: common branch a3, legs a4 and c1
+be:nr_W2_a3_a4 a era:NetRelation ;
+    era:elementA be:le_a3 ;
+    era:isOnOriginOfElementA false ;
+    era:elementB be:le_a4 ;
+    era:isOnOriginOfElementB true ;
+    era:navigability era-nv:Both .
+
+be:nr_W2_a3_c1 a era:NetRelation ;
+    era:elementA be:le_a3 ;
+    era:isOnOriginOfElementA false ;
+    era:elementB be:le_c1 ;
+    era:isOnOriginOfElementB false ;
+    era:navigability era-nv:Both .
+
+be:nr_W2_a4_c1 a era:NetRelation ;
+    era:elementA be:le_a4 ;
+    era:isOnOriginOfElementA true ;
+    era:elementB be:le_c1 ;
+    era:isOnOriginOfElementB false ;
+    era:navigability era-nv:None .
+
+# --- switch W3 at node W3: common branch a5, legs a4 and c1
+be:nr_W3_a5_a4 a era:NetRelation ;
+    era:elementA be:le_a5 ;
+    era:isOnOriginOfElementA true ;
+    era:elementB be:le_a4 ;
+    era:isOnOriginOfElementB false ;
+    era:navigability era-nv:Both .
+
+be:nr_W3_a5_c1 a era:NetRelation ;
+    era:elementA be:le_a5 ;
+    era:isOnOriginOfElementA true ;
+    era:elementB be:le_c1 ;
+    era:isOnOriginOfElementB true ;
+    era:navigability era-nv:Both .
+
+be:nr_W3_a4_c1 a era:NetRelation ;
+    era:elementA be:le_a4 ;
+    era:isOnOriginOfElementA false ;
+    era:elementB be:le_c1 ;
+    era:isOnOriginOfElementB true ;
+    era:navigability era-nv:None .
+
+# --- switch W21 at node Wd: common branch d0, legs d1 and d2
+be:nr_Wd_d0_d1 a era:NetRelation ;
+    era:elementA be:le_d0 ;
+    era:isOnOriginOfElementA true ;
+    era:elementB be:le_d1 ;
+    era:isOnOriginOfElementB true ;
+    era:navigability era-nv:Both .
+
+be:nr_Wd_d0_d2 a era:NetRelation ;
+    era:elementA be:le_d0 ;
+    era:isOnOriginOfElementA true ;
+    era:elementB be:le_d2 ;
+    era:isOnOriginOfElementB true ;
+    era:navigability era-nv:Both .
+
+be:nr_Wd_d1_d2 a era:NetRelation ;
+    era:elementA be:le_d1 ;
+    era:isOnOriginOfElementA true ;
+    era:elementB be:le_d2 ;
+    era:isOnOriginOfElementB true ;
+    era:navigability era-nv:None .
+
+# --- switch W31 at node Wy: common branch y0, legs y1 and y2
+be:nr_Wy_y0_y1 a era:NetRelation ;
+    era:elementA be:le_y0 ;
+    era:isOnOriginOfElementA true ;
+    era:elementB be:le_y1 ;
+    era:isOnOriginOfElementB true ;
+    era:navigability era-nv:Both .
+
+be:nr_Wy_y0_y2 a era:NetRelation ;
+    era:elementA be:le_y0 ;
+    era:isOnOriginOfElementA true ;
+    era:elementB be:le_y2 ;
+    era:isOnOriginOfElementB true ;
+    era:navigability era-nv:Both .
+
+be:nr_Wy_y1_y2 a era:NetRelation ;
+    era:elementA be:le_y1 ;
+    era:isOnOriginOfElementA true ;
+    era:elementB be:le_y2 ;
+    era:isOnOriginOfElementB true ;
+    era:navigability era-nv:None .
+
+# --- switch W7 at node W7: common branch a7, legs a5 and x2
+be:nr_W7_a7_a5 a era:NetRelation ;
+    era:elementA be:le_a7 ;
+    era:isOnOriginOfElementA true ;
+    era:elementB be:le_a5 ;
+    era:isOnOriginOfElementB false ;
+    era:navigability era-nv:Both .
+
+be:nr_W7_a7_x2 a era:NetRelation ;
+    era:elementA be:le_a7 ;
+    era:isOnOriginOfElementA true ;
+    era:elementB be:le_x2 ;
+    era:isOnOriginOfElementB false ;
+    era:navigability era-nv:Both .
+
+be:nr_W7_a5_x2 a era:NetRelation ;
+    era:elementA be:le_a5 ;
+    era:isOnOriginOfElementA false ;
+    era:elementB be:le_x2 ;
+    era:isOnOriginOfElementB false ;
+    era:navigability era-nv:None .
+
+# --- switch W4 at node W4: common branch b2, legs b6 and x2
+be:nr_W4_b2_b6 a era:NetRelation ;
+    era:elementA be:le_b2 ;
+    era:isOnOriginOfElementA true ;
+    era:elementB be:le_b6 ;
+    era:isOnOriginOfElementB false ;
+    era:navigability era-nv:Both .
+
+be:nr_W4_b2_x2 a era:NetRelation ;
+    era:elementA be:le_b2 ;
+    era:isOnOriginOfElementA true ;
+    era:elementB be:le_x2 ;
+    era:isOnOriginOfElementB true ;
+    era:navigability era-nv:Both .
+
+be:nr_W4_b6_x2 a era:NetRelation ;
+    era:elementA be:le_b6 ;
+    era:isOnOriginOfElementA false ;
+    era:elementB be:le_x2 ;
+    era:isOnOriginOfElementB true ;
+    era:navigability era-nv:None .
+
+# --- switch W11 at node Xa: common branch a7, legs a6 and cx
+be:nr_Xa_a7_a6 a era:NetRelation ;
+    era:elementA be:le_a7 ;
+    era:isOnOriginOfElementA false ;
+    era:elementB be:le_a6 ;
+    era:isOnOriginOfElementB true ;
+    era:navigability era-nv:Both .
+
+be:nr_Xa_a7_cx a era:NetRelation ;
+    era:elementA be:le_a7 ;
+    era:isOnOriginOfElementA false ;
+    era:elementB be:le_cx ;
+    era:isOnOriginOfElementB true ;
+    era:navigability era-nv:Both .
+
+be:nr_Xa_a6_cx a era:NetRelation ;
+    era:elementA be:le_a6 ;
+    era:isOnOriginOfElementA true ;
+    era:elementB be:le_cx ;
+    era:isOnOriginOfElementB true ;
+    era:navigability era-nv:None .
+
+# --- switch W12 at node Xb: common branch b3, legs b6 and cx
+be:nr_Xb_b3_b6 a era:NetRelation ;
+    era:elementA be:le_b3 ;
+    era:isOnOriginOfElementA true ;
+    era:elementB be:le_b6 ;
+    era:isOnOriginOfElementB true ;
+    era:navigability era-nv:Both .
+
+be:nr_Xb_b3_cx a era:NetRelation ;
+    era:elementA be:le_b3 ;
+    era:isOnOriginOfElementA true ;
+    era:elementB be:le_cx ;
+    era:isOnOriginOfElementB false ;
+    era:navigability era-nv:Both .
+
+be:nr_Xb_b6_cx a era:NetRelation ;
+    era:elementA be:le_b6 ;
+    era:isOnOriginOfElementA true ;
+    era:elementB be:le_cx ;
+    era:isOnOriginOfElementB false ;
+    era:navigability era-nv:None .
+
+# --- switch W13 at node Wm: common branch b3, legs b4 and br
+be:nr_Wm_b3_b4 a era:NetRelation ;
+    era:elementA be:le_b3 ;
+    era:isOnOriginOfElementA false ;
+    era:elementB be:le_b4 ;
+    era:isOnOriginOfElementB true ;
+    era:navigability era-nv:Both .
+
+be:nr_Wm_b3_br a era:NetRelation ;
+    era:elementA be:le_b3 ;
+    era:isOnOriginOfElementA false ;
+    era:elementB be:le_br ;
+    era:isOnOriginOfElementB true ;
+    era:navigability era-nv:Both .
+
+be:nr_Wm_b4_br a era:NetRelation ;
+    era:elementA be:le_b4 ;
+    era:isOnOriginOfElementA true ;
+    era:elementB be:le_br ;
+    era:isOnOriginOfElementB true ;
+    era:navigability era-nv:None .
+
+# --- switch W14 at node Wg: common branch b5, legs b4 and a6
+be:nr_Wg_b5_b4 a era:NetRelation ;
+    era:elementA be:le_b5 ;
+    era:isOnOriginOfElementA true ;
+    era:elementB be:le_b4 ;
+    era:isOnOriginOfElementB false ;
+    era:navigability era-nv:Both .
+
+be:nr_Wg_b5_a6 a era:NetRelation ;
+    era:elementA be:le_b5 ;
+    era:isOnOriginOfElementA true ;
+    era:elementB be:le_a6 ;
+    era:isOnOriginOfElementB false ;
+    era:navigability era-nv:Both .
+
+be:nr_Wg_b4_a6 a era:NetRelation ;
+    era:elementA be:le_b4 ;
+    era:isOnOriginOfElementA false ;
+    era:elementB be:le_a6 ;
+    era:isOnOriginOfElementB false ;
+    era:navigability era-nv:None .
+
+# --- double slip crossing W5 at node DS: four elements, six relations
+be:nr_DS_b1_b2 a era:NetRelation ;
+    era:elementA be:le_b1 ;
+    era:isOnOriginOfElementA false ;
+    era:elementB be:le_b2 ;
+    era:isOnOriginOfElementB false ;
+    era:navigability era-nv:Both .
+
+be:nr_DS_y0_x1 a era:NetRelation ;
+    era:elementA be:le_y0 ;
+    era:isOnOriginOfElementA false ;
+    era:elementB be:le_x1 ;
+    era:isOnOriginOfElementB true ;
+    era:navigability era-nv:Both .
+
+be:nr_DS_b1_x1 a era:NetRelation ;
+    era:elementA be:le_b1 ;
+    era:isOnOriginOfElementA false ;
+    era:elementB be:le_x1 ;
+    era:isOnOriginOfElementB true ;
+    era:navigability era-nv:Both .
+
+be:nr_DS_y0_b2 a era:NetRelation ;
+    era:elementA be:le_y0 ;
+    era:isOnOriginOfElementA false ;
+    era:elementB be:le_b2 ;
+    era:isOnOriginOfElementB false ;
+    era:navigability era-nv:Both .
+
+be:nr_DS_b1_y0 a era:NetRelation ;
+    era:elementA be:le_b1 ;
+    era:isOnOriginOfElementA false ;
+    era:elementB be:le_y0 ;
+    era:isOnOriginOfElementB false ;
+    era:navigability era-nv:None .
+
+be:nr_DS_b2_x1 a era:NetRelation ;
+    era:elementA be:le_b2 ;
+    era:isOnOriginOfElementA false ;
+    era:elementB be:le_x1 ;
+    era:isOnOriginOfElementB true ;
+    era:navigability era-nv:None .
+
+# --- the border: the last element of this IM meets the first element of the neighbour.
+#     Each IM delivers its own element; this IM delivers the relation.
+be:nr_BORD_b5_B1 a era:NetRelation ;
+    era:elementA be:le_b5 ;
+    era:isOnOriginOfElementA false ;
+    era:elementB nl:le_B1 ;
+    era:isOnOriginOfElementB false ;
+    era:navigability era-nv:Both .
+
+
+##############################################################################
+# 4. Line referencing
+# A linear positioning system per line, with kilometric posts placed on the topology.
+##############################################################################
+
+be:line_100 a era:LinearPositioningSystem ;
+    rdfs:label "Line 100"@en ;
+    era:lineId "100" .
+
+be:line_101 a era:LinearPositioningSystem ;
+    rdfs:label "Line 101 (Hillend branch)"@en ;
+    era:lineId "101" .
+
+be:kp_line_100_0 a era:KilometricPost ;
+    rdfs:label "km 0"@en ;
+    era:hasLRS be:line_100 ;
+    era:kilometer "0.0"^^xsd:double ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:kp_line_100_0_ref .
+
+be:kp_line_100_0_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:kp_line_100_0_ref_tc ;
+    gsp:hasGeometry be:kp_line_100_0_ref_geom .
+
+be:kp_line_100_0_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(2.90000 52.60480)"^^gsp:wktLiteral .
+
+be:kp_line_100_0_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a1 ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+be:kp_line_100_1 a era:KilometricPost ;
+    rdfs:label "km 1"@en ;
+    era:hasLRS be:line_100 ;
+    era:kilometer "1.0"^^xsd:double ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:kp_line_100_1_ref .
+
+be:kp_line_100_1_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:kp_line_100_1_ref_tc ;
+    gsp:hasGeometry be:kp_line_100_1_ref_geom .
+
+be:kp_line_100_1_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.00400 52.60480)"^^gsp:wktLiteral .
+
+be:kp_line_100_1_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a4 ;
+    era:offsetFromOrigin "250.0"^^xsd:double .
+
+be:kp_line_100_2 a era:KilometricPost ;
+    rdfs:label "km 2"@en ;
+    era:hasLRS be:line_100 ;
+    era:kilometer "2.0"^^xsd:double ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:kp_line_100_2_ref .
+
+be:kp_line_100_2_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:kp_line_100_2_ref_tc ;
+    gsp:hasGeometry be:kp_line_100_2_ref_geom .
+
+be:kp_line_100_2_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.10800 52.60480)"^^gsp:wktLiteral .
+
+be:kp_line_100_2_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a5 ;
+    era:offsetFromOrigin "750.0"^^xsd:double .
+
+be:kp_line_100_3 a era:KilometricPost ;
+    rdfs:label "km 3"@en ;
+    era:hasLRS be:line_100 ;
+    era:kilometer "3.0"^^xsd:double ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:kp_line_100_3_ref .
+
+be:kp_line_100_3_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:kp_line_100_3_ref_tc ;
+    gsp:hasGeometry be:kp_line_100_3_ref_geom .
+
+be:kp_line_100_3_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.19902 52.60480)"^^gsp:wktLiteral .
+
+be:kp_line_100_3_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a6 ;
+    era:offsetFromOrigin "200.0"^^xsd:double .
+
+be:kp_line_100_8 a era:KilometricPost ;
+    rdfs:label "km 8"@en ;
+    era:hasLRS be:line_100 ;
+    era:kilometer "8.0"^^xsd:double ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:kp_line_100_8_ref .
+
+be:kp_line_100_8_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:kp_line_100_8_ref_tc ;
+    gsp:hasGeometry be:kp_line_100_8_ref_geom .
+
+be:kp_line_100_8_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.39349 52.60260)"^^gsp:wktLiteral .
+
+be:kp_line_100_8_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a6 ;
+    era:offsetFromOrigin "5200.0"^^xsd:double .
+
+
+##############################################################################
+# 5. Subsystems that tracks point to
+# Contact line system, ETCS and train detection are not infrastructure elements in v3.3.4:
+# they have no net reference. Their extent is the set of tracks that point to them.
+##############################################################################
+
+be:cls_3kv a era:ContactLineSystem ;
+    rdfs:label "Overhead contact line 3 kV DC"@en ;
+    era:contactLineSystemType era-cls:10 ;
+    era:energySupplySystem era-ess:DC30 ;
+    era:maxTrainCurrent "2400"^^xsd:integer ;
+    era:umax2 "3900"^^xsd:integer ;
+    era:maxCurrentStandstillPantograph "200"^^xsd:integer ;
+    era:minimumContactWireHeight "4.8"^^xsd:double ;
+    era:maximumContactWireHeight "6.2"^^xsd:double .
+
+# Open world: leaving out era:contactLineSystem means 'unknown'. 'Not electrified' has to be stated.
+be:cls_none a era:ContactLineSystem ;
+    rdfs:label "Not electrified"@en ;
+    era:contactLineSystemType era-cls:40 .
+
+be:etcs_l2 a era:ETCS ;
+    rdfs:label "ETCS level 2, baseline 3 release 2"@en ;
+    era:etcsLevelType era-etcslevel:30 ;
+    era:etcsBaseline era-etcsbaseline:50 .
+
+be:tds_axle a era:TrainDetectionSystem ;
+    rdfs:label "Axle counters"@en ;
+    era:trainDetectionSystemType era-tds:20 ;
+    era:trainDetectionSystemSpecificCheck era-tdssc:NotApplicable .
+
+be:ldi_km a era:LinesideDistanceIndication ;
+    rdfs:label "Kilometre posts every 1000 m"@en ;
+    era:linesideDistanceIndicationAppearance era-ldia:00 ;
+    era:linesideDistanceIndicationFrequency "1000"^^xsd:integer ;
+    era:linesideDistanceIndicationPositioning era-ldip:00 .
+
+
+##############################################################################
+# 6. Operational points and their tracks
+# An operational point covers an area: its net reference includes the linear references of its tracks.
+# A track is a sequence of linear elements with a start and an end, which may lie inside an element.
+##############################################################################
+
+# ---------- Westhaven (BEWHS)
+be:op_WHS_validity a era:TemporalFeature, time:Interval ;
+    time:hasBeginning be:op_WHS_validity_begin .
+
+be:op_WHS_validity_begin a time:Instant ;
+    time:inXSDDate "2026-01-01"^^xsd:date .
+
+be:op_WHS a era:OperationalPoint ;
+    rdfs:label "Westhaven"@en ;
+    era:opName "Westhaven"@en ;
+    era:uopid "BEWHS" ;
+    era:opType era-op-types:10 ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:op_WHS_ref ;
+    era:hasPart be:trk_WHS_1, be:trk_WHS_2, be:trk_WHS_3, be:trk_WHS_5 ;
+    era:validity be:op_WHS_validity .
+
+be:op_WHS_ref a era:NetAreaReference ;
+    era:includes ( be:trk_WHS_1_ref be:trk_WHS_2_ref be:trk_WHS_3_ref be:trk_WHS_5_ref ) ;
+    gsp:hasGeometry be:op_WHS_ref_geom .
+
+be:op_WHS_ref_geom a gsp:Geometry ;
+    gsp:asWKT "MULTILINESTRING((2.90000 52.60480, 2.94160 52.60480, 2.96240 52.60480, 2.97800 52.60480, 3.03000 52.60480, 3.10800 52.60480), (2.90000 52.60000, 2.94680 52.60000, 3.10800 52.60000), (2.97800 52.60480, 2.98200 52.60960, 3.02600 52.60960, 3.03000 52.60480), (2.94680 52.60000, 2.96240 52.60480))"^^gsp:wktLiteral .
+
+be:trk_WHS_1 a era:RunningTrack ;
+    rdfs:label "Westhaven track 1"@en ;
+    era:trackId "1" ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:trk_WHS_1_ref ;
+    era:wheelSetGauge era-ntg:30 ;
+    era:contactLineSystem be:cls_3kv ;
+    era:etcs be:etcs_l2 ;
+    era:trainDetectionSystem be:tds_axle ;
+    era:maximumPermittedSpeed "90"^^xsd:integer .
+
+be:trk_WHS_1_ref a era:NetLinearReference ;
+    era:hasSequence ( be:le_a1 be:le_a2 be:le_a3 be:le_a4 be:le_a5 ) ;
+    era:startsAt be:trk_WHS_1_ref_start ;
+    era:endsAt be:trk_WHS_1_ref_end ;
+    gsp:hasGeometry be:trk_WHS_1_ref_geom .
+
+be:trk_WHS_1_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(2.90000 52.60480, 2.94160 52.60480, 2.96240 52.60480, 2.97800 52.60480, 3.03000 52.60480, 3.10800 52.60480)"^^gsp:wktLiteral .
+
+be:trk_WHS_1_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_WHS_1_ref_start_tc .
+
+be:trk_WHS_1_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a1 ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+be:trk_WHS_1_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_WHS_1_ref_end_tc .
+
+be:trk_WHS_1_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a5 ;
+    era:offsetFromOrigin "750.0"^^xsd:double .
+
+be:trk_WHS_2 a era:RunningTrack ;
+    rdfs:label "Westhaven track 2"@en ;
+    era:trackId "2" ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:trk_WHS_2_ref ;
+    era:wheelSetGauge era-ntg:30 ;
+    era:contactLineSystem be:cls_3kv ;
+    era:etcs be:etcs_l2 ;
+    era:trainDetectionSystem be:tds_axle ;
+    era:maximumPermittedSpeed "90"^^xsd:integer .
+
+be:trk_WHS_2_ref a era:NetLinearReference ;
+    era:hasSequence ( be:le_b1 be:le_b2 ) ;
+    era:startsAt be:trk_WHS_2_ref_start ;
+    era:endsAt be:trk_WHS_2_ref_end ;
+    gsp:hasGeometry be:trk_WHS_2_ref_geom .
+
+be:trk_WHS_2_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(2.90000 52.60000, 2.94680 52.60000, 3.10800 52.60000)"^^gsp:wktLiteral .
+
+be:trk_WHS_2_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_WHS_2_ref_start_tc .
+
+be:trk_WHS_2_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b1 ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+be:trk_WHS_2_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_WHS_2_ref_end_tc .
+
+be:trk_WHS_2_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b2 ;
+    era:offsetFromOrigin "400.0"^^xsd:double .
+
+be:trk_WHS_3 a era:RunningTrack ;
+    rdfs:label "Westhaven track 3"@en ;
+    era:trackId "3" ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:trk_WHS_3_ref ;
+    era:wheelSetGauge era-ntg:30 ;
+    era:contactLineSystem be:cls_3kv ;
+    era:etcs be:etcs_l2 ;
+    era:trainDetectionSystem be:tds_axle ;
+    era:maximumPermittedSpeed "40"^^xsd:integer .
+
+be:trk_WHS_3_ref a era:NetLinearReference ;
+    era:hasSequence ( be:le_c1 ) ;
+    era:startsAt be:trk_WHS_3_ref_start ;
+    era:endsAt be:trk_WHS_3_ref_end ;
+    gsp:hasGeometry be:trk_WHS_3_ref_geom .
+
+be:trk_WHS_3_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(2.97800 52.60480, 2.98200 52.60960, 3.02600 52.60960, 3.03000 52.60480)"^^gsp:wktLiteral .
+
+be:trk_WHS_3_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_WHS_3_ref_start_tc .
+
+be:trk_WHS_3_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_c1 ;
+    era:offsetFromOrigin "520.0"^^xsd:double .
+
+be:trk_WHS_3_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_WHS_3_ref_end_tc .
+
+be:trk_WHS_3_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_c1 ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+be:trk_WHS_5 a era:RunningTrack ;
+    rdfs:label "Westhaven connection 2-1"@en ;
+    era:trackId "5" ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:trk_WHS_5_ref ;
+    era:wheelSetGauge era-ntg:30 ;
+    era:contactLineSystem be:cls_3kv ;
+    era:etcs be:etcs_l2 ;
+    era:trainDetectionSystem be:tds_axle ;
+    era:maximumPermittedSpeed "40"^^xsd:integer .
+
+be:trk_WHS_5_ref a era:NetLinearReference ;
+    era:hasSequence ( be:le_x1 ) ;
+    era:startsAt be:trk_WHS_5_ref_start ;
+    era:endsAt be:trk_WHS_5_ref_end ;
+    gsp:hasGeometry be:trk_WHS_5_ref_geom .
+
+be:trk_WHS_5_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(2.94680 52.60000, 2.96240 52.60480)"^^gsp:wktLiteral .
+
+be:trk_WHS_5_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_WHS_5_ref_start_tc .
+
+be:trk_WHS_5_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_x1 ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+be:trk_WHS_5_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_WHS_5_ref_end_tc .
+
+be:trk_WHS_5_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_x1 ;
+    era:offsetFromOrigin "160.0"^^xsd:double .
+
+# ---------- Westhaven Depot (BEWHD)
+be:op_WHD_validity a era:TemporalFeature, time:Interval ;
+    time:hasBeginning be:op_WHD_validity_begin .
+
+be:op_WHD_validity_begin a time:Instant ;
+    time:inXSDDate "2026-01-01"^^xsd:date .
+
+be:op_WHD a era:OperationalPoint ;
+    rdfs:label "Westhaven Depot"@en ;
+    era:opName "Westhaven Depot"@en ;
+    era:uopid "BEWHD" ;
+    era:opType era-op-types:50 ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:op_WHD_ref ;
+    era:hasPart be:trk_WHD_L, be:trk_WHD_D1, be:trk_WHD_D2 ;
+    era:validity be:op_WHD_validity .
+
+be:op_WHD_ref a era:NetAreaReference ;
+    era:includes ( be:trk_WHD_L_ref be:trk_WHD_D1_ref be:trk_WHD_D2_ref ) ;
+    gsp:hasGeometry be:op_WHD_ref_geom .
+
+be:op_WHD_ref_geom a gsp:Geometry ;
+    gsp:asWKT "MULTILINESTRING((2.94160 52.60480, 2.93400 52.60960, 2.92600 52.60960), (2.92600 52.60960, 2.90000 52.60960), (2.92600 52.60960, 2.91400 52.61440, 2.90000 52.61440))"^^gsp:wktLiteral .
+
+be:trk_WHD_L a era:Siding ;
+    rdfs:label "Depot lead"@en ;
+    era:sidingId "L" ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:trk_WHD_L_ref ;
+    era:wheelSetGauge era-ntg:30 ;
+    era:contactLineSystem be:cls_3kv ;
+    era:trainDetectionSystem be:tds_axle ;
+    era:notApplicable era:etcs .
+
+be:trk_WHD_L_ref a era:NetLinearReference ;
+    era:hasSequence ( be:le_d0 ) ;
+    era:startsAt be:trk_WHD_L_ref_start ;
+    era:endsAt be:trk_WHD_L_ref_end ;
+    gsp:hasGeometry be:trk_WHD_L_ref_geom .
+
+be:trk_WHD_L_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(2.94160 52.60480, 2.93400 52.60960, 2.92600 52.60960)"^^gsp:wktLiteral .
+
+be:trk_WHD_L_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_WHD_L_ref_start_tc .
+
+be:trk_WHD_L_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_d0 ;
+    era:offsetFromOrigin "120.0"^^xsd:double .
+
+be:trk_WHD_L_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_WHD_L_ref_end_tc .
+
+be:trk_WHD_L_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_d0 ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+be:trk_WHD_D1 a era:Siding ;
+    rdfs:label "Depot siding D1"@en ;
+    era:sidingId "D1" ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:trk_WHD_D1_ref ;
+    era:wheelSetGauge era-ntg:30 ;
+    era:contactLineSystem be:cls_3kv ;
+    era:trainDetectionSystem be:tds_axle ;
+    era:notApplicable era:etcs .
+
+be:trk_WHD_D1_ref a era:NetLinearReference ;
+    era:hasSequence ( be:le_d1 ) ;
+    era:startsAt be:trk_WHD_D1_ref_start ;
+    era:endsAt be:trk_WHD_D1_ref_end ;
+    gsp:hasGeometry be:trk_WHD_D1_ref_geom .
+
+be:trk_WHD_D1_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(2.92600 52.60960, 2.90000 52.60960)"^^gsp:wktLiteral .
+
+be:trk_WHD_D1_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_WHD_D1_ref_start_tc .
+
+be:trk_WHD_D1_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_d1 ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+be:trk_WHD_D1_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_WHD_D1_ref_end_tc .
+
+be:trk_WHD_D1_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_d1 ;
+    era:offsetFromOrigin "150.0"^^xsd:double .
+
+be:trk_WHD_D2 a era:Siding ;
+    rdfs:label "Depot siding D2"@en ;
+    era:sidingId "D2" ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:trk_WHD_D2_ref ;
+    era:wheelSetGauge era-ntg:30 ;
+    era:contactLineSystem be:cls_3kv ;
+    era:trainDetectionSystem be:tds_axle ;
+    era:notApplicable era:etcs .
+
+be:trk_WHD_D2_ref a era:NetLinearReference ;
+    era:hasSequence ( be:le_d2 ) ;
+    era:startsAt be:trk_WHD_D2_ref_start ;
+    era:endsAt be:trk_WHD_D2_ref_end ;
+    gsp:hasGeometry be:trk_WHD_D2_ref_geom .
+
+be:trk_WHD_D2_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(2.92600 52.60960, 2.91400 52.61440, 2.90000 52.61440)"^^gsp:wktLiteral .
+
+be:trk_WHD_D2_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_WHD_D2_ref_start_tc .
+
+be:trk_WHD_D2_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_d2 ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+be:trk_WHD_D2_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_WHD_D2_ref_end_tc .
+
+be:trk_WHD_D2_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_d2 ;
+    era:offsetFromOrigin "160.0"^^xsd:double .
+
+# ---------- Westhaven Yard (BEWHY)
+be:op_WHY_validity a era:TemporalFeature, time:Interval ;
+    time:hasBeginning be:op_WHY_validity_begin .
+
+be:op_WHY_validity_begin a time:Instant ;
+    time:inXSDDate "2026-01-01"^^xsd:date .
+
+be:op_WHY a era:OperationalPoint ;
+    rdfs:label "Westhaven Yard"@en ;
+    era:opName "Westhaven Yard"@en ;
+    era:uopid "BEWHY" ;
+    era:opType era-op-types:40 ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:op_WHY_ref ;
+    era:hasPart be:trk_WHY_L, be:trk_WHY_Y1, be:trk_WHY_Y2 ;
+    era:validity be:op_WHY_validity .
+
+be:op_WHY_ref a era:NetAreaReference ;
+    era:includes ( be:trk_WHY_L_ref be:trk_WHY_Y1_ref be:trk_WHY_Y2_ref ) ;
+    gsp:hasGeometry be:op_WHY_ref_geom .
+
+be:op_WHY_ref_geom a gsp:Geometry ;
+    gsp:asWKT "MULTILINESTRING((2.92400 52.59520, 2.93600 52.59520, 2.94680 52.60000), (2.92400 52.59520, 2.90000 52.59520), (2.92400 52.59520, 2.91600 52.59040, 2.90000 52.59040))"^^gsp:wktLiteral .
+
+be:trk_WHY_L a era:Siding ;
+    rdfs:label "Yard lead"@en ;
+    era:sidingId "L" ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:trk_WHY_L_ref ;
+    era:wheelSetGauge era-ntg:30 ;
+    era:contactLineSystem be:cls_3kv ;
+    era:trainDetectionSystem be:tds_axle ;
+    era:notApplicable era:etcs .
+
+be:trk_WHY_L_ref a era:NetLinearReference ;
+    era:hasSequence ( be:le_y0 ) ;
+    era:startsAt be:trk_WHY_L_ref_start ;
+    era:endsAt be:trk_WHY_L_ref_end ;
+    gsp:hasGeometry be:trk_WHY_L_ref_geom .
+
+be:trk_WHY_L_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(2.92400 52.59520, 2.93600 52.59520, 2.94680 52.60000)"^^gsp:wktLiteral .
+
+be:trk_WHY_L_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_WHY_L_ref_start_tc .
+
+be:trk_WHY_L_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_y0 ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+be:trk_WHY_L_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_WHY_L_ref_end_tc .
+
+be:trk_WHY_L_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_y0 ;
+    era:offsetFromOrigin "100.0"^^xsd:double .
+
+be:trk_WHY_Y1 a era:Siding ;
+    rdfs:label "Yard siding Y1"@en ;
+    era:sidingId "Y1" ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:trk_WHY_Y1_ref ;
+    era:wheelSetGauge era-ntg:30 ;
+    era:contactLineSystem be:cls_3kv ;
+    era:trainDetectionSystem be:tds_axle ;
+    era:notApplicable era:etcs .
+
+be:trk_WHY_Y1_ref a era:NetLinearReference ;
+    era:hasSequence ( be:le_y1 ) ;
+    era:startsAt be:trk_WHY_Y1_ref_start ;
+    era:endsAt be:trk_WHY_Y1_ref_end ;
+    gsp:hasGeometry be:trk_WHY_Y1_ref_geom .
+
+be:trk_WHY_Y1_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(2.92400 52.59520, 2.90000 52.59520)"^^gsp:wktLiteral .
+
+be:trk_WHY_Y1_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_WHY_Y1_ref_start_tc .
+
+be:trk_WHY_Y1_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_y1 ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+be:trk_WHY_Y1_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_WHY_Y1_ref_end_tc .
+
+be:trk_WHY_Y1_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_y1 ;
+    era:offsetFromOrigin "400.0"^^xsd:double .
+
+be:trk_WHY_Y2 a era:Siding ;
+    rdfs:label "Yard siding Y2"@en ;
+    era:sidingId "Y2" ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:trk_WHY_Y2_ref ;
+    era:wheelSetGauge era-ntg:30 ;
+    era:contactLineSystem be:cls_3kv ;
+    era:trainDetectionSystem be:tds_axle ;
+    era:notApplicable era:etcs .
+
+be:trk_WHY_Y2_ref a era:NetLinearReference ;
+    era:hasSequence ( be:le_y2 ) ;
+    era:startsAt be:trk_WHY_Y2_ref_start ;
+    era:endsAt be:trk_WHY_Y2_ref_end ;
+    gsp:hasGeometry be:trk_WHY_Y2_ref_geom .
+
+be:trk_WHY_Y2_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(2.92400 52.59520, 2.91600 52.59040, 2.90000 52.59040)"^^gsp:wktLiteral .
+
+be:trk_WHY_Y2_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_WHY_Y2_ref_start_tc .
+
+be:trk_WHY_Y2_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_y2 ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+be:trk_WHY_Y2_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_WHY_Y2_ref_end_tc .
+
+be:trk_WHY_Y2_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_y2 ;
+    era:offsetFromOrigin "420.0"^^xsd:double .
+
+# ---------- Midford Junction (BEMID)
+be:op_MID_validity a era:TemporalFeature, time:Interval ;
+    time:hasBeginning be:op_MID_validity_begin .
+
+be:op_MID_validity_begin a time:Instant ;
+    time:inXSDDate "2026-01-01"^^xsd:date .
+
+be:op_MID a era:OperationalPoint ;
+    rdfs:label "Midford Junction"@en ;
+    era:opName "Midford Junction"@en ;
+    era:uopid "BEMID" ;
+    era:opType era-op-types:80 ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:op_MID_ref ;
+    era:hasPart be:trk_MID_1, be:trk_MID_2, be:trk_MID_X1, be:trk_MID_X2 ;
+    era:validity be:op_MID_validity .
+
+be:op_MID_ref a era:NetAreaReference ;
+    era:includes ( be:trk_MID_1_ref be:trk_MID_2_ref be:trk_MID_X1_ref be:trk_MID_X2_ref ) ;
+    gsp:hasGeometry be:op_MID_ref_geom .
+
+be:op_MID_ref_geom a gsp:Geometry ;
+    gsp:asWKT "MULTILINESTRING((3.13920 52.60480, 3.16000 52.60480, 3.19120 52.60480, 3.19902 52.60480), (3.13920 52.60000, 3.14960 52.60000, 3.20160 52.60000), (3.14960 52.60000, 3.16000 52.60480), (3.19120 52.60480, 3.20160 52.60000))"^^gsp:wktLiteral .
+
+be:trk_MID_1 a era:RunningTrack ;
+    rdfs:label "Midford track 1"@en ;
+    era:trackId "1" ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:trk_MID_1_ref ;
+    era:wheelSetGauge era-ntg:30 ;
+    era:contactLineSystem be:cls_3kv ;
+    era:etcs be:etcs_l2 ;
+    era:trainDetectionSystem be:tds_axle ;
+    era:maximumPermittedSpeed "120"^^xsd:integer .
+
+be:trk_MID_1_ref a era:NetLinearReference ;
+    era:hasSequence ( be:le_a5 be:le_a7 be:le_a6 ) ;
+    era:startsAt be:trk_MID_1_ref_start ;
+    era:endsAt be:trk_MID_1_ref_end ;
+    gsp:hasGeometry be:trk_MID_1_ref_geom .
+
+be:trk_MID_1_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.13920 52.60480, 3.16000 52.60480, 3.19120 52.60480, 3.19902 52.60480)"^^gsp:wktLiteral .
+
+be:trk_MID_1_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_MID_1_ref_start_tc .
+
+be:trk_MID_1_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a5 ;
+    era:offsetFromOrigin "1050.0"^^xsd:double .
+
+be:trk_MID_1_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_MID_1_ref_end_tc .
+
+be:trk_MID_1_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a6 ;
+    era:offsetFromOrigin "200.0"^^xsd:double .
+
+be:trk_MID_2 a era:RunningTrack ;
+    rdfs:label "Midford track 2"@en ;
+    era:trackId "2" ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:trk_MID_2_ref ;
+    era:wheelSetGauge era-ntg:30 ;
+    era:contactLineSystem be:cls_3kv ;
+    era:etcs be:etcs_l2 ;
+    era:trainDetectionSystem be:tds_axle ;
+    era:maximumPermittedSpeed "120"^^xsd:integer .
+
+be:trk_MID_2_ref a era:NetLinearReference ;
+    era:hasSequence ( be:le_b2 be:le_b6 ) ;
+    era:startsAt be:trk_MID_2_ref_start ;
+    era:endsAt be:trk_MID_2_ref_end ;
+    gsp:hasGeometry be:trk_MID_2_ref_geom .
+
+be:trk_MID_2_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.13920 52.60000, 3.14960 52.60000, 3.20160 52.60000)"^^gsp:wktLiteral .
+
+be:trk_MID_2_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_MID_2_ref_start_tc .
+
+be:trk_MID_2_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b2 ;
+    era:offsetFromOrigin "100.0"^^xsd:double .
+
+be:trk_MID_2_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_MID_2_ref_end_tc .
+
+be:trk_MID_2_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b6 ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+be:trk_MID_X1 a era:RunningTrack ;
+    rdfs:label "Midford crossover 2-1"@en ;
+    era:trackId "X1" ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:trk_MID_X1_ref ;
+    era:wheelSetGauge era-ntg:30 ;
+    era:contactLineSystem be:cls_3kv ;
+    era:etcs be:etcs_l2 ;
+    era:trainDetectionSystem be:tds_axle ;
+    era:maximumPermittedSpeed "60"^^xsd:integer .
+
+be:trk_MID_X1_ref a era:NetLinearReference ;
+    era:hasSequence ( be:le_x2 ) ;
+    era:startsAt be:trk_MID_X1_ref_start ;
+    era:endsAt be:trk_MID_X1_ref_end ;
+    gsp:hasGeometry be:trk_MID_X1_ref_geom .
+
+be:trk_MID_X1_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.14960 52.60000, 3.16000 52.60480)"^^gsp:wktLiteral .
+
+be:trk_MID_X1_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_MID_X1_ref_start_tc .
+
+be:trk_MID_X1_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_x2 ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+be:trk_MID_X1_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_MID_X1_ref_end_tc .
+
+be:trk_MID_X1_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_x2 ;
+    era:offsetFromOrigin "110.0"^^xsd:double .
+
+be:trk_MID_X2 a era:RunningTrack ;
+    rdfs:label "Midford crossover 1-2"@en ;
+    era:trackId "X2" ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:trk_MID_X2_ref ;
+    era:wheelSetGauge era-ntg:30 ;
+    era:contactLineSystem be:cls_3kv ;
+    era:etcs be:etcs_l2 ;
+    era:trainDetectionSystem be:tds_axle ;
+    era:maximumPermittedSpeed "60"^^xsd:integer .
+
+be:trk_MID_X2_ref a era:NetLinearReference ;
+    era:hasSequence ( be:le_cx ) ;
+    era:startsAt be:trk_MID_X2_ref_start ;
+    era:endsAt be:trk_MID_X2_ref_end ;
+    gsp:hasGeometry be:trk_MID_X2_ref_geom .
+
+be:trk_MID_X2_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.19120 52.60480, 3.20160 52.60000)"^^gsp:wktLiteral .
+
+be:trk_MID_X2_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_MID_X2_ref_start_tc .
+
+be:trk_MID_X2_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_cx ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+be:trk_MID_X2_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_MID_X2_ref_end_tc .
+
+be:trk_MID_X2_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_cx ;
+    era:offsetFromOrigin "110.0"^^xsd:double .
+
+# ---------- Dunes Junction (BEDUN)
+be:op_DUN_validity a era:TemporalFeature, time:Interval ;
+    time:hasBeginning be:op_DUN_validity_begin .
+
+be:op_DUN_validity_begin a time:Instant ;
+    time:inXSDDate "2026-01-01"^^xsd:date .
+
+be:op_DUN a era:OperationalPoint ;
+    rdfs:label "Dunes Junction"@en ;
+    era:opName "Dunes Junction"@en ;
+    era:uopid "BEDUN" ;
+    era:opType era-op-types:80 ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:op_DUN_ref ;
+    era:hasPart be:trk_DUN_1, be:trk_DUN_2 ;
+    era:validity be:op_DUN_validity .
+
+be:op_DUN_ref a era:NetAreaReference ;
+    era:includes ( be:trk_DUN_1_ref be:trk_DUN_2_ref ) ;
+    gsp:hasGeometry be:op_DUN_ref_geom .
+
+be:op_DUN_ref_geom a gsp:Geometry ;
+    gsp:asWKT "MULTILINESTRING((3.39349 52.60260, 3.40000 52.60000), (3.39375 52.60000, 3.40000 52.60000, 3.40933 52.60000))"^^gsp:wktLiteral .
+
+be:trk_DUN_1 a era:RunningTrack ;
+    rdfs:label "Dunes Junction track 1"@en ;
+    era:trackId "1" ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:trk_DUN_1_ref ;
+    era:wheelSetGauge era-ntg:30 ;
+    era:contactLineSystem be:cls_3kv ;
+    era:etcs be:etcs_l2 ;
+    era:trainDetectionSystem be:tds_axle ;
+    era:maximumPermittedSpeed "100"^^xsd:integer .
+
+be:trk_DUN_1_ref a era:NetLinearReference ;
+    era:hasSequence ( be:le_a6 ) ;
+    era:startsAt be:trk_DUN_1_ref_start ;
+    era:endsAt be:trk_DUN_1_ref_end ;
+    gsp:hasGeometry be:trk_DUN_1_ref_geom .
+
+be:trk_DUN_1_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.39349 52.60260, 3.40000 52.60000)"^^gsp:wktLiteral .
+
+be:trk_DUN_1_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_DUN_1_ref_start_tc .
+
+be:trk_DUN_1_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a6 ;
+    era:offsetFromOrigin "5200.0"^^xsd:double .
+
+be:trk_DUN_1_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_DUN_1_ref_end_tc .
+
+be:trk_DUN_1_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a6 ;
+    era:offsetFromOrigin "5400.0"^^xsd:double .
+
+be:trk_DUN_2 a era:RunningTrack ;
+    rdfs:label "Dunes Junction track 2"@en ;
+    era:trackId "2" ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:trk_DUN_2_ref ;
+    era:wheelSetGauge era-ntg:30 ;
+    era:contactLineSystem be:cls_3kv ;
+    era:etcs be:etcs_l2 ;
+    era:trainDetectionSystem be:tds_axle ;
+    era:maximumPermittedSpeed "100"^^xsd:integer .
+
+be:trk_DUN_2_ref a era:NetLinearReference ;
+    era:hasSequence ( be:le_b4 be:le_b5 ) ;
+    era:startsAt be:trk_DUN_2_ref_start ;
+    era:endsAt be:trk_DUN_2_ref_end ;
+    gsp:hasGeometry be:trk_DUN_2_ref_geom .
+
+be:trk_DUN_2_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.39375 52.60000, 3.40000 52.60000, 3.40933 52.60000)"^^gsp:wktLiteral .
+
+be:trk_DUN_2_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_DUN_2_ref_start_tc .
+
+be:trk_DUN_2_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b4 ;
+    era:offsetFromOrigin "4650.0"^^xsd:double .
+
+be:trk_DUN_2_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_DUN_2_ref_end_tc .
+
+be:trk_DUN_2_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b5 ;
+    era:offsetFromOrigin "200.0"^^xsd:double .
+
+# ---------- Hillend (BEHIL)
+be:op_HIL_validity a era:TemporalFeature, time:Interval ;
+    time:hasBeginning be:op_HIL_validity_begin .
+
+be:op_HIL_validity_begin a time:Instant ;
+    time:inXSDDate "2026-01-01"^^xsd:date .
+
+be:op_HIL a era:OperationalPoint ;
+    rdfs:label "Hillend"@en ;
+    era:opName "Hillend"@en ;
+    era:uopid "BEHIL" ;
+    era:opType era-op-types:20 ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:op_HIL_ref ;
+    era:hasPart be:trk_HIL_1 ;
+    era:validity be:op_HIL_validity .
+
+be:op_HIL_ref a era:NetAreaReference ;
+    era:includes ( be:trk_HIL_1_ref ) ;
+    gsp:hasGeometry be:op_HIL_ref_geom .
+
+be:op_HIL_ref_geom a gsp:Geometry ;
+    gsp:asWKT "MULTILINESTRING((3.24840 52.60000, 3.26600 52.59160, 3.32000 52.59160))"^^gsp:wktLiteral .
+
+be:trk_HIL_1 a era:RunningTrack ;
+    rdfs:label "Hillend track 1"@en ;
+    era:trackId "1" ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:trk_HIL_1_ref ;
+    era:wheelSetGauge era-ntg:30 ;
+    era:contactLineSystem be:cls_none ;
+    era:trainDetectionSystem be:tds_axle ;
+    era:notApplicable era:etcs ;
+    era:maximumPermittedSpeed "60"^^xsd:integer .
+
+be:trk_HIL_1_ref a era:NetLinearReference ;
+    era:hasSequence ( be:le_br ) ;
+    era:startsAt be:trk_HIL_1_ref_start ;
+    era:endsAt be:trk_HIL_1_ref_end ;
+    gsp:hasGeometry be:trk_HIL_1_ref_geom .
+
+be:trk_HIL_1_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.24840 52.60000, 3.26600 52.59160, 3.32000 52.59160)"^^gsp:wktLiteral .
+
+be:trk_HIL_1_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_HIL_1_ref_start_tc .
+
+be:trk_HIL_1_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_br ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+be:trk_HIL_1_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_HIL_1_ref_end_tc .
+
+be:trk_HIL_1_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_br ;
+    era:offsetFromOrigin "800.0"^^xsd:double .
+
+# ---------- Border point (EU99901)
+be:op_BORD_validity a era:TemporalFeature, time:Interval ;
+    time:hasBeginning be:op_BORD_validity_begin .
+
+be:op_BORD_validity_begin a time:Instant ;
+    time:inXSDDate "2026-01-01"^^xsd:date .
+
+# Both IMs deliver a record for the border point, with the same UOPID (prefix EU, not a country code),
+# the same reference border point and the same canonical URI. It is a point on this IM's last element.
+be:op_BORD a era:OperationalPoint ;
+    rdfs:label "Westhaven border"@en ;
+    era:opName "Westhaven border"@en ;
+    era:uopid "EU99901" ;
+    era:opType era-op-types:90 ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:op_BORD_ref ;
+    era:referenceBorderPoint <http://data.europa.eu/949/referenceBorderPoints/EU99901> ;
+    era:canonicalURI <http://data.europa.eu/949/example/operationalPoint/EU99901> ;
+    era:validity be:op_BORD_validity .
+
+be:op_BORD_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:op_BORD_ref_tc ;
+    era:hasLrsCoordinate be:op_BORD_ref_lrs ;
+    gsp:hasGeometry be:op_BORD_ref_geom .
+
+be:op_BORD_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.42800 52.60000)"^^gsp:wktLiteral .
+
+be:op_BORD_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b5 ;
+    era:offsetFromOrigin "600.0"^^xsd:double .
+
+be:op_BORD_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost be:kp_line_100_8 ;
+    era:offsetFromKilometricPost "800.0"^^xsd:double .
+
+
+##############################################################################
+# 7. Sections of line and their tracks
+# A section of line runs from opStart to opEnd. era:trackDirection on its tracks is relative to that:
+# N (10) = same direction, O (20) = opposite, B (30) = both.
+##############################################################################
+
+be:sol_WHS_MID_validity a era:TemporalFeature, time:Interval ;
+    time:hasBeginning be:sol_WHS_MID_validity_begin .
+
+be:sol_WHS_MID_validity_begin a time:Instant ;
+    time:inXSDDate "2026-01-01"^^xsd:date .
+
+be:sol_WHS_MID a era:SectionOfLine ;
+    rdfs:label "WHS - MID"@en ;
+    era:opStart be:op_WHS ;
+    era:opEnd be:op_MID ;
+    era:solNature era-sn:10 ;
+    era:lengthOfSectionOfLine "0.3"^^xsd:double ;
+    era:nationalLine be:line_100 ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sol_WHS_MID_ref ;
+    era:hasPart be:trk_WHS_MID_1, be:trk_WHS_MID_2 ;
+    era:validity be:sol_WHS_MID_validity .
+
+be:sol_WHS_MID_ref a era:NetAreaReference ;
+    era:includes ( be:trk_WHS_MID_1_ref be:trk_WHS_MID_2_ref ) ;
+    gsp:hasGeometry be:sol_WHS_MID_ref_geom .
+
+be:sol_WHS_MID_ref_geom a gsp:Geometry ;
+    gsp:asWKT "MULTILINESTRING((3.10800 52.60480, 3.13920 52.60480), (3.10800 52.60000, 3.13920 52.60000))"^^gsp:wktLiteral .
+
+be:trk_WHS_MID_1 a era:RunningTrack ;
+    rdfs:label "Westhaven - Midford track 1"@en ;
+    era:trackId "1" ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:trk_WHS_MID_1_ref ;
+    era:wheelSetGauge era-ntg:30 ;
+    era:contactLineSystem be:cls_3kv ;
+    era:etcs be:etcs_l2 ;
+    era:trainDetectionSystem be:tds_axle ;
+    era:maximumPermittedSpeed "140"^^xsd:integer ;
+    era:trackDirection era-trd:10 ;
+    era:linesideDistanceIndication be:ldi_km .
+
+be:trk_WHS_MID_1_ref a era:NetLinearReference ;
+    era:hasSequence ( be:le_a5 ) ;
+    era:startsAt be:trk_WHS_MID_1_ref_start ;
+    era:endsAt be:trk_WHS_MID_1_ref_end ;
+    gsp:hasGeometry be:trk_WHS_MID_1_ref_geom .
+
+be:trk_WHS_MID_1_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.10800 52.60480, 3.13920 52.60480)"^^gsp:wktLiteral .
+
+be:trk_WHS_MID_1_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_WHS_MID_1_ref_start_tc .
+
+be:trk_WHS_MID_1_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a5 ;
+    era:offsetFromOrigin "750.0"^^xsd:double .
+
+be:trk_WHS_MID_1_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_WHS_MID_1_ref_end_tc .
+
+be:trk_WHS_MID_1_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a5 ;
+    era:offsetFromOrigin "1050.0"^^xsd:double .
+
+be:trk_WHS_MID_2 a era:RunningTrack ;
+    rdfs:label "Westhaven - Midford track 2"@en ;
+    era:trackId "2" ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:trk_WHS_MID_2_ref ;
+    era:wheelSetGauge era-ntg:30 ;
+    era:contactLineSystem be:cls_3kv ;
+    era:etcs be:etcs_l2 ;
+    era:trainDetectionSystem be:tds_axle ;
+    era:maximumPermittedSpeed "140"^^xsd:integer ;
+    era:trackDirection era-trd:20 ;
+    era:linesideDistanceIndication be:ldi_km .
+
+be:trk_WHS_MID_2_ref a era:NetLinearReference ;
+    era:hasSequence ( be:le_b2 ) ;
+    era:startsAt be:trk_WHS_MID_2_ref_start ;
+    era:endsAt be:trk_WHS_MID_2_ref_end ;
+    gsp:hasGeometry be:trk_WHS_MID_2_ref_geom .
+
+be:trk_WHS_MID_2_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.10800 52.60000, 3.13920 52.60000)"^^gsp:wktLiteral .
+
+be:trk_WHS_MID_2_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_WHS_MID_2_ref_start_tc .
+
+be:trk_WHS_MID_2_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b2 ;
+    era:offsetFromOrigin "400.0"^^xsd:double .
+
+be:trk_WHS_MID_2_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_WHS_MID_2_ref_end_tc .
+
+be:trk_WHS_MID_2_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b2 ;
+    era:offsetFromOrigin "100.0"^^xsd:double .
+
+be:sol_MID_DUN_validity a era:TemporalFeature, time:Interval ;
+    time:hasBeginning be:sol_MID_DUN_validity_begin .
+
+be:sol_MID_DUN_validity_begin a time:Instant ;
+    time:inXSDDate "2026-01-01"^^xsd:date .
+
+be:sol_MID_DUN a era:SectionOfLine ;
+    rdfs:label "MID - DUN"@en ;
+    era:opStart be:op_MID ;
+    era:opEnd be:op_DUN ;
+    era:solNature era-sn:10 ;
+    era:lengthOfSectionOfLine "5.0"^^xsd:double ;
+    era:nationalLine be:line_100 ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sol_MID_DUN_ref ;
+    era:hasPart be:trk_MID_DUN_1 ;
+    era:validity be:sol_MID_DUN_validity .
+
+be:sol_MID_DUN_ref a era:NetAreaReference ;
+    era:includes ( be:trk_MID_DUN_1_ref ) ;
+    gsp:hasGeometry be:sol_MID_DUN_ref_geom .
+
+be:sol_MID_DUN_ref_geom a gsp:Geometry ;
+    gsp:asWKT "MULTILINESTRING((3.19902 52.60480, 3.38800 52.60480, 3.39349 52.60260))"^^gsp:wktLiteral .
+
+be:trk_MID_DUN_1 a era:RunningTrack ;
+    rdfs:label "Midford - Dunes track 1"@en ;
+    era:trackId "1" ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:trk_MID_DUN_1_ref ;
+    era:wheelSetGauge era-ntg:30 ;
+    era:contactLineSystem be:cls_3kv ;
+    era:etcs be:etcs_l2 ;
+    era:trainDetectionSystem be:tds_axle ;
+    era:maximumPermittedSpeed "140"^^xsd:integer ;
+    era:trackDirection era-trd:10 ;
+    era:linesideDistanceIndication be:ldi_km .
+
+be:trk_MID_DUN_1_ref a era:NetLinearReference ;
+    era:hasSequence ( be:le_a6 ) ;
+    era:startsAt be:trk_MID_DUN_1_ref_start ;
+    era:endsAt be:trk_MID_DUN_1_ref_end ;
+    gsp:hasGeometry be:trk_MID_DUN_1_ref_geom .
+
+be:trk_MID_DUN_1_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.19902 52.60480, 3.38800 52.60480, 3.39349 52.60260)"^^gsp:wktLiteral .
+
+be:trk_MID_DUN_1_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_MID_DUN_1_ref_start_tc .
+
+be:trk_MID_DUN_1_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a6 ;
+    era:offsetFromOrigin "200.0"^^xsd:double .
+
+be:trk_MID_DUN_1_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_MID_DUN_1_ref_end_tc .
+
+be:trk_MID_DUN_1_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a6 ;
+    era:offsetFromOrigin "5200.0"^^xsd:double .
+
+be:sol_DUN_BORD_validity a era:TemporalFeature, time:Interval ;
+    time:hasBeginning be:sol_DUN_BORD_validity_begin .
+
+be:sol_DUN_BORD_validity_begin a time:Instant ;
+    time:inXSDDate "2026-01-01"^^xsd:date .
+
+be:sol_DUN_BORD a era:SectionOfLine ;
+    rdfs:label "DUN - BORD"@en ;
+    era:opStart be:op_DUN ;
+    era:opEnd be:op_BORD ;
+    era:solNature era-sn:10 ;
+    era:lengthOfSectionOfLine "0.4"^^xsd:double ;
+    era:nationalLine be:line_100 ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sol_DUN_BORD_ref ;
+    era:hasPart be:trk_DUN_BORD_1 ;
+    era:validity be:sol_DUN_BORD_validity .
+
+be:sol_DUN_BORD_ref a era:NetAreaReference ;
+    era:includes ( be:trk_DUN_BORD_1_ref ) ;
+    gsp:hasGeometry be:sol_DUN_BORD_ref_geom .
+
+be:sol_DUN_BORD_ref_geom a gsp:Geometry ;
+    gsp:asWKT "MULTILINESTRING((3.40933 52.60000, 3.42800 52.60000))"^^gsp:wktLiteral .
+
+be:trk_DUN_BORD_1 a era:RunningTrack ;
+    rdfs:label "Dunes - border single track"@en ;
+    era:trackId "1" ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:trk_DUN_BORD_1_ref ;
+    era:wheelSetGauge era-ntg:30 ;
+    era:contactLineSystem be:cls_3kv ;
+    era:etcs be:etcs_l2 ;
+    era:trainDetectionSystem be:tds_axle ;
+    era:maximumPermittedSpeed "100"^^xsd:integer ;
+    era:trackDirection era-trd:30 ;
+    era:linesideDistanceIndication be:ldi_km .
+
+be:trk_DUN_BORD_1_ref a era:NetLinearReference ;
+    era:hasSequence ( be:le_b5 ) ;
+    era:startsAt be:trk_DUN_BORD_1_ref_start ;
+    era:endsAt be:trk_DUN_BORD_1_ref_end ;
+    gsp:hasGeometry be:trk_DUN_BORD_1_ref_geom .
+
+be:trk_DUN_BORD_1_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.40933 52.60000, 3.42800 52.60000)"^^gsp:wktLiteral .
+
+be:trk_DUN_BORD_1_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_DUN_BORD_1_ref_start_tc .
+
+be:trk_DUN_BORD_1_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b5 ;
+    era:offsetFromOrigin "200.0"^^xsd:double .
+
+be:trk_DUN_BORD_1_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_DUN_BORD_1_ref_end_tc .
+
+be:trk_DUN_BORD_1_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b5 ;
+    era:offsetFromOrigin "600.0"^^xsd:double .
+
+be:sol_MID_HIL_validity a era:TemporalFeature, time:Interval ;
+    time:hasBeginning be:sol_MID_HIL_validity_begin .
+
+be:sol_MID_HIL_validity_begin a time:Instant ;
+    time:inXSDDate "2026-01-01"^^xsd:date .
+
+be:sol_MID_HIL a era:SectionOfLine ;
+    rdfs:label "MID - HIL"@en ;
+    era:opStart be:op_MID ;
+    era:opEnd be:op_HIL ;
+    era:solNature era-sn:10 ;
+    era:lengthOfSectionOfLine "0.5"^^xsd:double ;
+    era:nationalLine be:line_100 ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sol_MID_HIL_ref ;
+    era:hasPart be:trk_MID_HIL_2 ;
+    era:validity be:sol_MID_HIL_validity .
+
+be:sol_MID_HIL_ref a era:NetAreaReference ;
+    era:includes ( be:trk_MID_HIL_2_ref ) ;
+    gsp:hasGeometry be:sol_MID_HIL_ref_geom .
+
+be:sol_MID_HIL_ref_geom a gsp:Geometry ;
+    gsp:asWKT "MULTILINESTRING((3.20160 52.60000, 3.24840 52.60000))"^^gsp:wktLiteral .
+
+be:trk_MID_HIL_2 a era:RunningTrack ;
+    rdfs:label "Midford - Hillend track 2"@en ;
+    era:trackId "2" ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:trk_MID_HIL_2_ref ;
+    era:wheelSetGauge era-ntg:30 ;
+    era:contactLineSystem be:cls_3kv ;
+    era:etcs be:etcs_l2 ;
+    era:trainDetectionSystem be:tds_axle ;
+    era:maximumPermittedSpeed "120"^^xsd:integer ;
+    era:trackDirection era-trd:20 ;
+    era:linesideDistanceIndication be:ldi_km .
+
+be:trk_MID_HIL_2_ref a era:NetLinearReference ;
+    era:hasSequence ( be:le_b3 ) ;
+    era:startsAt be:trk_MID_HIL_2_ref_start ;
+    era:endsAt be:trk_MID_HIL_2_ref_end ;
+    gsp:hasGeometry be:trk_MID_HIL_2_ref_geom .
+
+be:trk_MID_HIL_2_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.20160 52.60000, 3.24840 52.60000)"^^gsp:wktLiteral .
+
+be:trk_MID_HIL_2_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_MID_HIL_2_ref_start_tc .
+
+be:trk_MID_HIL_2_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b3 ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+be:trk_MID_HIL_2_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_MID_HIL_2_ref_end_tc .
+
+be:trk_MID_HIL_2_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b3 ;
+    era:offsetFromOrigin "450.0"^^xsd:double .
+
+be:sol_HIL_DUN_validity a era:TemporalFeature, time:Interval ;
+    time:hasBeginning be:sol_HIL_DUN_validity_begin .
+
+be:sol_HIL_DUN_validity_begin a time:Instant ;
+    time:inXSDDate "2026-01-01"^^xsd:date .
+
+be:sol_HIL_DUN a era:SectionOfLine ;
+    rdfs:label "HIL - DUN"@en ;
+    era:opStart be:op_HIL ;
+    era:opEnd be:op_DUN ;
+    era:solNature era-sn:10 ;
+    era:lengthOfSectionOfLine "4.7"^^xsd:double ;
+    era:nationalLine be:line_100 ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sol_HIL_DUN_ref ;
+    era:hasPart be:trk_HIL_DUN_2 ;
+    era:validity be:sol_HIL_DUN_validity .
+
+be:sol_HIL_DUN_ref a era:NetAreaReference ;
+    era:includes ( be:trk_HIL_DUN_2_ref ) ;
+    gsp:hasGeometry be:sol_HIL_DUN_ref_geom .
+
+be:sol_HIL_DUN_ref_geom a gsp:Geometry ;
+    gsp:asWKT "MULTILINESTRING((3.24840 52.60000, 3.39375 52.60000))"^^gsp:wktLiteral .
+
+be:trk_HIL_DUN_2 a era:RunningTrack ;
+    rdfs:label "Hillend - Dunes track 2"@en ;
+    era:trackId "2" ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:trk_HIL_DUN_2_ref ;
+    era:wheelSetGauge era-ntg:30 ;
+    era:contactLineSystem be:cls_3kv ;
+    era:etcs be:etcs_l2 ;
+    era:trainDetectionSystem be:tds_axle ;
+    era:maximumPermittedSpeed "140"^^xsd:integer ;
+    era:trackDirection era-trd:20 ;
+    era:linesideDistanceIndication be:ldi_km .
+
+be:trk_HIL_DUN_2_ref a era:NetLinearReference ;
+    era:hasSequence ( be:le_b4 ) ;
+    era:startsAt be:trk_HIL_DUN_2_ref_start ;
+    era:endsAt be:trk_HIL_DUN_2_ref_end ;
+    gsp:hasGeometry be:trk_HIL_DUN_2_ref_geom .
+
+be:trk_HIL_DUN_2_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.24840 52.60000, 3.39375 52.60000)"^^gsp:wktLiteral .
+
+be:trk_HIL_DUN_2_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_HIL_DUN_2_ref_start_tc .
+
+be:trk_HIL_DUN_2_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b4 ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+be:trk_HIL_DUN_2_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_HIL_DUN_2_ref_end_tc .
+
+be:trk_HIL_DUN_2_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b4 ;
+    era:offsetFromOrigin "4650.0"^^xsd:double .
+
+
+##############################################################################
+# 8. Switches
+# A switch has one net point reference, at the point where its elements meet, given on the common branch.
+# v3.3.4 has no switch properties: facing or trailing follows from the net relations at that point.
+##############################################################################
+
+be:sw_W1 a era:Switch ;
+    rdfs:label "Switch W1"@en ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sw_W1_ref .
+
+be:sw_W1_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sw_W1_ref_tc ;
+    era:appliesToDirection era-orient:02 ;
+    era:hasLrsCoordinate be:sw_W1_ref_lrs ;
+    gsp:hasGeometry be:sw_W1_ref_geom .
+
+be:sw_W1_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(2.94160 52.60480)"^^gsp:wktLiteral .
+
+be:sw_W1_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a2 ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+be:sw_W1_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost be:kp_line_100_0 ;
+    era:offsetFromKilometricPost "400.0"^^xsd:double .
+
+be:sw_W6 a era:Switch ;
+    rdfs:label "Switch W6"@en ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sw_W6_ref .
+
+be:sw_W6_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sw_W6_ref_tc ;
+    era:appliesToDirection era-orient:02 ;
+    era:hasLrsCoordinate be:sw_W6_ref_lrs ;
+    gsp:hasGeometry be:sw_W6_ref_geom .
+
+be:sw_W6_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(2.96240 52.60480)"^^gsp:wktLiteral .
+
+be:sw_W6_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a3 ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+be:sw_W6_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost be:kp_line_100_0 ;
+    era:offsetFromKilometricPost "600.0"^^xsd:double .
+
+be:sw_W2 a era:Switch ;
+    rdfs:label "Switch W2"@en ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sw_W2_ref .
+
+be:sw_W2_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sw_W2_ref_tc ;
+    era:appliesToDirection era-orient:02 ;
+    era:hasLrsCoordinate be:sw_W2_ref_lrs ;
+    gsp:hasGeometry be:sw_W2_ref_geom .
+
+be:sw_W2_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(2.97800 52.60480)"^^gsp:wktLiteral .
+
+be:sw_W2_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a3 ;
+    era:offsetFromOrigin "150.0"^^xsd:double .
+
+be:sw_W2_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost be:kp_line_100_0 ;
+    era:offsetFromKilometricPost "750.0"^^xsd:double .
+
+be:sw_W3 a era:Switch ;
+    rdfs:label "Switch W3"@en ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sw_W3_ref .
+
+be:sw_W3_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sw_W3_ref_tc ;
+    era:appliesToDirection era-orient:02 ;
+    era:hasLrsCoordinate be:sw_W3_ref_lrs ;
+    gsp:hasGeometry be:sw_W3_ref_geom .
+
+be:sw_W3_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.03000 52.60480)"^^gsp:wktLiteral .
+
+be:sw_W3_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a5 ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+be:sw_W3_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost be:kp_line_100_1 ;
+    era:offsetFromKilometricPost "250.0"^^xsd:double .
+
+be:sw_W21 a era:Switch ;
+    rdfs:label "Switch W21"@en ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sw_W21_ref .
+
+be:sw_W21_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sw_W21_ref_tc ;
+    era:appliesToDirection era-orient:02 ;
+    era:hasLrsCoordinate be:sw_W21_ref_lrs ;
+    gsp:hasGeometry be:sw_W21_ref_geom .
+
+be:sw_W21_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(2.92600 52.60960)"^^gsp:wktLiteral .
+
+be:sw_W21_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_d0 ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+be:sw_W21_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost be:kp_line_100_0 ;
+    era:offsetFromKilometricPost "520.0"^^xsd:double .
+
+be:sw_W31 a era:Switch ;
+    rdfs:label "Switch W31"@en ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sw_W31_ref .
+
+be:sw_W31_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sw_W31_ref_tc ;
+    era:appliesToDirection era-orient:02 ;
+    gsp:hasGeometry be:sw_W31_ref_geom .
+
+be:sw_W31_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(2.92400 52.59520)"^^gsp:wktLiteral .
+
+be:sw_W31_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_y0 ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+be:sw_W7 a era:Switch ;
+    rdfs:label "Switch W7"@en ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sw_W7_ref .
+
+be:sw_W7_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sw_W7_ref_tc ;
+    era:appliesToDirection era-orient:02 ;
+    era:hasLrsCoordinate be:sw_W7_ref_lrs ;
+    gsp:hasGeometry be:sw_W7_ref_geom .
+
+be:sw_W7_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.16000 52.60480)"^^gsp:wktLiteral .
+
+be:sw_W7_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a7 ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+be:sw_W7_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost be:kp_line_100_2 ;
+    era:offsetFromKilometricPost "500.0"^^xsd:double .
+
+be:sw_W4 a era:Switch ;
+    rdfs:label "Switch W4"@en ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sw_W4_ref .
+
+be:sw_W4_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sw_W4_ref_tc ;
+    era:appliesToDirection era-orient:02 ;
+    era:hasLrsCoordinate be:sw_W4_ref_lrs ;
+    gsp:hasGeometry be:sw_W4_ref_geom .
+
+be:sw_W4_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.14960 52.60000)"^^gsp:wktLiteral .
+
+be:sw_W4_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b2 ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+be:sw_W4_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost be:kp_line_100_2 ;
+    era:offsetFromKilometricPost "400.0"^^xsd:double .
+
+be:sw_W11 a era:Switch ;
+    rdfs:label "Switch W11"@en ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sw_W11_ref .
+
+be:sw_W11_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sw_W11_ref_tc ;
+    era:appliesToDirection era-orient:02 ;
+    era:hasLrsCoordinate be:sw_W11_ref_lrs ;
+    gsp:hasGeometry be:sw_W11_ref_geom .
+
+be:sw_W11_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.19120 52.60480)"^^gsp:wktLiteral .
+
+be:sw_W11_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a7 ;
+    era:offsetFromOrigin "300.0"^^xsd:double .
+
+be:sw_W11_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost be:kp_line_100_2 ;
+    era:offsetFromKilometricPost "800.0"^^xsd:double .
+
+be:sw_W12 a era:Switch ;
+    rdfs:label "Switch W12"@en ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sw_W12_ref .
+
+be:sw_W12_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sw_W12_ref_tc ;
+    era:appliesToDirection era-orient:02 ;
+    era:hasLrsCoordinate be:sw_W12_ref_lrs ;
+    gsp:hasGeometry be:sw_W12_ref_geom .
+
+be:sw_W12_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.20160 52.60000)"^^gsp:wktLiteral .
+
+be:sw_W12_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b3 ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+be:sw_W12_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost be:kp_line_100_2 ;
+    era:offsetFromKilometricPost "900.0"^^xsd:double .
+
+be:sw_W13 a era:Switch ;
+    rdfs:label "Switch W13"@en ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sw_W13_ref .
+
+be:sw_W13_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sw_W13_ref_tc ;
+    era:appliesToDirection era-orient:02 ;
+    era:hasLrsCoordinate be:sw_W13_ref_lrs ;
+    gsp:hasGeometry be:sw_W13_ref_geom .
+
+be:sw_W13_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.24840 52.60000)"^^gsp:wktLiteral .
+
+be:sw_W13_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b3 ;
+    era:offsetFromOrigin "450.0"^^xsd:double .
+
+be:sw_W13_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost be:kp_line_100_3 ;
+    era:offsetFromKilometricPost "350.0"^^xsd:double .
+
+be:sw_W14 a era:Switch ;
+    rdfs:label "Switch W14"@en ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sw_W14_ref .
+
+be:sw_W14_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sw_W14_ref_tc ;
+    era:appliesToDirection era-orient:02 ;
+    era:hasLrsCoordinate be:sw_W14_ref_lrs ;
+    gsp:hasGeometry be:sw_W14_ref_geom .
+
+be:sw_W14_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.40000 52.60000)"^^gsp:wktLiteral .
+
+be:sw_W14_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b5 ;
+    era:offsetFromOrigin "0.0"^^xsd:double .
+
+be:sw_W14_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost be:kp_line_100_8 ;
+    era:offsetFromKilometricPost "200.0"^^xsd:double .
+
+# A double slip crossing has no common branch; the reference is given on track 2 (element b1).
+be:sw_W5 a era:Switch ;
+    rdfs:label "Double slip crossing W5"@en ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sw_W5_ref .
+
+be:sw_W5_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sw_W5_ref_tc ;
+    era:appliesToDirection era-orient:02 ;
+    era:hasLrsCoordinate be:sw_W5_ref_lrs ;
+    gsp:hasGeometry be:sw_W5_ref_geom .
+
+be:sw_W5_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(2.94680 52.60000)"^^gsp:wktLiteral .
+
+be:sw_W5_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b1 ;
+    era:offsetFromOrigin "450.0"^^xsd:double .
+
+be:sw_W5_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost be:kp_line_100_0 ;
+    era:offsetFromKilometricPost "450.0"^^xsd:double .
+
+
+##############################################################################
+# 9. Signals
+# Three statements about direction, each in its own frame:
+#  - era:appliesToDirection on the net point reference: relative to the linear element (origin to end);
+#  - era:hasOrientation: direction and side relative to the carrier linear element;
+#  - era:signalOrientation: relative to the direction of the line (rising kilometrage).
+# On an element that runs against the line they give different values.
+##############################################################################
+
+be:sig_S1 a era:Signal ;
+    rdfs:label "Exit signal track 1"@en ;
+    era:signalId "S1" ;
+    era:signalType era-sigtypes:04 ;
+    era:signalOrientation era-orient:00 ;
+    era:hasOrientation be:sig_S1_orientation ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sig_S1_ref .
+
+be:sig_S1_orientation a era:Orientation ;
+    era:carrierLinearElement be:le_a4 ;
+    era:direction era-orient:00 ;
+    era:side era-orient:Left .
+
+be:sig_S1_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sig_S1_ref_tc ;
+    era:appliesToDirection era-orient:00 ;
+    era:hasLrsCoordinate be:sig_S1_ref_lrs ;
+    gsp:hasGeometry be:sig_S1_ref_geom .
+
+be:sig_S1_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.02272 52.60480)"^^gsp:wktLiteral .
+
+be:sig_S1_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a4 ;
+    era:offsetFromOrigin "430.0"^^xsd:double .
+
+be:sig_S1_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost be:kp_line_100_1 ;
+    era:offsetFromKilometricPost "180.0"^^xsd:double .
+
+be:sig_S3 a era:Signal ;
+    rdfs:label "Exit signal track 3"@en ;
+    era:signalId "S3" ;
+    era:signalType era-sigtypes:04 ;
+    era:signalOrientation era-orient:00 ;
+    era:hasOrientation be:sig_S3_orientation ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sig_S3_ref .
+
+be:sig_S3_orientation a era:Orientation ;
+    era:carrierLinearElement be:le_c1 ;
+    era:direction era-orient:01 ;
+    era:side era-orient:Right .
+
+be:sig_S3_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sig_S3_ref_tc ;
+    era:appliesToDirection era-orient:01 ;
+    era:hasLrsCoordinate be:sig_S3_ref_lrs ;
+    gsp:hasGeometry be:sig_S3_ref_geom .
+
+be:sig_S3_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.02423 52.60960)"^^gsp:wktLiteral .
+
+be:sig_S3_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_c1 ;
+    era:offsetFromOrigin "90.0"^^xsd:double .
+
+be:sig_S3_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost be:kp_line_100_1 ;
+    era:offsetFromKilometricPost "180.0"^^xsd:double .
+
+be:sig_S2 a era:Signal ;
+    rdfs:label "Exit signal track 2"@en ;
+    era:signalId "S2" ;
+    era:signalType era-sigtypes:04 ;
+    era:signalOrientation era-orient:01 ;
+    era:hasOrientation be:sig_S2_orientation ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sig_S2_ref .
+
+be:sig_S2_orientation a era:Orientation ;
+    era:carrierLinearElement be:le_b2 ;
+    era:direction era-orient:00 ;
+    era:side era-orient:Left .
+
+be:sig_S2_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sig_S2_ref_tc ;
+    era:appliesToDirection era-orient:00 ;
+    era:hasLrsCoordinate be:sig_S2_ref_lrs ;
+    gsp:hasGeometry be:sig_S2_ref_geom .
+
+be:sig_S2_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(2.97800 52.60000)"^^gsp:wktLiteral .
+
+be:sig_S2_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b2 ;
+    era:offsetFromOrigin "1650.0"^^xsd:double .
+
+be:sig_S2_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost be:kp_line_100_0 ;
+    era:offsetFromKilometricPost "750.0"^^xsd:double .
+
+be:sig_H2 a era:Signal ;
+    rdfs:label "Home signal track 2"@en ;
+    era:signalId "H2" ;
+    era:signalType era-sigtypes:01 ;
+    era:signalOrientation era-orient:01 ;
+    era:hasOrientation be:sig_H2_orientation ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sig_H2_ref .
+
+be:sig_H2_orientation a era:Orientation ;
+    era:carrierLinearElement be:le_b2 ;
+    era:direction era-orient:00 ;
+    era:side era-orient:Left .
+
+be:sig_H2_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sig_H2_ref_tc ;
+    era:appliesToDirection era-orient:00 ;
+    era:hasLrsCoordinate be:sig_H2_ref_lrs ;
+    gsp:hasGeometry be:sig_H2_ref_geom .
+
+be:sig_H2_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.10800 52.60000)"^^gsp:wktLiteral .
+
+be:sig_H2_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b2 ;
+    era:offsetFromOrigin "400.0"^^xsd:double .
+
+be:sig_H2_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost be:kp_line_100_2 ;
+    era:offsetFromKilometricPost "0.0"^^xsd:double .
+
+be:sig_B1 a era:Signal ;
+    rdfs:label "Block signal track 1"@en ;
+    era:signalId "B1" ;
+    era:signalType era-sigtypes:07 ;
+    era:signalOrientation era-orient:00 ;
+    era:hasOrientation be:sig_B1_orientation ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sig_B1_ref .
+
+be:sig_B1_orientation a era:Orientation ;
+    era:carrierLinearElement be:le_a6 ;
+    era:direction era-orient:00 ;
+    era:side era-orient:Left .
+
+be:sig_B1_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sig_B1_ref_tc ;
+    era:appliesToDirection era-orient:00 ;
+    era:hasLrsCoordinate be:sig_B1_ref_lrs ;
+    gsp:hasGeometry be:sig_B1_ref_geom .
+
+be:sig_B1_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.25378 52.60480)"^^gsp:wktLiteral .
+
+be:sig_B1_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a6 ;
+    era:offsetFromOrigin "1600.0"^^xsd:double .
+
+be:sig_B1_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost be:kp_line_100_3 ;
+    era:offsetFromKilometricPost "1400.0"^^xsd:double .
+
+be:sig_MA a era:Signal ;
+    rdfs:label "Midford protection signal A"@en ;
+    era:signalId "MA" ;
+    era:signalType era-sigtypes:08 ;
+    era:signalOrientation era-orient:00 ;
+    era:hasOrientation be:sig_MA_orientation ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sig_MA_ref .
+
+be:sig_MA_orientation a era:Orientation ;
+    era:carrierLinearElement be:le_a5 ;
+    era:direction era-orient:00 ;
+    era:side era-orient:Left .
+
+be:sig_MA_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sig_MA_ref_tc ;
+    era:appliesToDirection era-orient:00 ;
+    era:hasLrsCoordinate be:sig_MA_ref_lrs ;
+    gsp:hasGeometry be:sig_MA_ref_geom .
+
+be:sig_MA_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.13920 52.60480)"^^gsp:wktLiteral .
+
+be:sig_MA_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a5 ;
+    era:offsetFromOrigin "1050.0"^^xsd:double .
+
+be:sig_MA_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost be:kp_line_100_2 ;
+    era:offsetFromKilometricPost "300.0"^^xsd:double .
+
+be:sig_MB a era:Signal ;
+    rdfs:label "Hillend protection signal B"@en ;
+    era:signalId "MB" ;
+    era:signalType era-sigtypes:08 ;
+    era:signalOrientation era-orient:01 ;
+    era:hasOrientation be:sig_MB_orientation ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sig_MB_ref .
+
+be:sig_MB_orientation a era:Orientation ;
+    era:carrierLinearElement be:le_b4 ;
+    era:direction era-orient:01 ;
+    era:side era-orient:Right .
+
+be:sig_MB_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sig_MB_ref_tc ;
+    era:appliesToDirection era-orient:01 ;
+    era:hasLrsCoordinate be:sig_MB_ref_lrs ;
+    gsp:hasGeometry be:sig_MB_ref_geom .
+
+be:sig_MB_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.25778 52.60000)"^^gsp:wktLiteral .
+
+be:sig_MB_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b4 ;
+    era:offsetFromOrigin "300.0"^^xsd:double .
+
+be:sig_MB_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost be:kp_line_100_3 ;
+    era:offsetFromKilometricPost "650.0"^^xsd:double .
+
+be:sig_MC a era:Signal ;
+    rdfs:label "Hillend protection signal C"@en ;
+    era:signalId "MC" ;
+    era:signalType era-sigtypes:08 ;
+    era:signalOrientation era-orient:01 ;
+    era:hasOrientation be:sig_MC_orientation ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sig_MC_ref .
+
+be:sig_MC_orientation a era:Orientation ;
+    era:carrierLinearElement be:le_br ;
+    era:direction era-orient:01 ;
+    era:side era-orient:Right .
+
+be:sig_MC_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sig_MC_ref_tc ;
+    era:appliesToDirection era-orient:01 ;
+    era:hasLrsCoordinate be:sig_MC_ref_lrs ;
+    gsp:hasGeometry be:sig_MC_ref_geom .
+
+be:sig_MC_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.27219 52.59160)"^^gsp:wktLiteral .
+
+be:sig_MC_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_br ;
+    era:offsetFromOrigin "300.0"^^xsd:double .
+
+be:sig_MC_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost be:kp_line_100_3 ;
+    era:offsetFromKilometricPost "650.0"^^xsd:double .
+
+
+##############################################################################
+# 10. Tunnel, level crossing, platform edges, document
+##############################################################################
+
+be:doc_tunnel_plan a era:Document ;
+    foaf:name "midford-tunnel-emergency-plan.pdf" ;
+    era:documentUrl "https://example.org/documents/midford-tunnel-emergency-plan.pdf"^^xsd:anyURI ;
+    dcterms:language "en" .
+
+# The tunnel covers both tracks: an area reference with one linear reference per track.
+# Three required parameters are not surveyed yet and are flagged with era:notYetAvailable.
+be:tun_MID a era:Tunnel ;
+    rdfs:label "Midford tunnel"@en ;
+    era:tunnelIdentification "T-100-1" ;
+    era:lengthOfTunnel "1200.0"^^xsd:double ;
+    era:hasEmergencyPlan true ;
+    era:hasEvacuationAndRescuePoints true ;
+    era:rollingStockFireCategory era-rsf:10 ;
+    era:tunnelDocRef be:doc_tunnel_plan ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:tun_MID_ref ;
+    era:notYetAvailable era:verificationSRT ;
+    era:notYetAvailable era:demonstrationSRT ;
+    era:notYetAvailable era:nationalRollingStockFireCategory .
+
+be:tun_MID_ref a era:NetAreaReference ;
+    era:includes ( be:tun_MID_ref_1 be:tun_MID_ref_2 ) ;
+    gsp:hasGeometry be:tun_MID_ref_geom .
+
+be:tun_MID_ref_geom a gsp:Geometry ;
+    gsp:asWKT "MULTILINESTRING((3.28117 52.60480, 3.32810 52.60480), (3.30310 52.60000, 3.34061 52.60000))"^^gsp:wktLiteral .
+
+be:tun_MID_ref_1 a era:NetLinearReference ;
+    era:hasSequence ( be:le_a6 ) ;
+    era:startsAt be:tun_MID_ref_1_start ;
+    era:endsAt be:tun_MID_ref_1_end ;
+    gsp:hasGeometry be:tun_MID_ref_1_geom .
+
+be:tun_MID_ref_1_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.28117 52.60480, 3.32810 52.60480)"^^gsp:wktLiteral .
+
+be:tun_MID_ref_1_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:tun_MID_ref_1_start_tc .
+
+be:tun_MID_ref_1_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a6 ;
+    era:offsetFromOrigin "2300.0"^^xsd:double .
+
+be:tun_MID_ref_1_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:tun_MID_ref_1_end_tc .
+
+be:tun_MID_ref_1_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a6 ;
+    era:offsetFromOrigin "3500.0"^^xsd:double .
+
+be:tun_MID_ref_2 a era:NetLinearReference ;
+    era:hasSequence ( be:le_b4 ) ;
+    era:startsAt be:tun_MID_ref_2_start ;
+    era:endsAt be:tun_MID_ref_2_end ;
+    gsp:hasGeometry be:tun_MID_ref_2_geom .
+
+be:tun_MID_ref_2_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.30310 52.60000, 3.34061 52.60000)"^^gsp:wktLiteral .
+
+be:tun_MID_ref_2_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:tun_MID_ref_2_start_tc .
+
+be:tun_MID_ref_2_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b4 ;
+    era:offsetFromOrigin "1750.0"^^xsd:double .
+
+be:tun_MID_ref_2_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:tun_MID_ref_2_end_tc .
+
+be:tun_MID_ref_2_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b4 ;
+    era:offsetFromOrigin "2950.0"^^xsd:double .
+
+# The level crossing crosses both tracks: an area reference with one very short linear reference per track.
+be:lc_1 a era:LevelCrossing ;
+    rdfs:label "Dune road level crossing"@en ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:lc_1_ref .
+
+be:lc_1_ref a era:NetAreaReference ;
+    era:includes ( be:lc_1_ref_1 be:lc_1_ref_2 ) ;
+    gsp:hasGeometry be:lc_1_ref_geom .
+
+be:lc_1_ref_geom a gsp:Geometry ;
+    gsp:asWKT "MULTILINESTRING((3.37485 52.60480, 3.37524 52.60480), (3.37796 52.60000, 3.37828 52.60000))"^^gsp:wktLiteral .
+
+be:lc_1_ref_1 a era:NetLinearReference ;
+    era:hasSequence ( be:le_a6 ) ;
+    era:startsAt be:lc_1_ref_1_start ;
+    era:endsAt be:lc_1_ref_1_end ;
+    gsp:hasGeometry be:lc_1_ref_1_geom .
+
+be:lc_1_ref_1_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.37485 52.60480, 3.37524 52.60480)"^^gsp:wktLiteral .
+
+be:lc_1_ref_1_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:lc_1_ref_1_start_tc .
+
+be:lc_1_ref_1_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a6 ;
+    era:offsetFromOrigin "4695.0"^^xsd:double .
+
+be:lc_1_ref_1_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:lc_1_ref_1_end_tc .
+
+be:lc_1_ref_1_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a6 ;
+    era:offsetFromOrigin "4705.0"^^xsd:double .
+
+be:lc_1_ref_2 a era:NetLinearReference ;
+    era:hasSequence ( be:le_b4 ) ;
+    era:startsAt be:lc_1_ref_2_start ;
+    era:endsAt be:lc_1_ref_2_end ;
+    gsp:hasGeometry be:lc_1_ref_2_geom .
+
+be:lc_1_ref_2_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.37796 52.60000, 3.37828 52.60000)"^^gsp:wktLiteral .
+
+be:lc_1_ref_2_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:lc_1_ref_2_start_tc .
+
+be:lc_1_ref_2_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b4 ;
+    era:offsetFromOrigin "4145.0"^^xsd:double .
+
+be:lc_1_ref_2_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:lc_1_ref_2_end_tc .
+
+be:lc_1_ref_2_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b4 ;
+    era:offsetFromOrigin "4155.0"^^xsd:double .
+
+be:pe_WHS_1 a era:PlatformEdge ;
+    rdfs:label "Platform 1"@en ;
+    era:platformId "1" ;
+    era:lengthOfPlatform "250.0"^^xsd:double ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:pe_WHS_1_ref .
+
+be:pe_WHS_1_ref a era:NetLinearReference ;
+    era:hasSequence ( be:le_a4 ) ;
+    era:startsAt be:pe_WHS_1_ref_start ;
+    era:endsAt be:pe_WHS_1_ref_end ;
+    gsp:hasGeometry be:pe_WHS_1_ref_geom .
+
+be:pe_WHS_1_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(2.99100 52.60480, 3.01700 52.60480)"^^gsp:wktLiteral .
+
+be:pe_WHS_1_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:pe_WHS_1_ref_start_tc .
+
+be:pe_WHS_1_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a4 ;
+    era:offsetFromOrigin "125.0"^^xsd:double .
+
+be:pe_WHS_1_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:pe_WHS_1_ref_end_tc .
+
+be:pe_WHS_1_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a4 ;
+    era:offsetFromOrigin "375.0"^^xsd:double .
+
+be:pe_WHS_3 a era:PlatformEdge ;
+    rdfs:label "Platform 3"@en ;
+    era:platformId "3" ;
+    era:lengthOfPlatform "240.0"^^xsd:double ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:pe_WHS_3_ref .
+
+be:pe_WHS_3_ref a era:NetLinearReference ;
+    era:hasSequence ( be:le_c1 ) ;
+    era:startsAt be:pe_WHS_3_ref_start ;
+    era:endsAt be:pe_WHS_3_ref_end ;
+    gsp:hasGeometry be:pe_WHS_3_ref_geom .
+
+be:pe_WHS_3_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(2.98972 52.60960, 3.01828 52.60960)"^^gsp:wktLiteral .
+
+be:pe_WHS_3_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:pe_WHS_3_ref_start_tc .
+
+be:pe_WHS_3_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_c1 ;
+    era:offsetFromOrigin "380.0"^^xsd:double .
+
+be:pe_WHS_3_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:pe_WHS_3_ref_end_tc .
+
+be:pe_WHS_3_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_c1 ;
+    era:offsetFromOrigin "140.0"^^xsd:double .
+
+be:pe_WHS_2 a era:PlatformEdge ;
+    rdfs:label "Platform 2"@en ;
+    era:platformId "2" ;
+    era:lengthOfPlatform "250.0"^^xsd:double ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:pe_WHS_2_ref .
+
+be:pe_WHS_2_ref a era:NetLinearReference ;
+    era:hasSequence ( be:le_b2 ) ;
+    era:startsAt be:pe_WHS_2_ref_start ;
+    era:endsAt be:pe_WHS_2_ref_end ;
+    gsp:hasGeometry be:pe_WHS_2_ref_geom .
+
+be:pe_WHS_2_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(2.99100 52.60000, 3.01700 52.60000)"^^gsp:wktLiteral .
+
+be:pe_WHS_2_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:pe_WHS_2_ref_start_tc .
+
+be:pe_WHS_2_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b2 ;
+    era:offsetFromOrigin "1525.0"^^xsd:double .
+
+be:pe_WHS_2_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:pe_WHS_2_ref_end_tc .
+
+be:pe_WHS_2_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b2 ;
+    era:offsetFromOrigin "1275.0"^^xsd:double .
+
+be:pe_HIL_1 a era:PlatformEdge ;
+    rdfs:label "Platform 1"@en ;
+    era:platformId "1" ;
+    era:lengthOfPlatform "200.0"^^xsd:double ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:pe_HIL_1_ref .
+
+be:pe_HIL_1_ref a era:NetLinearReference ;
+    era:hasSequence ( be:le_br ) ;
+    era:startsAt be:pe_HIL_1_ref_start ;
+    era:endsAt be:pe_HIL_1_ref_end ;
+    gsp:hasGeometry be:pe_HIL_1_ref_geom .
+
+be:pe_HIL_1_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.29610 52.59160, 3.31522 52.59160)"^^gsp:wktLiteral .
+
+be:pe_HIL_1_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:pe_HIL_1_ref_start_tc .
+
+be:pe_HIL_1_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_br ;
+    era:offsetFromOrigin "550.0"^^xsd:double .
+
+be:pe_HIL_1_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:pe_HIL_1_ref_end_tc .
+
+be:pe_HIL_1_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_br ;
+    era:offsetFromOrigin "750.0"^^xsd:double .
+
+
+##############################################################################
+# 11. Primary and subsidiary locations
+# Location codes for the telematics messages. An operational point points to its primary location;
+# a subsidiary location points to the primary location it belongs to.
+##############################################################################
+
+be:pl_WHS a era:PrimaryLocation ;
+    rdfs:label "Westhaven"@en ;
+    era:primaryLocationCode "BE99001" ;
+    era:primaryLocationName "Westhaven"@en ;
+    era:passengerFlag true ;
+    era:freightFlag false ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:pl_WHS_ref .
+
+be:pl_WHS_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:pl_WHS_ref_tc ;
+    gsp:hasGeometry be:pl_WHS_ref_geom .
+
+be:pl_WHS_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.00400 52.60480)"^^gsp:wktLiteral .
+
+be:pl_WHS_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a4 ;
+    era:offsetFromOrigin "250.0"^^xsd:double .
+
+be:op_WHS era:primaryLocation be:pl_WHS .
+
+be:pl_WHY a era:PrimaryLocation ;
+    rdfs:label "Westhaven Yard"@en ;
+    era:primaryLocationCode "BE99002" ;
+    era:primaryLocationName "Westhaven Yard"@en ;
+    era:passengerFlag false ;
+    era:freightFlag true ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:pl_WHY_ref .
+
+be:pl_WHY_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:pl_WHY_ref_tc ;
+    gsp:hasGeometry be:pl_WHY_ref_geom .
+
+be:pl_WHY_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(2.91200 52.59520)"^^gsp:wktLiteral .
+
+be:pl_WHY_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_y1 ;
+    era:offsetFromOrigin "200.0"^^xsd:double .
+
+be:op_WHY era:primaryLocation be:pl_WHY .
+
+be:pl_HIL a era:PrimaryLocation ;
+    rdfs:label "Hillend"@en ;
+    era:primaryLocationCode "BE99003" ;
+    era:primaryLocationName "Hillend"@en ;
+    era:passengerFlag true ;
+    era:freightFlag false ;
+    era:inCountry country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:pl_HIL_ref .
+
+be:pl_HIL_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:pl_HIL_ref_tc ;
+    gsp:hasGeometry be:pl_HIL_ref_geom .
+
+be:pl_HIL_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.30566 52.59160)"^^gsp:wktLiteral .
+
+be:pl_HIL_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_br ;
+    era:offsetFromOrigin "650.0"^^xsd:double .
+
+be:op_HIL era:primaryLocation be:pl_HIL .
+
+be:sl_WHS_PF a era:SubsidiaryLocation ;
+    rdfs:label "Westhaven platforms"@en ;
+    era:subsidiaryLocationCode "01" ;
+    era:subsidiaryLocationName "Westhaven platforms"@en ;
+    era:subsidiaryLocationType era-subloctype:39 ;
+    era:linkedToPrimaryLocation be:pl_WHS .
+
+be:sl_WHY_LP a era:SubsidiaryLocation ;
+    rdfs:label "Westhaven Yard loading point"@en ;
+    era:subsidiaryLocationCode "02" ;
+    era:subsidiaryLocationName "Westhaven Yard loading point"@en ;
+    era:subsidiaryLocationType era-subloctype:43 ;
+    era:linkedToPrimaryLocation be:pl_WHY .
+
+be:sl_WHD_GT a era:SubsidiaryLocation ;
+    rdfs:label "Westhaven Depot gate"@en ;
+    era:subsidiaryLocationCode "03" ;
+    era:subsidiaryLocationName "Westhaven Depot gate"@en ;
+    era:subsidiaryLocationType era-subloctype:05 ;
+    era:linkedToPrimaryLocation be:pl_WHS .

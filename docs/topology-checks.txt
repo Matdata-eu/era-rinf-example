@@ -1,0 +1,15 @@
+ok   net relation refers to two linear elements
+ok   net relation joins two element ends at the same point
+ok   every pair of element ends that meet has a net relation
+ok   no two relations for the same pair of ends
+ok   topological coordinate lies on its linear element
+ok   linear reference starts on its first and ends on its last element
+ok   consecutive elements of a linear reference are navigable
+ok   area reference includes linear references only
+ok   signal orientation agrees with its net point reference
+ok   switch is placed on a point where at least three element ends meet
+ok   border point records share UOPID, reference border point, canonical URI and position
+ok   hasPart agrees with the area reference of the container
+ok   operational points and sections of line do not overlap
+ok   every linear element is covered by an operational point or a section of line
+2787 triples, 28 linear elements, 49 net relations, 14 checks, 0 failures
