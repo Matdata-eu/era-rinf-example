@@ -14,12 +14,12 @@ except the country IRIs is invented, and the geometries are schematic and lie in
 
 | File | Content |
 |---|---|
-| `data/im-a-belgium.ttl` | Infra Alfa: Westhaven station, depot and yard, Midford Junction, Hillend, Dunes Junction, border |
+| `data/im-a-belgium.ttl` | Infra Alfa: Westhaven station, depot and yard, Midford Junction, Hillend siding, Dunes Junction, border |
 | `data/im-b-netherlands.ttl` | Beta Spoor: border, Eastgate |
 | `data/era-managed.ttl` | Stand-in for the reference border point that ERA manages |
 
-2,787 triples: 28 linear elements, 49 net relations, 15 switches (one double slip crossing), 12 signals,
-8 operational points (one border point delivered by both managers), 6 sections of line, 5 platform edges,
+2,936 triples: 28 linear elements, 48 net relations, 15 switches (one double slip crossing), 19 signals,
+8 operational points (one border point delivered by both managers), 6 sections of line, 4 platform edges,
 1 tunnel, 1 level crossing, 4 primary and 3 subsidiary locations, 9 kilometre posts on 2 lines.
 
 The Turtle is the source of truth. `tools/build_network.py` wrote the first version and is kept for reference.
@@ -61,7 +61,12 @@ Nothing about the network is written in the page code. Change the Turtle and the
    point wherever the number of tracks of a section of line changes.
 3. `era:side` of a signal is given relative to the carrier linear element (origin to end);
    `era:signalOrientation` is relative to rising kilometrage.
-4. Switches have a net point reference only. `era:connectedTo` and navigability `AB` / `BA` are not used.
-5. Contact line system, ETCS and train detection are not infrastructure elements in v3.3.4, so an "area" is the
+4. The two networks are not joined by a net relation. They share the border point: each manager delivers an
+   operational point of type border point with the same UOPID, reference border point and coordinates.
+5. Signals are main signals for the normal running directions (Infra Alfa: track 1 eastbound, track 2 westbound,
+   signals on the left; Beta Spoor: signals on the right), plus both directions on the stretch W12 - W13 that
+   trains to and from the Hillend siding use. Shunting signals and wrong-road signalling are left out.
+6. Switches have a net point reference only. `era:connectedTo` and navigability `AB` / `BA` are not used.
+7. Contact line system, ETCS and train detection are not infrastructure elements in v3.3.4, so an "area" is the
    set of tracks that point to the same subsystem node.
-6. Geometry nodes are IRIs and each feature has one geometry, as the SHACL requires.
+8. Geometry nodes are IRIs and each feature has one geometry, as the SHACL requires.

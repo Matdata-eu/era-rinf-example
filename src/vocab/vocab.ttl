@@ -10,7 +10,7 @@
 @prefix era-ntg: <http://data.europa.eu/949/concepts/nominal-track-gauges/> .
 @prefix era-nv: <http://data.europa.eu/949/concepts/navigabilities/> .
 @prefix era-op-types: <http://data.europa.eu/949/concepts/op-types/> .
-@prefix era-org-roles: <http://data.europa.eu/949/concepts/organisation-roles/> .
+@prefix era-organisation-roles: <http://data.europa.eu/949/concepts/organisation-roles/> .
 @prefix era-orient: <http://data.europa.eu/949/concepts/orientations/> .
 @prefix era-rsf: <http://data.europa.eu/949/concepts/rolling-stock-fire/> .
 @prefix era-sigtypes: <http://data.europa.eu/949/concepts/signal-types/> .
@@ -1063,6 +1063,14 @@ era-op-types:10 a skos:Concept ;
         "estación"@es ;
     skos:topConceptOf era-op-types:OperationalPointTypes .
 
+era-op-types:130 a skos:Concept ;
+    skos:definition "Operational Point allowing to provide more information on the private siding and on the way its is linked to the main network. Its use is left to the discretion of each Member State."@en ;
+    skos:inScheme era-op-types:OperationalPointTypes ;
+    skos:notation "130"^^xsd:string ;
+    skos:prefLabel "private siding"@en,
+        "vía lateral privada"@es ;
+    skos:topConceptOf era-op-types:OperationalPointTypes .
+
 era-op-types:20 a skos:Concept ;
     skos:definition "Multifunctional Operational Point not so big and not so important like station"@en ;
     skos:inScheme era-op-types:OperationalPointTypes ;
@@ -1103,17 +1111,17 @@ era-op-types:90 a skos:Concept ;
         "punto de frontera"@es ;
     skos:topConceptOf era-op-types:OperationalPointTypes .
 
-era-org-roles:IM a skos:Concept ;
+era-organisation-roles:IM a skos:Concept ;
     dcterms:source <http://data.europa.eu/eli/dir/2012/34/2019-01-01> ;
     skos:altLabel "IM"@en,
         "Infrastructure Manager"@en ;
     skos:definition " A body or firm responsible for the operation, maintenance and renewal of railway infrastructure on a network, as well as responsible for participating in its development as determined by the Member State within the framework of its general policy on development and financing of infrastructure"@en ;
-    skos:inScheme era-org-roles:OrgRoles ;
-    skos:narrower era-org-roles:IM-1,
-        era-org-roles:IM-2 ;
+    skos:inScheme era-organisation-roles:OrgRoles ;
+    skos:narrower era-organisation-roles:IM-1,
+        era-organisation-roles:IM-2 ;
     skos:notation "IM"^^xsd:string ;
     skos:prefLabel "Infrastructure Manager (IM)"@en ;
-    skos:topConceptOf era-org-roles:OrgRoles .
+    skos:topConceptOf era-organisation-roles:OrgRoles .
 
 era-orient:00 a skos:Concept ;
     skos:inScheme era-orient:OrientationDirections ;
@@ -4074,7 +4082,7 @@ must have a value for this parameter `era:energyMeterInstalled`."""@en .
 era:hasOrganisationRole a owl:FunctionalProperty,
         owl:ObjectProperty ;
     rdfs:label "has organisation role"@en ;
-    era:inSkosConceptScheme era-org-roles:OrgRoles ;
+    era:inSkosConceptScheme era-organisation-roles:OrgRoles ;
     era:shaclShapeValidationRule <http://data.europa.eu/949/shapes/DC2TContributorOrganisationRole>,
         <http://data.europa.eu/949/shapes/DC2TCreatorOrganisationRole>,
         <http://data.europa.eu/949/shapes/ECDContributorOrganisationRole>,
@@ -14286,7 +14294,7 @@ era-ldip:LinesideDistanceIndicationPositioning a skos:ConceptScheme ;
     rdfs:comment "Controlled SKOS-based vocabularies defined by the European Union Agency for Railways to describe concepts related to the European railway infrastructure and the vehicles authorized to operate over it."@en ;
     skos:prefLabel "Lineside distance indication positioning"@en .
 
-era-org-roles:OrgRoles a skos:ConceptScheme ;
+era-organisation-roles:OrgRoles a skos:ConceptScheme ;
     rdfs:label "Organisation roles"@en ;
     ns2:license <https://creativecommons.org/licenses/by/4.0/> ;
     dcterms:issued "2024-07-31"^^xsd:date ;
@@ -15692,25 +15700,6 @@ era:Switch a owl:Class ;
         era:Tunnel ;
     ns1:term_status "stable" .
 
-era-op-types:OperationalPointTypes a skos:ConceptScheme ;
-    rdfs:label "Operational Point Types"@en ;
-    ns2:license <https://creativecommons.org/licenses/by/4.0/> ;
-    era:rinfIndex "1.2.0.0.0.4" ;
-    dcterms:issued "2020-09-01"^^xsd:date ;
-    dcterms:modified "2022-09-09"^^xsd:date,
-        "2024-09-04"^^xsd:date,
-        "2024-12-12"^^xsd:date,
-        "2026-02-03"^^xsd:date,
-        "2026-05-28"^^xsd:date ;
-    dcterms:title "Concept scheme grouping the different existing types of Operational Points"@en ;
-    rdfs:comment "Controlled SKOS-based vocabularies defined by the European Union Agency for Railways to describe concepts related to the European railway infrastructure and the vehicles authorized to operate over it."@en ;
-    skos:changeNote """
-        Revision 28-05-2026:
-        - Added new Operational Point types: era-op-types:20, era-op-types:110, era-op-types:150.
-        - Removed legacy CCSTMS hiddenLabel references
-    """@en ;
-    skos:prefLabel "Operational Point Types"@en .
-
 era:tunnelDataParameter a owl:DatatypeProperty ;
     rdfs:label "Tunnel"@en ;
     era:rinfIndex "1.1.1.1.8",
@@ -15766,6 +15755,25 @@ era:Vehicle a owl:Class ;
     rdfs:subClassOf <https://w3id.org/vpa#Scope> ;
     owl:disjointWith era:VehicleType ;
     ns1:term_status "stable" .
+
+era-op-types:OperationalPointTypes a skos:ConceptScheme ;
+    rdfs:label "Operational Point Types"@en ;
+    ns2:license <https://creativecommons.org/licenses/by/4.0/> ;
+    era:rinfIndex "1.2.0.0.0.4" ;
+    dcterms:issued "2020-09-01"^^xsd:date ;
+    dcterms:modified "2022-09-09"^^xsd:date,
+        "2024-09-04"^^xsd:date,
+        "2024-12-12"^^xsd:date,
+        "2026-02-03"^^xsd:date,
+        "2026-05-28"^^xsd:date ;
+    dcterms:title "Concept scheme grouping the different existing types of Operational Points"@en ;
+    rdfs:comment "Controlled SKOS-based vocabularies defined by the European Union Agency for Railways to describe concepts related to the European railway infrastructure and the vehicles authorized to operate over it."@en ;
+    skos:changeNote """
+        Revision 28-05-2026:
+        - Added new Operational Point types: era-op-types:20, era-op-types:110, era-op-types:150.
+        - Removed legacy CCSTMS hiddenLabel references
+    """@en ;
+    skos:prefLabel "Operational Point Types"@en .
 
 era:trainDetectionSystemType a owl:FunctionalProperty,
         owl:ObjectProperty ;

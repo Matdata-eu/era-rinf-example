@@ -77,11 +77,13 @@ const marks = computed(() => {
   return out
 })
 
-// animated viewBox
-const vb = ref(props.view ?? [0, 0, W, H])
+// viewBox: follows the scene (animated), and the reader can zoom with the wheel and drag to pan
+const FULL = [0, 0, W, H]
+const svg = ref(null)
+const vb = ref(props.view ?? FULL)
 let raf = 0
-watch(() => props.view, (to) => {
-  const from = [...vb.value], target = to ?? [0, 0, W, H], t0 = performance.now()
+function animate(target) {
+  const from = [...vb.value], t0 = performance.now()
   cancelAnimationFrame(raf)
   const step = (t) => {
     const k = Math.min(1, (t - t0) / 450), e = 1 - Math.pow(1 - k, 3)
@@ -89,12 +91,43 @@ watch(() => props.view, (to) => {
     if (k < 1) raf = requestAnimationFrame(step)
   }
   raf = requestAnimationFrame(step)
-})
+}
+watch(() => props.view, (to) => animate(to ?? FULL))
+const reset = () => animate(props.view ?? FULL)
+
+function toSvg(ev) {
+  const m = svg.value.getScreenCTM().inverse()
+  return [m.a * ev.clientX + m.e, m.d * ev.clientY + m.f]
+}
+function zoom(factor, around) {
+  cancelAnimationFrame(raf)
+  const [x, y, w, h] = vb.value
+  const nw = Math.min(W * 1.5, Math.max(120, w * factor)), k = nw / w
+  const [cx, cy] = around ?? [x + w / 2, y + h / 2]
+  vb.value = [cx - (cx - x) * k, cy - (cy - y) * k, nw, h * k]
+}
+const wheel = (ev) => zoom(ev.deltaY > 0 ? 1.18 : 1 / 1.18, toSvg(ev))
+let drag = null, dragged = false
+function down(ev) { if (ev.button === 0) { drag = { x: ev.clientX, y: ev.clientY, vb: [...vb.value] }; dragged = false } }
+function moveTo(ev) {
+  if (!drag) return
+  const dx = ev.clientX - drag.x, dy = ev.clientY - drag.y
+  if (!dragged && Math.hypot(dx, dy) < 5) return
+  dragged = true
+  cancelAnimationFrame(raf)
+  const scale = 1 / svg.value.getScreenCTM().a
+  vb.value = [drag.vb[0] - dx * scale, drag.vb[1] - dy * scale, drag.vb[2], drag.vb[3]]
+}
+const up = () => { drag = null }
+const swallow = (ev) => { if (dragged) { ev.stopPropagation(); dragged = false } }   // a drag is not a click
 const border = borders.find((b) => b.im === 'be')
 </script>
 
 <template>
-  <svg :viewBox="vb.join(' ')" class="net" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Schematic drawing of the example network">
+  <div class="wrap">
+  <div class="zoom"><button title="Zoom in" @click="zoom(1 / 1.4)">+</button><button title="Zoom out" @click="zoom(1.4)">−</button><button title="Reset the view" @click="reset">⤢</button></div>
+  <svg ref="svg" :viewBox="vb.join(' ')" class="net" :class="{ grabbing: dragged }" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Schematic drawing of the example network"
+    @wheel.prevent="wheel" @pointerdown="down" @pointermove="moveTo" @pointerup="up" @pointerleave="up" @click.capture="swallow">
     <g v-if="on('sols')">
       <g v-for="s in sols" :key="s.iri" class="pick" @click="pick($event, s.iri)"><title>{{ shrink(s.iri) }} · section of line {{ label(s.iri) }}</title>
         <path v-for="(d, i) in s.paths" :key="i" :d="d" class="sol" /></g>
@@ -137,7 +170,6 @@ const border = borders.find((b) => b.im === 'be')
     <g v-for="e in lines" :key="e.iri" class="pick" @click="pick($event, e.iri)"><title>{{ shrink(e.iri) }} · linear element, {{ e.length }} m</title>
       <path :d="e.d" class="hit" /><path :d="e.d" class="le" :class="e.im" /><path :d="e.arrow" :class="'fill-' + e.im" />
       <text v-for="(t, j) in e.text" :key="j" :transform="`translate(${e.m[0]},${e.m[1]}) rotate(${e.ang})`" :y="-13 - 11 * (e.text.length - 1 - j)" class="lelab" :class="'fill-' + e.im">{{ t }}</text>
-      <circle :cx="e.origin[0]" :cy="e.origin[1]" r="2.2" class="origin" :class="e.im" />
     </g>
 
     <g v-if="on('km')">
@@ -160,10 +192,16 @@ const border = borders.find((b) => b.im === 'be')
         <text :x="l.p[0]" :y="l.p[1] + 40" class="plt">PLC {{ l.code }}</text></g>
     </g>
   </svg>
+  </div>
 </template>
 
 <style scoped>
-.net { width: 100%; height: 100%; display: block; background: var(--c-panel); }
+.wrap { position: relative; width: 100%; height: 100%; }
+.net { width: 100%; height: 100%; display: block; background: var(--c-panel); cursor: grab; touch-action: none; }
+.net.grabbing { cursor: grabbing; }
+.zoom { position: absolute; top: 8px; right: 8px; display: flex; flex-direction: column; gap: 4px; z-index: 1; }
+.zoom button { width: 28px; height: 28px; border: 1px solid var(--c-stroke); border-radius: 6px; background: var(--c-panel); color: var(--c-ink); font-size: 16px; line-height: 1; cursor: pointer; }
+.zoom button:hover { border-color: var(--c-era); color: var(--c-era); }
 text { font-family: var(--font); font-size: 11px; fill: var(--c-ink); text-anchor: middle; user-select: none; }
 .pick { cursor: pointer; }
 .pick:hover .le, .pick:hover .pe { stroke-width: 4.5; }
@@ -171,8 +209,7 @@ text { font-family: var(--font); font-size: 11px; fill: var(--c-ink); text-ancho
 .hit { fill: none; stroke: transparent; stroke-width: 16; }
 .hitc { fill: transparent; }
 .le { fill: none; stroke-width: 2.6; stroke-linejoin: round; }
-.le.be, .origin.be { stroke: var(--c-be); } .le.nl, .origin.nl { stroke: var(--c-nl); }
-.origin { fill: var(--c-panel); }
+.le.be { stroke: var(--c-be); } .le.nl { stroke: var(--c-nl); }
 .fill-be { fill: var(--c-be); } .fill-nl { fill: var(--c-nl); }
 .lelab { font-size: 10.5px; font-weight: 700; }
 .op { fill: none; stroke-width: 30; stroke-linecap: round; stroke-linejoin: round; }

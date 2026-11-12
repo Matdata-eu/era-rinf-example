@@ -34,8 +34,8 @@ PREFIXES = """@prefix be: <http://data.europa.eu/949/example/be/> .
 @prefix era-ntg: <http://data.europa.eu/949/concepts/nominal-track-gauges/> .
 @prefix era-lclc: <http://data.europa.eu/949/concepts/load-capability-line-categories/> .
 @prefix era-subloctype: <http://data.europa.eu/949/concepts/subsidiary-location-types/> .
-@prefix era-org-roles: <http://data.europa.eu/949/concepts/organisation-roles/> .
-@prefix country: <http://publications.europa.eu/resource/authority/country/> .
+@prefix era-organisation-roles: <http://data.europa.eu/949/concepts/organisation-roles/> .
+@prefix eu-country: <http://publications.europa.eu/resource/authority/country/> .
 @prefix gsp: <http://www.opengis.net/ont/geosparql#> .
 @prefix time: <http://www.w3.org/2006/time#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
@@ -123,7 +123,7 @@ SW = {
 # Double slip crossing: node -> (label, [navigable pairs], [non-navigable pairs])
 DS = {"DS": ("W5", [("b1", "b2"), ("y0", "x1"), ("b1", "x1"), ("y0", "b2")], [("b1", "y0"), ("b2", "x1")])}
 # Plain joint between the two IMs (delivered by IM A)
-JOINT = {"BORD": ("b5", "B1")}
+JOINT = {}   # the two networks are not joined by a net relation; the border point is what they share
 
 IMS = {
     "be": dict(country="BEL", org="9901", name="Infra Alfa", side="Left"),
@@ -307,7 +307,7 @@ def nar(im, iri, nlrs, comment=None):
 
 
 def common(im):
-    return [("era:inCountry", f"country:{IMS[im]['country']}"),
+    return [("era:inCountry", f"eu-country:{IMS[im]['country']}"),
             ("era:infrastructureManager", f"orgrole:{IMS[im]['org']}_IM")]
 
 
@@ -329,7 +329,7 @@ for im, d in IMS.items():
     emit(im, f"org:{d['org']}", ["era:Body", ("era:organisationCode", f'"{d["org"]}"'),
                                 ("rdfs:label", lit(d["name"])), ("era:role", f"orgrole:{d['org']}_IM")],
          "The shapes require organisation IRIs in the ERA namespace; code 99xx is not a real organisation code.")
-    emit(im, f"orgrole:{d['org']}_IM", ["era:OrganisationRole", ("era:hasOrganisationRole", "era-org-roles:IM"),
+    emit(im, f"orgrole:{d['org']}_IM", ["era:OrganisationRole", ("era:hasOrganisationRole", "era-organisation-roles:IM"),
                                        ("era:roleOf", f"org:{d['org']}")])
 
 # ---------------------------------------------------------------------------
@@ -494,8 +494,8 @@ OPS = [
         ("1", "era:RunningTrack", "Dunes Junction track 1", [("a6", 5200, 5400)], MAIN_BE + [speed(100)]),
         ("2", "era:RunningTrack", "Dunes Junction track 2", [("b4", 4650, 4850), ("b5", 0, 200)], MAIN_BE + [speed(100)]),
     ]),
-    ("be", "HIL", "BEHIL", "Hillend", "20", [
-        ("1", "era:RunningTrack", "Hillend track 1", [("br", 0, 800)], BRANCH + [speed(60)]),
+    ("be", "HIL", "BEHIL", "Hillend siding", "130", [
+        ("S1", "era:Siding", "Hillend siding S1", [("br", 0, 800)], BRANCH),
     ]),
     ("nl", "EGT", "NLEGT", "Eastgate", "20", [
         ("1", "era:RunningTrack", "Eastgate track 1", [("B4", 400, 0), ("B2", 800, 0), ("B1", 4800, 4500)], MAIN_NL + [speed(80)]),
@@ -518,7 +518,7 @@ SOLS = [
         ("1", "era:RunningTrack", "Dunes - border single track", [("b5", 200, 600)], MAIN_BE + [speed(100), *sol_track("be", "30")]),
     ]),
     ("be", "MID_HIL", "MID", "HIL", "10", "line_100", 450, [
-        ("2", "era:RunningTrack", "Midford - Hillend track 2", [("b3", 0, 450)], MAIN_BE + [speed(120), *sol_track("be", "20")]),
+        ("2", "era:RunningTrack", "Midford - Hillend track 2", [("b3", 0, 450)], MAIN_BE + [speed(120), *sol_track("be", "30")]),
     ]),
     ("be", "HIL_DUN", "HIL", "DUN", "10", "line_100", 4650, [
         ("2", "era:RunningTrack", "Hillend - Dunes track 2", [("b4", 0, 4650)], MAIN_BE + [speed(140), *sol_track("be", "20")]),
@@ -561,7 +561,7 @@ for im in IMS:
     e, d = BORDER[im]
     iri = f"{im}:op_BORD"
     w(im, f"# ---------- Border point ({BORDER_UOPID})")
-    emit(im, iri, ["era:OperationalPoint", ("rdfs:label", lit("Westhaven border")), ("era:opName", lit("Westhaven border")),
+    emit(im, iri, ["era:OperationalPoint", ("rdfs:label", lit("Dunes border")), ("era:opName", lit("Dunes border")),
                    ("era:uopid", f'"{BORDER_UOPID}"'), ("era:opType", "era-op-types:90"), *common(im),
                    ("era:netReference", f"{iri}_ref"),
                    ("era:referenceBorderPoint", f"<http://data.europa.eu/949/referenceBorderPoints/{BORDER_UOPID}>"),
@@ -613,11 +613,18 @@ SIG = [
     ("be", "H2", "b2", 1550, "tf", "01", "Home signal track 2"),
     ("be", "B1", "a6", 1600, "ft", "07", "Block signal track 1"),
     ("be", "MA", "a5", 1050, "ft", "08", "Midford protection signal A"),
-    ("be", "MB", "b4", 300, "tf", "08", "Hillend protection signal B"),
-    ("be", "MC", "br", 300, "tf", "08", "Hillend protection signal C"),
+    ("be", "MB", "b3", 60, "tf", "08", "Midford protection signal B"),
+    ("be", "HA", "b3", 390, "ft", "08", "Hillend protection signal A"),
+    ("be", "HB", "b4", 300, "tf", "08", "Hillend protection signal B"),
+    ("be", "HC", "br", 300, "tf", "08", "Hillend protection signal C"),
+    ("be", "B2", "b4", 3300, "tf", "07", "Block signal track 2"),
+    ("be", "DA", "a6", 4950, "ft", "08", "Dunes protection signal A"),
+    ("be", "DB", "b5", 200, "tf", "08", "Dunes protection signal B"),
     ("nl", "EH", "B1", 4500, "ft", "01", "Eastgate home signal west"),
     ("nl", "EX1", "B2", 100, "tf", "04", "Eastgate exit signal track 1"),
     ("nl", "EX2", "B3", 100, "tf", "04", "Eastgate exit signal track 2"),
+    ("nl", "EX3", "B2", 700, "ft", "04", "Eastgate exit signal track 1 east"),
+    ("nl", "EX4", "B3", 680, "ft", "04", "Eastgate exit signal track 2 east"),
     ("nl", "EHE", "B4", 300, "tf", "01", "Eastgate home signal east"),
 ]
 for im in IMS:
@@ -669,7 +676,7 @@ nar("be", "be:lc_1_ref", ["be:lc_1_ref_1", "be:lc_1_ref_2"])
 nlr("be", "be:lc_1_ref_1", [("a6", 4695, 4705)])
 nlr("be", "be:lc_1_ref_2", [("b4", 4145, 4155)])
 PLAT = [("be", "WHS_1", "1", [("a4", 125, 375)]), ("be", "WHS_3", "3", [("c1", 140, 380)]),
-        ("be", "WHS_2", "2", [("b2", 425, 675)]), ("be", "HIL_1", "1", [("br", 550, 750)]),
+        ("be", "WHS_2", "2", [("b2", 425, 675)]),
         ("nl", "EGT_2", "2", [("B3", 620, 220)])]
 sec("nl", "10. Platform edge")
 for (im, pid, label, parts) in PLAT:
@@ -683,7 +690,7 @@ for (im, pid, label, parts) in PLAT:
 # Primary and subsidiary locations
 PL = [("be", "WHS", "BE99001", "Westhaven", "a4", 250, True, False),
       ("be", "WHY", "BE99002", "Westhaven Yard", "y1", 200, False, True),
-      ("be", "HIL", "BE99003", "Hillend", "br", 650, True, False),
+      ("be", "HIL", "BE99003", "Hillend siding", "br", 650, False, True),
       ("nl", "EGT", "NL99001", "Eastgate", "B2", 400, True, False)]
 SL = [("be", "WHS_PF", "01", "Westhaven platforms", "WHS", "39"),
       ("be", "WHY_LP", "02", "Westhaven Yard loading point", "WHY", "43"),
@@ -714,7 +721,7 @@ for im in IMS:
 w("shared", PREFIXES)
 w("shared", "# Stand-in for data that ERA manages. An IM does not deliver this; it is here so that the example is complete.\n")
 emit("shared", f"<http://data.europa.eu/949/referenceBorderPoints/{BORDER_UOPID}>",
-     ["era:ReferenceBorderPoint", ("rdfs:label", lit("Westhaven border (fictive reference border point)")),
+     ["era:ReferenceBorderPoint", ("rdfs:label", lit("Dunes border (fictive reference border point)")),
       ("era:borderPointId", f'"{BORDER_UOPID}"'),
       ("gsp:hasGeometry", f"<http://data.europa.eu/949/referenceBorderPoints/{BORDER_UOPID}/geometry>")])
 emit("shared", f"<http://data.europa.eu/949/referenceBorderPoints/{BORDER_UOPID}/geometry>",

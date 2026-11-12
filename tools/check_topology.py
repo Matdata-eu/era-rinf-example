@@ -40,8 +40,9 @@ for e in elems:
 bad = []
 for pt, ends in at.items():
     for x, y in itertools.combinations(ends, 2):
+        if short(x[0])[:2] != short(y[0])[:2]: continue   # two managers: joined by the border point, not by a relation
         if frozenset([x, y]) not in pairs: bad.append(f'{short(x[0])} / {short(y[0])} at {pt}')
-check('every pair of element ends that meet has a net relation', bad)
+check('every pair of element ends of one manager that meet has a net relation', bad)
 check('no two relations for the same pair of ends', [] if len(pairs) == len(rels) else ['duplicate relation'])
 
 # 3 offsets lie on their element

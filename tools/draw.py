@@ -102,7 +102,6 @@ for e, (pts, L) in sorted(elems.items()):
     lines = [f'{loc(e)[3:]} · {L:g} m'] if n > 75 else [f'{L:g} m', loc(e)[3:]]   # short elements: two lines
     for j, t in enumerate(lines):
         o.append(f'<text transform="translate({mx:.1f},{my:.1f}) rotate({ang:.1f})" y="{-13 - 11 * (len(lines) - 1 - j)}" text-anchor="middle" class="lelab" fill="{c}">{t}</text>')
-    ox, oy = at(e, 0)[0]; o.append(f'<circle cx="{ox:.1f}" cy="{oy:.1f}" r="2.2" fill="#fff" stroke="{c}"/>')
 
 # kilometre posts
 for kp in g.subjects(RDF.type, ERA.KilometricPost):
@@ -140,7 +139,7 @@ for x, y0, y1, name, typ, c in oplabels:
 
 # legend
 lx, ly = 70, 750
-leg = [('<path d="M0,0 L40,0" class="le" stroke="#004494"/><path d="M26,0 L14,-6 L14,6Z" fill="#004494"/><circle cx="0" cy="0" r="2.2" fill="#fff" stroke="#004494"/>', 'linear element, arrow from origin to end, length'),
+leg = [('<path d="M0,0 L40,0" class="le" stroke="#004494"/><path d="M26,0 L14,-6 L14,6Z" fill="#004494"/>', 'linear element, arrow from origin to end, length'),
        ('<circle cx="20" cy="0" r="5" class="sw"/>', 'switch (net point reference)'),
        ('<line x1="20" y1="8" x2="20" y2="-4" class="sigl"/><path d="M28,-4 L15,-9 L15,1Z" class="sig"/>', 'signal: direction of travel it applies to, and side of the track'),
        ('<path d="M0,0 L40,0" class="op" stroke="#ffe9a8"/>', 'operational point (area reference)'),

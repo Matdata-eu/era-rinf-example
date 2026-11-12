@@ -21,8 +21,8 @@
 @prefix era-ntg: <http://data.europa.eu/949/concepts/nominal-track-gauges/> .
 @prefix era-lclc: <http://data.europa.eu/949/concepts/load-capability-line-categories/> .
 @prefix era-subloctype: <http://data.europa.eu/949/concepts/subsidiary-location-types/> .
-@prefix era-org-roles: <http://data.europa.eu/949/concepts/organisation-roles/> .
-@prefix country: <http://publications.europa.eu/resource/authority/country/> .
+@prefix era-organisation-roles: <http://data.europa.eu/949/concepts/organisation-roles/> .
+@prefix eu-country: <http://publications.europa.eu/resource/authority/country/> .
 @prefix gsp: <http://www.opengis.net/ont/geosparql#> .
 @prefix time: <http://www.w3.org/2006/time#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
@@ -33,7 +33,7 @@
 # Stand-in for data that ERA manages. An IM does not deliver this; it is here so that the example is complete.
 
 <http://data.europa.eu/949/referenceBorderPoints/EU99901> a era:ReferenceBorderPoint ;
-    rdfs:label "Westhaven border (fictive reference border point)"@en ;
+    rdfs:label "Dunes border (fictive reference border point)"@en ;
     era:borderPointId "EU99901" ;
     gsp:hasGeometry <http://data.europa.eu/949/referenceBorderPoints/EU99901/geometry> .
 

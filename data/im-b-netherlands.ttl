@@ -21,8 +21,8 @@
 @prefix era-ntg: <http://data.europa.eu/949/concepts/nominal-track-gauges/> .
 @prefix era-lclc: <http://data.europa.eu/949/concepts/load-capability-line-categories/> .
 @prefix era-subloctype: <http://data.europa.eu/949/concepts/subsidiary-location-types/> .
-@prefix era-org-roles: <http://data.europa.eu/949/concepts/organisation-roles/> .
-@prefix country: <http://publications.europa.eu/resource/authority/country/> .
+@prefix era-organisation-roles: <http://data.europa.eu/949/concepts/organisation-roles/> .
+@prefix eu-country: <http://publications.europa.eu/resource/authority/country/> .
 @prefix gsp: <http://www.opengis.net/ont/geosparql#> .
 @prefix time: <http://www.w3.org/2006/time#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
@@ -46,7 +46,7 @@ org:9902 a era:Body ;
     era:role orgrole:9902_IM .
 
 orgrole:9902_IM a era:OrganisationRole ;
-    era:hasOrganisationRole era-org-roles:IM ;
+    era:hasOrganisationRole era-organisation-roles:IM ;
     era:roleOf org:9902 .
 
 
@@ -154,7 +154,7 @@ nl:kp_line_7_0 a era:KilometricPost ;
     rdfs:label "km 0"@en ;
     era:hasLRS nl:line_7 ;
     era:kilometer "0.0"^^xsd:double ;
-    era:inCountry country:NLD ;
+    era:inCountry eu-country:NLD ;
     era:infrastructureManager orgrole:9902_IM ;
     era:netReference nl:kp_line_7_0_ref .
 
@@ -173,7 +173,7 @@ nl:kp_line_7_1 a era:KilometricPost ;
     rdfs:label "km 1"@en ;
     era:hasLRS nl:line_7 ;
     era:kilometer "1.0"^^xsd:double ;
-    era:inCountry country:NLD ;
+    era:inCountry eu-country:NLD ;
     era:infrastructureManager orgrole:9902_IM ;
     era:netReference nl:kp_line_7_1_ref .
 
@@ -192,7 +192,7 @@ nl:kp_line_7_3 a era:KilometricPost ;
     rdfs:label "km 3"@en ;
     era:hasLRS nl:line_7 ;
     era:kilometer "3.0"^^xsd:double ;
-    era:inCountry country:NLD ;
+    era:inCountry eu-country:NLD ;
     era:infrastructureManager orgrole:9902_IM ;
     era:netReference nl:kp_line_7_3_ref .
 
@@ -211,7 +211,7 @@ nl:kp_line_7_6 a era:KilometricPost ;
     rdfs:label "km 6"@en ;
     era:hasLRS nl:line_7 ;
     era:kilometer "6.0"^^xsd:double ;
-    era:inCountry country:NLD ;
+    era:inCountry eu-country:NLD ;
     era:infrastructureManager orgrole:9902_IM ;
     era:netReference nl:kp_line_7_6_ref .
 
@@ -273,7 +273,7 @@ nl:op_EGT a era:OperationalPoint ;
     era:opName "Eastgate"@en ;
     era:uopid "NLEGT" ;
     era:opType era-op-types:20 ;
-    era:inCountry country:NLD ;
+    era:inCountry eu-country:NLD ;
     era:infrastructureManager orgrole:9902_IM ;
     era:netReference nl:op_EGT_ref ;
     era:hasPart nl:trk_EGT_1, nl:trk_EGT_2 ;
@@ -289,7 +289,7 @@ nl:op_EGT_ref_geom a gsp:Geometry ;
 nl:trk_EGT_1 a era:RunningTrack ;
     rdfs:label "Eastgate track 1"@en ;
     era:trackId "1" ;
-    era:inCountry country:NLD ;
+    era:inCountry eu-country:NLD ;
     era:infrastructureManager orgrole:9902_IM ;
     era:netReference nl:trk_EGT_1_ref ;
     era:wheelSetGauge era-ntg:30 ;
@@ -324,7 +324,7 @@ nl:trk_EGT_1_ref_end_tc a era:TopologicalCoordinate ;
 nl:trk_EGT_2 a era:RunningTrack ;
     rdfs:label "Eastgate track 2"@en ;
     era:trackId "2" ;
-    era:inCountry country:NLD ;
+    era:inCountry eu-country:NLD ;
     era:infrastructureManager orgrole:9902_IM ;
     era:netReference nl:trk_EGT_2_ref ;
     era:wheelSetGauge era-ntg:30 ;
@@ -366,11 +366,11 @@ nl:op_BORD_validity_begin a time:Instant ;
 # Both IMs deliver a record for the border point, with the same UOPID (prefix EU, not a country code),
 # the same reference border point and the same canonical URI. It is a point on this IM's last element.
 nl:op_BORD a era:OperationalPoint ;
-    rdfs:label "Westhaven border"@en ;
-    era:opName "Westhaven border"@en ;
+    rdfs:label "Dunes border"@en ;
+    era:opName "Dunes border"@en ;
     era:uopid "EU99901" ;
     era:opType era-op-types:90 ;
-    era:inCountry country:NLD ;
+    era:inCountry eu-country:NLD ;
     era:infrastructureManager orgrole:9902_IM ;
     era:netReference nl:op_BORD_ref ;
     era:referenceBorderPoint <http://data.europa.eu/949/referenceBorderPoints/EU99901> ;
@@ -413,7 +413,7 @@ nl:sol_EGT_BORD a era:SectionOfLine ;
     era:solNature era-sn:10 ;
     era:lengthOfSectionOfLine "4.5"^^xsd:double ;
     era:nationalLine nl:line_7 ;
-    era:inCountry country:NLD ;
+    era:inCountry eu-country:NLD ;
     era:infrastructureManager orgrole:9902_IM ;
     era:netReference nl:sol_EGT_BORD_ref ;
     era:hasPart nl:trk_EGT_BORD_1 ;
@@ -429,7 +429,7 @@ nl:sol_EGT_BORD_ref_geom a gsp:Geometry ;
 nl:trk_EGT_BORD_1 a era:RunningTrack ;
     rdfs:label "Eastgate - border"@en ;
     era:trackId "1" ;
-    era:inCountry country:NLD ;
+    era:inCountry eu-country:NLD ;
     era:infrastructureManager orgrole:9902_IM ;
     era:netReference nl:trk_EGT_BORD_1_ref ;
     era:wheelSetGauge era-ntg:30 ;
@@ -472,7 +472,7 @@ nl:trk_EGT_BORD_1_ref_end_tc a era:TopologicalCoordinate ;
 
 nl:sw_101 a era:Switch ;
     rdfs:label "Switch 101"@en ;
-    era:inCountry country:NLD ;
+    era:inCountry eu-country:NLD ;
     era:infrastructureManager orgrole:9902_IM ;
     era:netReference nl:sw_101_ref .
 
@@ -495,7 +495,7 @@ nl:sw_101_ref_lrs a era:LinearPositioningSystemCoordinate ;
 
 nl:sw_102 a era:Switch ;
     rdfs:label "Switch 102"@en ;
-    era:inCountry country:NLD ;
+    era:inCountry eu-country:NLD ;
     era:infrastructureManager orgrole:9902_IM ;
     era:netReference nl:sw_102_ref .
 
@@ -532,7 +532,7 @@ nl:sig_EH a era:Signal ;
     era:signalType era-sigtypes:01 ;
     era:signalOrientation era-orient:01 ;
     era:hasOrientation nl:sig_EH_orientation ;
-    era:inCountry country:NLD ;
+    era:inCountry eu-country:NLD ;
     era:infrastructureManager orgrole:9902_IM ;
     era:netReference nl:sig_EH_ref .
 
@@ -564,7 +564,7 @@ nl:sig_EX1 a era:Signal ;
     era:signalType era-sigtypes:04 ;
     era:signalOrientation era-orient:00 ;
     era:hasOrientation nl:sig_EX1_orientation ;
-    era:inCountry country:NLD ;
+    era:inCountry eu-country:NLD ;
     era:infrastructureManager orgrole:9902_IM ;
     era:netReference nl:sig_EX1_ref .
 
@@ -596,7 +596,7 @@ nl:sig_EX2 a era:Signal ;
     era:signalType era-sigtypes:04 ;
     era:signalOrientation era-orient:00 ;
     era:hasOrientation nl:sig_EX2_orientation ;
-    era:inCountry country:NLD ;
+    era:inCountry eu-country:NLD ;
     era:infrastructureManager orgrole:9902_IM ;
     era:netReference nl:sig_EX2_ref .
 
@@ -622,13 +622,77 @@ nl:sig_EX2_ref_lrs a era:LinearPositioningSystemCoordinate ;
     era:kmPost nl:kp_line_7_1 ;
     era:offsetFromKilometricPost "100.0"^^xsd:double .
 
+nl:sig_EX3 a era:Signal ;
+    rdfs:label "Eastgate exit signal track 1 east"@en ;
+    era:signalId "EX3" ;
+    era:signalType era-sigtypes:04 ;
+    era:signalOrientation era-orient:01 ;
+    era:hasOrientation nl:sig_EX3_orientation ;
+    era:inCountry eu-country:NLD ;
+    era:infrastructureManager orgrole:9902_IM ;
+    era:netReference nl:sig_EX3_ref .
+
+nl:sig_EX3_orientation a era:Orientation ;
+    era:carrierLinearElement nl:le_B2 ;
+    era:direction era-orient:01 ;
+    era:side era-orient:Left .
+
+nl:sig_EX3_ref a era:NetPointReference ;
+    era:hasTopoCoordinate nl:sig_EX3_ref_tc ;
+    era:appliesToDirection era-orient:01 ;
+    era:hasLrsCoordinate nl:sig_EX3_ref_lrs ;
+    gsp:hasGeometry nl:sig_EX3_ref_geom .
+
+nl:sig_EX3_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.57550 52.60000)"^^gsp:wktLiteral .
+
+nl:sig_EX3_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement nl:le_B2 ;
+    era:offsetFromOrigin "100.0"^^xsd:double .
+
+nl:sig_EX3_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost nl:kp_line_7_0 ;
+    era:offsetFromKilometricPost "500.0"^^xsd:double .
+
+nl:sig_EX4 a era:Signal ;
+    rdfs:label "Eastgate exit signal track 2 east"@en ;
+    era:signalId "EX4" ;
+    era:signalType era-sigtypes:04 ;
+    era:signalOrientation era-orient:01 ;
+    era:hasOrientation nl:sig_EX4_orientation ;
+    era:inCountry eu-country:NLD ;
+    era:infrastructureManager orgrole:9902_IM ;
+    era:netReference nl:sig_EX4_ref .
+
+nl:sig_EX4_orientation a era:Orientation ;
+    era:carrierLinearElement nl:le_B3 ;
+    era:direction era-orient:01 ;
+    era:side era-orient:Left .
+
+nl:sig_EX4_ref a era:NetPointReference ;
+    era:hasTopoCoordinate nl:sig_EX4_ref_tc ;
+    era:appliesToDirection era-orient:01 ;
+    era:hasLrsCoordinate nl:sig_EX4_ref_lrs ;
+    gsp:hasGeometry nl:sig_EX4_ref_geom .
+
+nl:sig_EX4_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.57277 52.60480)"^^gsp:wktLiteral .
+
+nl:sig_EX4_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement nl:le_B3 ;
+    era:offsetFromOrigin "140.0"^^xsd:double .
+
+nl:sig_EX4_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost nl:kp_line_7_0 ;
+    era:offsetFromKilometricPost "520.0"^^xsd:double .
+
 nl:sig_EHE a era:Signal ;
     rdfs:label "Eastgate home signal east"@en ;
     era:signalId "EHE" ;
     era:signalType era-sigtypes:01 ;
     era:signalOrientation era-orient:00 ;
     era:hasOrientation nl:sig_EHE_orientation ;
-    era:inCountry country:NLD ;
+    era:inCountry eu-country:NLD ;
     era:infrastructureManager orgrole:9902_IM ;
     era:netReference nl:sig_EHE_ref .
 
@@ -663,7 +727,7 @@ nl:pe_EGT_2 a era:PlatformEdge ;
     rdfs:label "Platform 2"@en ;
     era:platformId "2" ;
     era:lengthOfPlatform "400.0"^^xsd:double ;
-    era:inCountry country:NLD ;
+    era:inCountry eu-country:NLD ;
     era:infrastructureManager orgrole:9902_IM ;
     era:netReference nl:pe_EGT_2_ref .
 
@@ -703,7 +767,7 @@ nl:pl_EGT a era:PrimaryLocation ;
     era:primaryLocationName "Eastgate"@en ;
     era:passengerFlag true ;
     era:freightFlag false ;
-    era:inCountry country:NLD ;
+    era:inCountry eu-country:NLD ;
     era:infrastructureManager orgrole:9902_IM ;
     era:netReference nl:pl_EGT_ref .
 

@@ -21,8 +21,8 @@
 @prefix era-ntg: <http://data.europa.eu/949/concepts/nominal-track-gauges/> .
 @prefix era-lclc: <http://data.europa.eu/949/concepts/load-capability-line-categories/> .
 @prefix era-subloctype: <http://data.europa.eu/949/concepts/subsidiary-location-types/> .
-@prefix era-org-roles: <http://data.europa.eu/949/concepts/organisation-roles/> .
-@prefix country: <http://publications.europa.eu/resource/authority/country/> .
+@prefix era-organisation-roles: <http://data.europa.eu/949/concepts/organisation-roles/> .
+@prefix eu-country: <http://publications.europa.eu/resource/authority/country/> .
 @prefix gsp: <http://www.opengis.net/ont/geosparql#> .
 @prefix time: <http://www.w3.org/2006/time#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
@@ -46,7 +46,7 @@ org:9901 a era:Body ;
     era:role orgrole:9901_IM .
 
 orgrole:9901_IM a era:OrganisationRole ;
-    era:hasOrganisationRole era-org-roles:IM ;
+    era:hasOrganisationRole era-organisation-roles:IM ;
     era:roleOf org:9901 .
 
 
@@ -563,15 +563,6 @@ be:nr_DS_b2_x1 a era:NetRelation ;
     era:isOnOriginOfElementB true ;
     era:navigability era-nv:None .
 
-# --- the border: the last element of this IM meets the first element of the neighbour.
-#     Each IM delivers its own element; this IM delivers the relation.
-be:nr_BORD_b5_B1 a era:NetRelation ;
-    era:elementA be:le_b5 ;
-    era:isOnOriginOfElementA false ;
-    era:elementB nl:le_B1 ;
-    era:isOnOriginOfElementB false ;
-    era:navigability era-nv:Both .
-
 
 ##############################################################################
 # 4. Line referencing
@@ -590,7 +581,7 @@ be:kp_line_100_0 a era:KilometricPost ;
     rdfs:label "km 0"@en ;
     era:hasLRS be:line_100 ;
     era:kilometer "0.0"^^xsd:double ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:kp_line_100_0_ref .
 
@@ -609,7 +600,7 @@ be:kp_line_100_1 a era:KilometricPost ;
     rdfs:label "km 1"@en ;
     era:hasLRS be:line_100 ;
     era:kilometer "1.0"^^xsd:double ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:kp_line_100_1_ref .
 
@@ -628,7 +619,7 @@ be:kp_line_100_2 a era:KilometricPost ;
     rdfs:label "km 2"@en ;
     era:hasLRS be:line_100 ;
     era:kilometer "2.0"^^xsd:double ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:kp_line_100_2_ref .
 
@@ -647,7 +638,7 @@ be:kp_line_100_3 a era:KilometricPost ;
     rdfs:label "km 3"@en ;
     era:hasLRS be:line_100 ;
     era:kilometer "3.0"^^xsd:double ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:kp_line_100_3_ref .
 
@@ -666,7 +657,7 @@ be:kp_line_100_8 a era:KilometricPost ;
     rdfs:label "km 8"@en ;
     era:hasLRS be:line_100 ;
     era:kilometer "8.0"^^xsd:double ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:kp_line_100_8_ref .
 
@@ -738,7 +729,7 @@ be:op_WHS a era:OperationalPoint ;
     era:opName "Westhaven"@en ;
     era:uopid "BEWHS" ;
     era:opType era-op-types:10 ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:op_WHS_ref ;
     era:hasPart be:trk_WHS_1, be:trk_WHS_2, be:trk_WHS_3, be:trk_WHS_5 ;
@@ -754,7 +745,7 @@ be:op_WHS_ref_geom a gsp:Geometry ;
 be:trk_WHS_1 a era:RunningTrack ;
     rdfs:label "Westhaven track 1"@en ;
     era:trackId "1" ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:trk_WHS_1_ref ;
     era:wheelSetGauge era-ntg:30 ;
@@ -789,7 +780,7 @@ be:trk_WHS_1_ref_end_tc a era:TopologicalCoordinate ;
 be:trk_WHS_2 a era:RunningTrack ;
     rdfs:label "Westhaven track 2"@en ;
     era:trackId "2" ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:trk_WHS_2_ref ;
     era:wheelSetGauge era-ntg:30 ;
@@ -824,7 +815,7 @@ be:trk_WHS_2_ref_end_tc a era:TopologicalCoordinate ;
 be:trk_WHS_3 a era:RunningTrack ;
     rdfs:label "Westhaven track 3"@en ;
     era:trackId "3" ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:trk_WHS_3_ref ;
     era:wheelSetGauge era-ntg:30 ;
@@ -859,7 +850,7 @@ be:trk_WHS_3_ref_end_tc a era:TopologicalCoordinate ;
 be:trk_WHS_5 a era:RunningTrack ;
     rdfs:label "Westhaven connection 2-1"@en ;
     era:trackId "5" ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:trk_WHS_5_ref ;
     era:wheelSetGauge era-ntg:30 ;
@@ -903,7 +894,7 @@ be:op_WHD a era:OperationalPoint ;
     era:opName "Westhaven Depot"@en ;
     era:uopid "BEWHD" ;
     era:opType era-op-types:50 ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:op_WHD_ref ;
     era:hasPart be:trk_WHD_L, be:trk_WHD_D1, be:trk_WHD_D2 ;
@@ -919,7 +910,7 @@ be:op_WHD_ref_geom a gsp:Geometry ;
 be:trk_WHD_L a era:Siding ;
     rdfs:label "Depot lead"@en ;
     era:sidingId "L" ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:trk_WHD_L_ref ;
     era:wheelSetGauge era-ntg:30 ;
@@ -953,7 +944,7 @@ be:trk_WHD_L_ref_end_tc a era:TopologicalCoordinate ;
 be:trk_WHD_D1 a era:Siding ;
     rdfs:label "Depot siding D1"@en ;
     era:sidingId "D1" ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:trk_WHD_D1_ref ;
     era:wheelSetGauge era-ntg:30 ;
@@ -987,7 +978,7 @@ be:trk_WHD_D1_ref_end_tc a era:TopologicalCoordinate ;
 be:trk_WHD_D2 a era:Siding ;
     rdfs:label "Depot siding D2"@en ;
     era:sidingId "D2" ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:trk_WHD_D2_ref ;
     era:wheelSetGauge era-ntg:30 ;
@@ -1030,7 +1021,7 @@ be:op_WHY a era:OperationalPoint ;
     era:opName "Westhaven Yard"@en ;
     era:uopid "BEWHY" ;
     era:opType era-op-types:40 ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:op_WHY_ref ;
     era:hasPart be:trk_WHY_L, be:trk_WHY_Y1, be:trk_WHY_Y2 ;
@@ -1046,7 +1037,7 @@ be:op_WHY_ref_geom a gsp:Geometry ;
 be:trk_WHY_L a era:Siding ;
     rdfs:label "Yard lead"@en ;
     era:sidingId "L" ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:trk_WHY_L_ref ;
     era:wheelSetGauge era-ntg:30 ;
@@ -1080,7 +1071,7 @@ be:trk_WHY_L_ref_end_tc a era:TopologicalCoordinate ;
 be:trk_WHY_Y1 a era:Siding ;
     rdfs:label "Yard siding Y1"@en ;
     era:sidingId "Y1" ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:trk_WHY_Y1_ref ;
     era:wheelSetGauge era-ntg:30 ;
@@ -1114,7 +1105,7 @@ be:trk_WHY_Y1_ref_end_tc a era:TopologicalCoordinate ;
 be:trk_WHY_Y2 a era:Siding ;
     rdfs:label "Yard siding Y2"@en ;
     era:sidingId "Y2" ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:trk_WHY_Y2_ref ;
     era:wheelSetGauge era-ntg:30 ;
@@ -1157,7 +1148,7 @@ be:op_MID a era:OperationalPoint ;
     era:opName "Midford Junction"@en ;
     era:uopid "BEMID" ;
     era:opType era-op-types:80 ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:op_MID_ref ;
     era:hasPart be:trk_MID_1, be:trk_MID_2, be:trk_MID_X1, be:trk_MID_X2 ;
@@ -1173,7 +1164,7 @@ be:op_MID_ref_geom a gsp:Geometry ;
 be:trk_MID_1 a era:RunningTrack ;
     rdfs:label "Midford track 1"@en ;
     era:trackId "1" ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:trk_MID_1_ref ;
     era:wheelSetGauge era-ntg:30 ;
@@ -1208,7 +1199,7 @@ be:trk_MID_1_ref_end_tc a era:TopologicalCoordinate ;
 be:trk_MID_2 a era:RunningTrack ;
     rdfs:label "Midford track 2"@en ;
     era:trackId "2" ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:trk_MID_2_ref ;
     era:wheelSetGauge era-ntg:30 ;
@@ -1243,7 +1234,7 @@ be:trk_MID_2_ref_end_tc a era:TopologicalCoordinate ;
 be:trk_MID_X1 a era:RunningTrack ;
     rdfs:label "Midford crossover 2-1"@en ;
     era:trackId "X1" ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:trk_MID_X1_ref ;
     era:wheelSetGauge era-ntg:30 ;
@@ -1278,7 +1269,7 @@ be:trk_MID_X1_ref_end_tc a era:TopologicalCoordinate ;
 be:trk_MID_X2 a era:RunningTrack ;
     rdfs:label "Midford crossover 1-2"@en ;
     era:trackId "X2" ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:trk_MID_X2_ref ;
     era:wheelSetGauge era-ntg:30 ;
@@ -1322,7 +1313,7 @@ be:op_DUN a era:OperationalPoint ;
     era:opName "Dunes Junction"@en ;
     era:uopid "BEDUN" ;
     era:opType era-op-types:80 ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:op_DUN_ref ;
     era:hasPart be:trk_DUN_1, be:trk_DUN_2 ;
@@ -1338,7 +1329,7 @@ be:op_DUN_ref_geom a gsp:Geometry ;
 be:trk_DUN_1 a era:RunningTrack ;
     rdfs:label "Dunes Junction track 1"@en ;
     era:trackId "1" ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:trk_DUN_1_ref ;
     era:wheelSetGauge era-ntg:30 ;
@@ -1373,7 +1364,7 @@ be:trk_DUN_1_ref_end_tc a era:TopologicalCoordinate ;
 be:trk_DUN_2 a era:RunningTrack ;
     rdfs:label "Dunes Junction track 2"@en ;
     era:trackId "2" ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:trk_DUN_2_ref ;
     era:wheelSetGauge era-ntg:30 ;
@@ -1405,7 +1396,7 @@ be:trk_DUN_2_ref_end_tc a era:TopologicalCoordinate ;
     era:onLinearElement be:le_b5 ;
     era:offsetFromOrigin "200.0"^^xsd:double .
 
-# ---------- Hillend (BEHIL)
+# ---------- Hillend siding (BEHIL)
 be:op_HIL_validity a era:TemporalFeature, time:Interval ;
     time:hasBeginning be:op_HIL_validity_begin .
 
@@ -1413,55 +1404,54 @@ be:op_HIL_validity_begin a time:Instant ;
     time:inXSDDate "2026-01-01"^^xsd:date .
 
 be:op_HIL a era:OperationalPoint ;
-    rdfs:label "Hillend"@en ;
-    era:opName "Hillend"@en ;
+    rdfs:label "Hillend siding"@en ;
+    era:opName "Hillend siding"@en ;
     era:uopid "BEHIL" ;
-    era:opType era-op-types:20 ;
-    era:inCountry country:BEL ;
+    era:opType era-op-types:130 ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:op_HIL_ref ;
-    era:hasPart be:trk_HIL_1 ;
+    era:hasPart be:trk_HIL_S1 ;
     era:validity be:op_HIL_validity .
 
 be:op_HIL_ref a era:NetAreaReference ;
-    era:includes ( be:trk_HIL_1_ref ) ;
+    era:includes ( be:trk_HIL_S1_ref ) ;
     gsp:hasGeometry be:op_HIL_ref_geom .
 
 be:op_HIL_ref_geom a gsp:Geometry ;
     gsp:asWKT "MULTILINESTRING((3.24840 52.60000, 3.26600 52.59160, 3.32000 52.59160))"^^gsp:wktLiteral .
 
-be:trk_HIL_1 a era:RunningTrack ;
-    rdfs:label "Hillend track 1"@en ;
-    era:trackId "1" ;
-    era:inCountry country:BEL ;
+be:trk_HIL_S1 a era:Siding ;
+    rdfs:label "Hillend siding S1"@en ;
+    era:sidingId "S1" ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
-    era:netReference be:trk_HIL_1_ref ;
+    era:netReference be:trk_HIL_S1_ref ;
     era:wheelSetGauge era-ntg:30 ;
     era:contactLineSystem be:cls_none ;
     era:trainDetectionSystem be:tds_axle ;
-    era:notApplicable era:etcs ;
-    era:maximumPermittedSpeed "60"^^xsd:integer .
+    era:notApplicable era:etcs .
 
-be:trk_HIL_1_ref a era:NetLinearReference ;
+be:trk_HIL_S1_ref a era:NetLinearReference ;
     era:hasSequence ( be:le_br ) ;
-    era:startsAt be:trk_HIL_1_ref_start ;
-    era:endsAt be:trk_HIL_1_ref_end ;
-    gsp:hasGeometry be:trk_HIL_1_ref_geom .
+    era:startsAt be:trk_HIL_S1_ref_start ;
+    era:endsAt be:trk_HIL_S1_ref_end ;
+    gsp:hasGeometry be:trk_HIL_S1_ref_geom .
 
-be:trk_HIL_1_ref_geom a gsp:Geometry ;
+be:trk_HIL_S1_ref_geom a gsp:Geometry ;
     gsp:asWKT "LINESTRING(3.24840 52.60000, 3.26600 52.59160, 3.32000 52.59160)"^^gsp:wktLiteral .
 
-be:trk_HIL_1_ref_start a era:NetPointReference ;
-    era:hasTopoCoordinate be:trk_HIL_1_ref_start_tc .
+be:trk_HIL_S1_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_HIL_S1_ref_start_tc .
 
-be:trk_HIL_1_ref_start_tc a era:TopologicalCoordinate ;
+be:trk_HIL_S1_ref_start_tc a era:TopologicalCoordinate ;
     era:onLinearElement be:le_br ;
     era:offsetFromOrigin "0.0"^^xsd:double .
 
-be:trk_HIL_1_ref_end a era:NetPointReference ;
-    era:hasTopoCoordinate be:trk_HIL_1_ref_end_tc .
+be:trk_HIL_S1_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate be:trk_HIL_S1_ref_end_tc .
 
-be:trk_HIL_1_ref_end_tc a era:TopologicalCoordinate ;
+be:trk_HIL_S1_ref_end_tc a era:TopologicalCoordinate ;
     era:onLinearElement be:le_br ;
     era:offsetFromOrigin "800.0"^^xsd:double .
 
@@ -1475,11 +1465,11 @@ be:op_BORD_validity_begin a time:Instant ;
 # Both IMs deliver a record for the border point, with the same UOPID (prefix EU, not a country code),
 # the same reference border point and the same canonical URI. It is a point on this IM's last element.
 be:op_BORD a era:OperationalPoint ;
-    rdfs:label "Westhaven border"@en ;
-    era:opName "Westhaven border"@en ;
+    rdfs:label "Dunes border"@en ;
+    era:opName "Dunes border"@en ;
     era:uopid "EU99901" ;
     era:opType era-op-types:90 ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:op_BORD_ref ;
     era:referenceBorderPoint <http://data.europa.eu/949/referenceBorderPoints/EU99901> ;
@@ -1522,7 +1512,7 @@ be:sol_WHS_MID a era:SectionOfLine ;
     era:solNature era-sn:10 ;
     era:lengthOfSectionOfLine "0.3"^^xsd:double ;
     era:nationalLine be:line_100 ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:sol_WHS_MID_ref ;
     era:hasPart be:trk_WHS_MID_1, be:trk_WHS_MID_2 ;
@@ -1538,7 +1528,7 @@ be:sol_WHS_MID_ref_geom a gsp:Geometry ;
 be:trk_WHS_MID_1 a era:RunningTrack ;
     rdfs:label "Westhaven - Midford track 1"@en ;
     era:trackId "1" ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:trk_WHS_MID_1_ref ;
     era:wheelSetGauge era-ntg:30 ;
@@ -1575,7 +1565,7 @@ be:trk_WHS_MID_1_ref_end_tc a era:TopologicalCoordinate ;
 be:trk_WHS_MID_2 a era:RunningTrack ;
     rdfs:label "Westhaven - Midford track 2"@en ;
     era:trackId "2" ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:trk_WHS_MID_2_ref ;
     era:wheelSetGauge era-ntg:30 ;
@@ -1622,7 +1612,7 @@ be:sol_MID_DUN a era:SectionOfLine ;
     era:solNature era-sn:10 ;
     era:lengthOfSectionOfLine "5.0"^^xsd:double ;
     era:nationalLine be:line_100 ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:sol_MID_DUN_ref ;
     era:hasPart be:trk_MID_DUN_1 ;
@@ -1638,7 +1628,7 @@ be:sol_MID_DUN_ref_geom a gsp:Geometry ;
 be:trk_MID_DUN_1 a era:RunningTrack ;
     rdfs:label "Midford - Dunes track 1"@en ;
     era:trackId "1" ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:trk_MID_DUN_1_ref ;
     era:wheelSetGauge era-ntg:30 ;
@@ -1685,7 +1675,7 @@ be:sol_DUN_BORD a era:SectionOfLine ;
     era:solNature era-sn:10 ;
     era:lengthOfSectionOfLine "0.4"^^xsd:double ;
     era:nationalLine be:line_100 ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:sol_DUN_BORD_ref ;
     era:hasPart be:trk_DUN_BORD_1 ;
@@ -1701,7 +1691,7 @@ be:sol_DUN_BORD_ref_geom a gsp:Geometry ;
 be:trk_DUN_BORD_1 a era:RunningTrack ;
     rdfs:label "Dunes - border single track"@en ;
     era:trackId "1" ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:trk_DUN_BORD_1_ref ;
     era:wheelSetGauge era-ntg:30 ;
@@ -1748,7 +1738,7 @@ be:sol_MID_HIL a era:SectionOfLine ;
     era:solNature era-sn:10 ;
     era:lengthOfSectionOfLine "0.5"^^xsd:double ;
     era:nationalLine be:line_100 ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:sol_MID_HIL_ref ;
     era:hasPart be:trk_MID_HIL_2 ;
@@ -1764,7 +1754,7 @@ be:sol_MID_HIL_ref_geom a gsp:Geometry ;
 be:trk_MID_HIL_2 a era:RunningTrack ;
     rdfs:label "Midford - Hillend track 2"@en ;
     era:trackId "2" ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:trk_MID_HIL_2_ref ;
     era:wheelSetGauge era-ntg:30 ;
@@ -1772,7 +1762,7 @@ be:trk_MID_HIL_2 a era:RunningTrack ;
     era:etcs be:etcs_l2 ;
     era:trainDetectionSystem be:tds_axle ;
     era:maximumPermittedSpeed "120"^^xsd:integer ;
-    era:trackDirection era-trd:20 ;
+    era:trackDirection era-trd:30 ;
     era:linesideDistanceIndication be:ldi_km .
 
 be:trk_MID_HIL_2_ref a era:NetLinearReference ;
@@ -1811,7 +1801,7 @@ be:sol_HIL_DUN a era:SectionOfLine ;
     era:solNature era-sn:10 ;
     era:lengthOfSectionOfLine "4.7"^^xsd:double ;
     era:nationalLine be:line_100 ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:sol_HIL_DUN_ref ;
     era:hasPart be:trk_HIL_DUN_2 ;
@@ -1827,7 +1817,7 @@ be:sol_HIL_DUN_ref_geom a gsp:Geometry ;
 be:trk_HIL_DUN_2 a era:RunningTrack ;
     rdfs:label "Hillend - Dunes track 2"@en ;
     era:trackId "2" ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:trk_HIL_DUN_2_ref ;
     era:wheelSetGauge era-ntg:30 ;
@@ -1870,7 +1860,7 @@ be:trk_HIL_DUN_2_ref_end_tc a era:TopologicalCoordinate ;
 
 be:sw_W1 a era:Switch ;
     rdfs:label "Switch W1"@en ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:sw_W1_ref .
 
@@ -1893,7 +1883,7 @@ be:sw_W1_ref_lrs a era:LinearPositioningSystemCoordinate ;
 
 be:sw_W6 a era:Switch ;
     rdfs:label "Switch W6"@en ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:sw_W6_ref .
 
@@ -1916,7 +1906,7 @@ be:sw_W6_ref_lrs a era:LinearPositioningSystemCoordinate ;
 
 be:sw_W2 a era:Switch ;
     rdfs:label "Switch W2"@en ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:sw_W2_ref .
 
@@ -1939,7 +1929,7 @@ be:sw_W2_ref_lrs a era:LinearPositioningSystemCoordinate ;
 
 be:sw_W3 a era:Switch ;
     rdfs:label "Switch W3"@en ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:sw_W3_ref .
 
@@ -1962,7 +1952,7 @@ be:sw_W3_ref_lrs a era:LinearPositioningSystemCoordinate ;
 
 be:sw_W21 a era:Switch ;
     rdfs:label "Switch W21"@en ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:sw_W21_ref .
 
@@ -1985,7 +1975,7 @@ be:sw_W21_ref_lrs a era:LinearPositioningSystemCoordinate ;
 
 be:sw_W31 a era:Switch ;
     rdfs:label "Switch W31"@en ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:sw_W31_ref .
 
@@ -2003,7 +1993,7 @@ be:sw_W31_ref_tc a era:TopologicalCoordinate ;
 
 be:sw_W7 a era:Switch ;
     rdfs:label "Switch W7"@en ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:sw_W7_ref .
 
@@ -2026,7 +2016,7 @@ be:sw_W7_ref_lrs a era:LinearPositioningSystemCoordinate ;
 
 be:sw_W4 a era:Switch ;
     rdfs:label "Switch W4"@en ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:sw_W4_ref .
 
@@ -2049,7 +2039,7 @@ be:sw_W4_ref_lrs a era:LinearPositioningSystemCoordinate ;
 
 be:sw_W11 a era:Switch ;
     rdfs:label "Switch W11"@en ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:sw_W11_ref .
 
@@ -2072,7 +2062,7 @@ be:sw_W11_ref_lrs a era:LinearPositioningSystemCoordinate ;
 
 be:sw_W12 a era:Switch ;
     rdfs:label "Switch W12"@en ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:sw_W12_ref .
 
@@ -2095,7 +2085,7 @@ be:sw_W12_ref_lrs a era:LinearPositioningSystemCoordinate ;
 
 be:sw_W13 a era:Switch ;
     rdfs:label "Switch W13"@en ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:sw_W13_ref .
 
@@ -2118,7 +2108,7 @@ be:sw_W13_ref_lrs a era:LinearPositioningSystemCoordinate ;
 
 be:sw_W14 a era:Switch ;
     rdfs:label "Switch W14"@en ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:sw_W14_ref .
 
@@ -2142,7 +2132,7 @@ be:sw_W14_ref_lrs a era:LinearPositioningSystemCoordinate ;
 # A double slip crossing has no common branch; the reference is given on track 2 (element b1).
 be:sw_W5 a era:Switch ;
     rdfs:label "Double slip crossing W5"@en ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:sw_W5_ref .
 
@@ -2179,7 +2169,7 @@ be:sig_S1 a era:Signal ;
     era:signalType era-sigtypes:04 ;
     era:signalOrientation era-orient:00 ;
     era:hasOrientation be:sig_S1_orientation ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:sig_S1_ref .
 
@@ -2211,7 +2201,7 @@ be:sig_S3 a era:Signal ;
     era:signalType era-sigtypes:04 ;
     era:signalOrientation era-orient:00 ;
     era:hasOrientation be:sig_S3_orientation ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:sig_S3_ref .
 
@@ -2243,7 +2233,7 @@ be:sig_S2 a era:Signal ;
     era:signalType era-sigtypes:04 ;
     era:signalOrientation era-orient:01 ;
     era:hasOrientation be:sig_S2_orientation ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:sig_S2_ref .
 
@@ -2275,7 +2265,7 @@ be:sig_H2 a era:Signal ;
     era:signalType era-sigtypes:01 ;
     era:signalOrientation era-orient:01 ;
     era:hasOrientation be:sig_H2_orientation ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:sig_H2_ref .
 
@@ -2307,7 +2297,7 @@ be:sig_B1 a era:Signal ;
     era:signalType era-sigtypes:07 ;
     era:signalOrientation era-orient:00 ;
     era:hasOrientation be:sig_B1_orientation ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:sig_B1_ref .
 
@@ -2339,7 +2329,7 @@ be:sig_MA a era:Signal ;
     era:signalType era-sigtypes:08 ;
     era:signalOrientation era-orient:00 ;
     era:hasOrientation be:sig_MA_orientation ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:sig_MA_ref .
 
@@ -2366,17 +2356,17 @@ be:sig_MA_ref_lrs a era:LinearPositioningSystemCoordinate ;
     era:offsetFromKilometricPost "300.0"^^xsd:double .
 
 be:sig_MB a era:Signal ;
-    rdfs:label "Hillend protection signal B"@en ;
+    rdfs:label "Midford protection signal B"@en ;
     era:signalId "MB" ;
     era:signalType era-sigtypes:08 ;
     era:signalOrientation era-orient:01 ;
     era:hasOrientation be:sig_MB_orientation ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:sig_MB_ref .
 
 be:sig_MB_orientation a era:Orientation ;
-    era:carrierLinearElement be:le_b4 ;
+    era:carrierLinearElement be:le_b3 ;
     era:direction era-orient:01 ;
     era:side era-orient:Right .
 
@@ -2387,47 +2377,207 @@ be:sig_MB_ref a era:NetPointReference ;
     gsp:hasGeometry be:sig_MB_ref_geom .
 
 be:sig_MB_ref_geom a gsp:Geometry ;
-    gsp:asWKT "POINT(3.25778 52.60000)"^^gsp:wktLiteral .
+    gsp:asWKT "POINT(3.20784 52.60000)"^^gsp:wktLiteral .
 
 be:sig_MB_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b3 ;
+    era:offsetFromOrigin "60.0"^^xsd:double .
+
+be:sig_MB_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost be:kp_line_100_2 ;
+    era:offsetFromKilometricPost "960.0"^^xsd:double .
+
+be:sig_HA a era:Signal ;
+    rdfs:label "Hillend protection signal A"@en ;
+    era:signalId "HA" ;
+    era:signalType era-sigtypes:08 ;
+    era:signalOrientation era-orient:00 ;
+    era:hasOrientation be:sig_HA_orientation ;
+    era:inCountry eu-country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sig_HA_ref .
+
+be:sig_HA_orientation a era:Orientation ;
+    era:carrierLinearElement be:le_b3 ;
+    era:direction era-orient:00 ;
+    era:side era-orient:Left .
+
+be:sig_HA_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sig_HA_ref_tc ;
+    era:appliesToDirection era-orient:00 ;
+    era:hasLrsCoordinate be:sig_HA_ref_lrs ;
+    gsp:hasGeometry be:sig_HA_ref_geom .
+
+be:sig_HA_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.24216 52.60000)"^^gsp:wktLiteral .
+
+be:sig_HA_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b3 ;
+    era:offsetFromOrigin "390.0"^^xsd:double .
+
+be:sig_HA_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost be:kp_line_100_3 ;
+    era:offsetFromKilometricPost "290.0"^^xsd:double .
+
+be:sig_HB a era:Signal ;
+    rdfs:label "Hillend protection signal B"@en ;
+    era:signalId "HB" ;
+    era:signalType era-sigtypes:08 ;
+    era:signalOrientation era-orient:01 ;
+    era:hasOrientation be:sig_HB_orientation ;
+    era:inCountry eu-country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sig_HB_ref .
+
+be:sig_HB_orientation a era:Orientation ;
+    era:carrierLinearElement be:le_b4 ;
+    era:direction era-orient:01 ;
+    era:side era-orient:Right .
+
+be:sig_HB_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sig_HB_ref_tc ;
+    era:appliesToDirection era-orient:01 ;
+    era:hasLrsCoordinate be:sig_HB_ref_lrs ;
+    gsp:hasGeometry be:sig_HB_ref_geom .
+
+be:sig_HB_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.25778 52.60000)"^^gsp:wktLiteral .
+
+be:sig_HB_ref_tc a era:TopologicalCoordinate ;
     era:onLinearElement be:le_b4 ;
     era:offsetFromOrigin "300.0"^^xsd:double .
 
-be:sig_MB_ref_lrs a era:LinearPositioningSystemCoordinate ;
+be:sig_HB_ref_lrs a era:LinearPositioningSystemCoordinate ;
     era:kmPost be:kp_line_100_3 ;
     era:offsetFromKilometricPost "650.0"^^xsd:double .
 
-be:sig_MC a era:Signal ;
+be:sig_HC a era:Signal ;
     rdfs:label "Hillend protection signal C"@en ;
-    era:signalId "MC" ;
+    era:signalId "HC" ;
     era:signalType era-sigtypes:08 ;
     era:signalOrientation era-orient:01 ;
-    era:hasOrientation be:sig_MC_orientation ;
-    era:inCountry country:BEL ;
+    era:hasOrientation be:sig_HC_orientation ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
-    era:netReference be:sig_MC_ref .
+    era:netReference be:sig_HC_ref .
 
-be:sig_MC_orientation a era:Orientation ;
+be:sig_HC_orientation a era:Orientation ;
     era:carrierLinearElement be:le_br ;
     era:direction era-orient:01 ;
     era:side era-orient:Right .
 
-be:sig_MC_ref a era:NetPointReference ;
-    era:hasTopoCoordinate be:sig_MC_ref_tc ;
+be:sig_HC_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sig_HC_ref_tc ;
     era:appliesToDirection era-orient:01 ;
-    era:hasLrsCoordinate be:sig_MC_ref_lrs ;
-    gsp:hasGeometry be:sig_MC_ref_geom .
+    era:hasLrsCoordinate be:sig_HC_ref_lrs ;
+    gsp:hasGeometry be:sig_HC_ref_geom .
 
-be:sig_MC_ref_geom a gsp:Geometry ;
+be:sig_HC_ref_geom a gsp:Geometry ;
     gsp:asWKT "POINT(3.27219 52.59160)"^^gsp:wktLiteral .
 
-be:sig_MC_ref_tc a era:TopologicalCoordinate ;
+be:sig_HC_ref_tc a era:TopologicalCoordinate ;
     era:onLinearElement be:le_br ;
     era:offsetFromOrigin "300.0"^^xsd:double .
 
-be:sig_MC_ref_lrs a era:LinearPositioningSystemCoordinate ;
+be:sig_HC_ref_lrs a era:LinearPositioningSystemCoordinate ;
     era:kmPost be:kp_line_100_3 ;
     era:offsetFromKilometricPost "650.0"^^xsd:double .
+
+be:sig_B2 a era:Signal ;
+    rdfs:label "Block signal track 2"@en ;
+    era:signalId "B2" ;
+    era:signalType era-sigtypes:07 ;
+    era:signalOrientation era-orient:01 ;
+    era:hasOrientation be:sig_B2_orientation ;
+    era:inCountry eu-country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sig_B2_ref .
+
+be:sig_B2_orientation a era:Orientation ;
+    era:carrierLinearElement be:le_b4 ;
+    era:direction era-orient:01 ;
+    era:side era-orient:Right .
+
+be:sig_B2_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sig_B2_ref_tc ;
+    era:appliesToDirection era-orient:01 ;
+    era:hasLrsCoordinate be:sig_B2_ref_lrs ;
+    gsp:hasGeometry be:sig_B2_ref_geom .
+
+be:sig_B2_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.35155 52.60000)"^^gsp:wktLiteral .
+
+be:sig_B2_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b4 ;
+    era:offsetFromOrigin "3300.0"^^xsd:double .
+
+be:sig_B2_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost be:kp_line_100_3 ;
+    era:offsetFromKilometricPost "3650.0"^^xsd:double .
+
+be:sig_DA a era:Signal ;
+    rdfs:label "Dunes protection signal A"@en ;
+    era:signalId "DA" ;
+    era:signalType era-sigtypes:08 ;
+    era:signalOrientation era-orient:00 ;
+    era:hasOrientation be:sig_DA_orientation ;
+    era:inCountry eu-country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sig_DA_ref .
+
+be:sig_DA_orientation a era:Orientation ;
+    era:carrierLinearElement be:le_a6 ;
+    era:direction era-orient:00 ;
+    era:side era-orient:Left .
+
+be:sig_DA_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sig_DA_ref_tc ;
+    era:appliesToDirection era-orient:00 ;
+    era:hasLrsCoordinate be:sig_DA_ref_lrs ;
+    gsp:hasGeometry be:sig_DA_ref_geom .
+
+be:sig_DA_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.38482 52.60480)"^^gsp:wktLiteral .
+
+be:sig_DA_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a6 ;
+    era:offsetFromOrigin "4950.0"^^xsd:double .
+
+be:sig_DA_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost be:kp_line_100_3 ;
+    era:offsetFromKilometricPost "4750.0"^^xsd:double .
+
+be:sig_DB a era:Signal ;
+    rdfs:label "Dunes protection signal B"@en ;
+    era:signalId "DB" ;
+    era:signalType era-sigtypes:08 ;
+    era:signalOrientation era-orient:01 ;
+    era:hasOrientation be:sig_DB_orientation ;
+    era:inCountry eu-country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sig_DB_ref .
+
+be:sig_DB_orientation a era:Orientation ;
+    era:carrierLinearElement be:le_b5 ;
+    era:direction era-orient:01 ;
+    era:side era-orient:Right .
+
+be:sig_DB_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sig_DB_ref_tc ;
+    era:appliesToDirection era-orient:01 ;
+    era:hasLrsCoordinate be:sig_DB_ref_lrs ;
+    gsp:hasGeometry be:sig_DB_ref_geom .
+
+be:sig_DB_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.40933 52.60000)"^^gsp:wktLiteral .
+
+be:sig_DB_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_b5 ;
+    era:offsetFromOrigin "200.0"^^xsd:double .
+
+be:sig_DB_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost be:kp_line_100_8 ;
+    era:offsetFromKilometricPost "400.0"^^xsd:double .
 
 
 ##############################################################################
@@ -2449,7 +2599,7 @@ be:tun_MID a era:Tunnel ;
     era:hasEvacuationAndRescuePoints true ;
     era:rollingStockFireCategory era-rsf:10 ;
     era:tunnelDocRef be:doc_tunnel_plan ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:tun_MID_ref ;
     era:notYetAvailable era:verificationSRT ;
@@ -2512,7 +2662,7 @@ be:tun_MID_ref_2_end_tc a era:TopologicalCoordinate ;
 # The level crossing crosses both tracks: an area reference with one very short linear reference per track.
 be:lc_1 a era:LevelCrossing ;
     rdfs:label "Dune road level crossing"@en ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:lc_1_ref .
 
@@ -2573,7 +2723,7 @@ be:pe_WHS_1 a era:PlatformEdge ;
     rdfs:label "Platform 1"@en ;
     era:platformId "1" ;
     era:lengthOfPlatform "250.0"^^xsd:double ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:pe_WHS_1_ref .
 
@@ -2604,7 +2754,7 @@ be:pe_WHS_3 a era:PlatformEdge ;
     rdfs:label "Platform 3"@en ;
     era:platformId "3" ;
     era:lengthOfPlatform "240.0"^^xsd:double ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:pe_WHS_3_ref .
 
@@ -2635,7 +2785,7 @@ be:pe_WHS_2 a era:PlatformEdge ;
     rdfs:label "Platform 2"@en ;
     era:platformId "2" ;
     era:lengthOfPlatform "250.0"^^xsd:double ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:pe_WHS_2_ref .
 
@@ -2662,37 +2812,6 @@ be:pe_WHS_2_ref_end_tc a era:TopologicalCoordinate ;
     era:onLinearElement be:le_b2 ;
     era:offsetFromOrigin "1275.0"^^xsd:double .
 
-be:pe_HIL_1 a era:PlatformEdge ;
-    rdfs:label "Platform 1"@en ;
-    era:platformId "1" ;
-    era:lengthOfPlatform "200.0"^^xsd:double ;
-    era:inCountry country:BEL ;
-    era:infrastructureManager orgrole:9901_IM ;
-    era:netReference be:pe_HIL_1_ref .
-
-be:pe_HIL_1_ref a era:NetLinearReference ;
-    era:hasSequence ( be:le_br ) ;
-    era:startsAt be:pe_HIL_1_ref_start ;
-    era:endsAt be:pe_HIL_1_ref_end ;
-    gsp:hasGeometry be:pe_HIL_1_ref_geom .
-
-be:pe_HIL_1_ref_geom a gsp:Geometry ;
-    gsp:asWKT "LINESTRING(3.29610 52.59160, 3.31522 52.59160)"^^gsp:wktLiteral .
-
-be:pe_HIL_1_ref_start a era:NetPointReference ;
-    era:hasTopoCoordinate be:pe_HIL_1_ref_start_tc .
-
-be:pe_HIL_1_ref_start_tc a era:TopologicalCoordinate ;
-    era:onLinearElement be:le_br ;
-    era:offsetFromOrigin "550.0"^^xsd:double .
-
-be:pe_HIL_1_ref_end a era:NetPointReference ;
-    era:hasTopoCoordinate be:pe_HIL_1_ref_end_tc .
-
-be:pe_HIL_1_ref_end_tc a era:TopologicalCoordinate ;
-    era:onLinearElement be:le_br ;
-    era:offsetFromOrigin "750.0"^^xsd:double .
-
 
 ##############################################################################
 # 11. Primary and subsidiary locations
@@ -2706,7 +2825,7 @@ be:pl_WHS a era:PrimaryLocation ;
     era:primaryLocationName "Westhaven"@en ;
     era:passengerFlag true ;
     era:freightFlag false ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:pl_WHS_ref .
 
@@ -2729,7 +2848,7 @@ be:pl_WHY a era:PrimaryLocation ;
     era:primaryLocationName "Westhaven Yard"@en ;
     era:passengerFlag false ;
     era:freightFlag true ;
-    era:inCountry country:BEL ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:pl_WHY_ref .
 
@@ -2747,12 +2866,12 @@ be:pl_WHY_ref_tc a era:TopologicalCoordinate ;
 be:op_WHY era:primaryLocation be:pl_WHY .
 
 be:pl_HIL a era:PrimaryLocation ;
-    rdfs:label "Hillend"@en ;
+    rdfs:label "Hillend siding"@en ;
     era:primaryLocationCode "BE99003" ;
-    era:primaryLocationName "Hillend"@en ;
-    era:passengerFlag true ;
-    era:freightFlag false ;
-    era:inCountry country:BEL ;
+    era:primaryLocationName "Hillend siding"@en ;
+    era:passengerFlag false ;
+    era:freightFlag true ;
+    era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:pl_HIL_ref .
 
