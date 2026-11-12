@@ -1636,7 +1636,7 @@ be:trk_MID_DUN_1 a era:RunningTrack ;
     era:etcs be:etcs_l2 ;
     era:trainDetectionSystem be:tds_axle ;
     era:maximumPermittedSpeed "140"^^xsd:integer ;
-    era:trackDirection era-trd:10 ;
+    era:trackDirection era-trd:30 ;
     era:linesideDistanceIndication be:ldi_km .
 
 be:trk_MID_DUN_1_ref a era:NetLinearReference ;
@@ -2291,6 +2291,38 @@ be:sig_H2_ref_lrs a era:LinearPositioningSystemCoordinate ;
     era:kmPost be:kp_line_100_2 ;
     era:offsetFromKilometricPost "0.0"^^xsd:double .
 
+be:sig_MC a era:Signal ;
+    rdfs:label "Midford protection signal C"@en ;
+    era:signalId "MC" ;
+    era:signalType era-sigtypes:08 ;
+    era:signalOrientation era-orient:01 ;
+    era:hasOrientation be:sig_MC_orientation ;
+    era:inCountry eu-country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:sig_MC_ref .
+
+be:sig_MC_orientation a era:Orientation ;
+    era:carrierLinearElement be:le_a6 ;
+    era:direction era-orient:01 ;
+    era:side era-orient:Right .
+
+be:sig_MC_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sig_MC_ref_tc ;
+    era:appliesToDirection era-orient:01 ;
+    era:hasLrsCoordinate be:sig_MC_ref_lrs ;
+    gsp:hasGeometry be:sig_MC_ref_geom .
+
+be:sig_MC_ref_geom a gsp:Geometry ;
+    gsp:asWKT "POINT(3.19902 52.60480)"^^gsp:wktLiteral .
+
+be:sig_MC_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_a6 ;
+    era:offsetFromOrigin "200.0"^^xsd:double .
+
+be:sig_MC_ref_lrs a era:LinearPositioningSystemCoordinate ;
+    era:kmPost be:kp_line_100_3 ;
+    era:offsetFromKilometricPost "0.0"^^xsd:double .
+
 be:sig_B1 a era:Signal ;
     rdfs:label "Block signal track 1"@en ;
     era:signalId "B1" ;
@@ -2815,8 +2847,9 @@ be:pe_WHS_2_ref_end_tc a era:TopologicalCoordinate ;
 
 ##############################################################################
 # 11. Primary and subsidiary locations
-# Location codes for the telematics messages. An operational point points to its primary location;
-# a subsidiary location points to the primary location it belongs to.
+# Location codes for the telematics messages. Every operational point points to its primary location,
+# and the primary location has the same net reference as its operational point (the same node).
+# A subsidiary location points to the primary location it belongs to.
 ##############################################################################
 
 be:pl_WHS a era:PrimaryLocation ;
@@ -2827,18 +2860,7 @@ be:pl_WHS a era:PrimaryLocation ;
     era:freightFlag false ;
     era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
-    era:netReference be:pl_WHS_ref .
-
-be:pl_WHS_ref a era:NetPointReference ;
-    era:hasTopoCoordinate be:pl_WHS_ref_tc ;
-    gsp:hasGeometry be:pl_WHS_ref_geom .
-
-be:pl_WHS_ref_geom a gsp:Geometry ;
-    gsp:asWKT "POINT(3.00400 52.60480)"^^gsp:wktLiteral .
-
-be:pl_WHS_ref_tc a era:TopologicalCoordinate ;
-    era:onLinearElement be:le_a4 ;
-    era:offsetFromOrigin "250.0"^^xsd:double .
+    era:netReference be:op_WHS_ref .
 
 be:op_WHS era:primaryLocation be:pl_WHS .
 
@@ -2850,18 +2872,7 @@ be:pl_WHY a era:PrimaryLocation ;
     era:freightFlag true ;
     era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
-    era:netReference be:pl_WHY_ref .
-
-be:pl_WHY_ref a era:NetPointReference ;
-    era:hasTopoCoordinate be:pl_WHY_ref_tc ;
-    gsp:hasGeometry be:pl_WHY_ref_geom .
-
-be:pl_WHY_ref_geom a gsp:Geometry ;
-    gsp:asWKT "POINT(2.91200 52.59520)"^^gsp:wktLiteral .
-
-be:pl_WHY_ref_tc a era:TopologicalCoordinate ;
-    era:onLinearElement be:le_y1 ;
-    era:offsetFromOrigin "200.0"^^xsd:double .
+    era:netReference be:op_WHY_ref .
 
 be:op_WHY era:primaryLocation be:pl_WHY .
 
@@ -2873,20 +2884,57 @@ be:pl_HIL a era:PrimaryLocation ;
     era:freightFlag true ;
     era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
-    era:netReference be:pl_HIL_ref .
-
-be:pl_HIL_ref a era:NetPointReference ;
-    era:hasTopoCoordinate be:pl_HIL_ref_tc ;
-    gsp:hasGeometry be:pl_HIL_ref_geom .
-
-be:pl_HIL_ref_geom a gsp:Geometry ;
-    gsp:asWKT "POINT(3.30566 52.59160)"^^gsp:wktLiteral .
-
-be:pl_HIL_ref_tc a era:TopologicalCoordinate ;
-    era:onLinearElement be:le_br ;
-    era:offsetFromOrigin "650.0"^^xsd:double .
+    era:netReference be:op_HIL_ref .
 
 be:op_HIL era:primaryLocation be:pl_HIL .
+
+be:pl_WHD a era:PrimaryLocation ;
+    rdfs:label "Westhaven Depot"@en ;
+    era:primaryLocationCode "BE99004" ;
+    era:primaryLocationName "Westhaven Depot"@en ;
+    era:passengerFlag false ;
+    era:freightFlag false ;
+    era:inCountry eu-country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:op_WHD_ref .
+
+be:op_WHD era:primaryLocation be:pl_WHD .
+
+be:pl_MID a era:PrimaryLocation ;
+    rdfs:label "Midford Junction"@en ;
+    era:primaryLocationCode "BE99005" ;
+    era:primaryLocationName "Midford Junction"@en ;
+    era:passengerFlag false ;
+    era:freightFlag false ;
+    era:inCountry eu-country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:op_MID_ref .
+
+be:op_MID era:primaryLocation be:pl_MID .
+
+be:pl_DUN a era:PrimaryLocation ;
+    rdfs:label "Dunes Junction"@en ;
+    era:primaryLocationCode "BE99006" ;
+    era:primaryLocationName "Dunes Junction"@en ;
+    era:passengerFlag false ;
+    era:freightFlag false ;
+    era:inCountry eu-country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:op_DUN_ref .
+
+be:op_DUN era:primaryLocation be:pl_DUN .
+
+be:pl_BORD a era:PrimaryLocation ;
+    rdfs:label "Dunes border"@en ;
+    era:primaryLocationCode "BE99007" ;
+    era:primaryLocationName "Dunes border"@en ;
+    era:passengerFlag false ;
+    era:freightFlag false ;
+    era:inCountry eu-country:BEL ;
+    era:infrastructureManager orgrole:9901_IM ;
+    era:netReference be:op_BORD_ref .
+
+be:op_BORD era:primaryLocation be:pl_BORD .
 
 be:sl_WHS_PF a era:SubsidiaryLocation ;
     rdfs:label "Westhaven platforms"@en ;
@@ -2907,4 +2955,4 @@ be:sl_WHD_GT a era:SubsidiaryLocation ;
     era:subsidiaryLocationCode "03" ;
     era:subsidiaryLocationName "Westhaven Depot gate"@en ;
     era:subsidiaryLocationType era-subloctype:05 ;
-    era:linkedToPrimaryLocation be:pl_WHS .
+    era:linkedToPrimaryLocation be:pl_WHD .

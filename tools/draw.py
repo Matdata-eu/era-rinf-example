@@ -1,3 +1,4 @@
+import math
 #!/usr/bin/env python3
 """Draws the example network from the Turtle (no other input).
 Positions come from the topology (element + offset), the element shapes from the schematic WKT.
@@ -127,10 +128,19 @@ for s in g.subjects(RDF.type, ERA.Signal):
     T(cx - ux * 4, cy + ny * 13 + 4, str(g.value(s, ERA.signalId)), 'sigt')
 
 # primary locations
+# a primary location shares the net reference of its operational point: mark it halfway along the longest stretch
+def middle(ref):
+    if (ref, RDF.type, ERA.NetPointReference) in g: return at(*pos(ref))[0]
+    seg = lambda p: [math.dist(a, b) for a, b in zip(p, p[1:])]
+    pts = max(stretches(ref), key=lambda p: sum(seg(p))); d = sum(seg(pts)) / 2
+    for a, b, l in zip(pts, pts[1:], seg(pts)):
+        if d <= l: t = d / l if l else 0; return a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t
+        d -= l
+    return pts[-1]
 for pl in g.subjects(RDF.type, ERA.PrimaryLocation):
-    (x, y), _ = at(*pos(g.value(pl, ERA.netReference)))
+    x, y = middle(g.value(pl, ERA.netReference))
     o.append(f'<rect x="{x-4:.1f}" y="{y-4:.1f}" width="8" height="8" class="pl" transform="rotate(45 {x:.1f} {y:.1f})"/>')
-    T(x, y + 40, 'PLC ' + str(g.value(pl, ERA.primaryLocationCode)), 'plt')
+    T(x, y - 9, 'PLC ' + str(g.value(pl, ERA.primaryLocationCode)), 'plt')
 
 for x, y0, y1, name, typ, c in oplabels:
     above = name.startswith(('Westhaven Depot', 'Midford', 'Westhaven (', 'Eastgate'))

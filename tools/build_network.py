@@ -512,7 +512,7 @@ SOLS = [
         ("2", "era:RunningTrack", "Westhaven - Midford track 2", [("b2", 1550, 1850)], MAIN_BE + [speed(140), *sol_track("be", "20")]),
     ]),
     ("be", "MID_DUN", "MID", "DUN", "10", "line_100", 5000, [
-        ("1", "era:RunningTrack", "Midford - Dunes track 1", [("a6", 200, 5200)], MAIN_BE + [speed(140), *sol_track("be", "10")]),
+        ("1", "era:RunningTrack", "Midford - Dunes track 1", [("a6", 200, 5200)], MAIN_BE + [speed(140), *sol_track("be", "30")]),
     ]),
     ("be", "DUN_BORD", "DUN", "BORD", "10", "line_100", 400, [
         ("1", "era:RunningTrack", "Dunes - border single track", [("b5", 200, 600)], MAIN_BE + [speed(100), *sol_track("be", "30")]),
@@ -611,6 +611,7 @@ SIG = [
     ("be", "S3", "c1", 430, "ft", "04", "Exit signal track 3"),
     ("be", "S2", "b2", 300, "tf", "04", "Exit signal track 2"),
     ("be", "H2", "b2", 1550, "tf", "01", "Home signal track 2"),
+    ("be", "MC", "a6", 200, "tf", "08", "Midford protection signal C"),
     ("be", "B1", "a6", 1600, "ft", "07", "Block signal track 1"),
     ("be", "MA", "a5", 1050, "ft", "08", "Midford protection signal A"),
     ("be", "MB", "b3", 60, "tf", "08", "Midford protection signal B"),
@@ -688,25 +689,30 @@ for (im, pid, label, parts) in PLAT:
 
 # ---------------------------------------------------------------------------
 # Primary and subsidiary locations
-PL = [("be", "WHS", "BE99001", "Westhaven", "a4", 250, True, False),
-      ("be", "WHY", "BE99002", "Westhaven Yard", "y1", 200, False, True),
-      ("be", "HIL", "BE99003", "Hillend siding", "br", 650, False, True),
-      ("nl", "EGT", "NL99001", "Eastgate", "B2", 400, True, False)]
+PL = [("be", "WHS", "BE99001", "Westhaven", True, False),
+      ("be", "WHY", "BE99002", "Westhaven Yard", False, True),
+      ("be", "HIL", "BE99003", "Hillend siding", False, True),
+      ("be", "WHD", "BE99004", "Westhaven Depot", False, False),
+      ("be", "MID", "BE99005", "Midford Junction", False, False),
+      ("be", "DUN", "BE99006", "Dunes Junction", False, False),
+      ("be", "BORD", "BE99007", "Dunes border", False, False),
+      ("nl", "EGT", "NL99001", "Eastgate", True, False),
+      ("nl", "BORD", "NL99002", "Dunes border", False, False)]
 SL = [("be", "WHS_PF", "01", "Westhaven platforms", "WHS", "39"),
       ("be", "WHY_LP", "02", "Westhaven Yard loading point", "WHY", "43"),
-      ("be", "WHD_GT", "03", "Westhaven Depot gate", "WHS", "05")]
+      ("be", "WHD_GT", "03", "Westhaven Depot gate", "WHD", "05")]
 for im in IMS:
     sec(im, "11. Primary and subsidiary locations",
-        "Location codes for the telematics messages. An operational point points to its primary location;\n"
-        "a subsidiary location points to the primary location it belongs to.")
-    for (pim, pid, code, name, e, d, pax, freight) in PL:
+        "Location codes for the telematics messages. Every operational point points to its primary location,\n"
+        "and the primary location has the same net reference as its operational point (the same node).\n"
+        "A subsidiary location points to the primary location it belongs to.")
+    for (pim, pid, code, name, pax, freight) in PL:
         if pim != im:
             continue
         iri = f"{im}:pl_{pid}"
         emit(im, iri, ["era:PrimaryLocation", ("rdfs:label", lit(name)), ("era:primaryLocationCode", f'"{code}"'),
                        ("era:primaryLocationName", lit(name)), ("era:passengerFlag", str(pax).lower()),
-                       ("era:freightFlag", str(freight).lower()), *common(im), ("era:netReference", f"{iri}_ref")])
-        npr(im, f"{iri}_ref", e, d, lrs=False)
+                       ("era:freightFlag", str(freight).lower()), *common(im), ("era:netReference", f"{im}:op_{pid}_ref")])
         w(im, f"{im}:op_{pid} era:primaryLocation {iri} .\n")
     for (sim, sid, code, name, pl, typ) in SL:
         if sim != im:

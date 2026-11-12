@@ -1,7 +1,7 @@
 <script setup>
 // The network, drawn from the Turtle. Every object is clickable and carries its IRI.
 import { computed, ref, watch, onMounted } from 'vue'
-import { ERA, value, instances, label, objects, shrink } from '../lib/rdf.js'
+import { ERA, value, instances, label, objects, shrink, isA } from '../lib/rdf.js'
 import { elements, relations, at, pos, stretches, locate, path, im, W, H, Y0 } from '../lib/net.js'
 
 const props = defineProps({
@@ -68,7 +68,20 @@ const crossings = instances(ERA + 'LevelCrossing').map((t) => {
   return { iri: t, pts, name: label(t), x: pts.reduce((a, p) => a + p[0], 0) / pts.length, y: Math.min(...pts.map((p) => p[1])) - 30 }
 })
 const posts = instances(ERA + 'KilometricPost').map((k) => { const q = pos(value(k, ERA + 'netReference')); return { iri: k, p: at(q.e, q.off).p, km: parseFloat(value(k, ERA + 'kilometer')) } })
-const locations = instances(ERA + 'PrimaryLocation').map((l) => { const q = pos(value(l, ERA + 'netReference')); return { iri: l, p: at(q.e, q.off).p, code: value(l, ERA + 'primaryLocationCode') } })
+// a primary location shares the net reference of its operational point: its mark sits halfway along the longest stretch
+function middle(ref) {
+  if (isA(ref, ERA + 'NetPointReference')) { const q = pos(ref); return at(q.e, q.off).p }
+  const len = (p) => p.slice(1).reduce((t, q, i) => t + Math.hypot(q[0] - p[i][0], q[1] - p[i][1]), 0)
+  const pts = stretches(ref).reduce((a, b) => (len(b) > len(a) ? b : a))
+  let d = len(pts) / 2
+  for (let i = 1; i < pts.length; i++) {
+    const l = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1])
+    if (d <= l) { const t = l ? d / l : 0; return [pts[i - 1][0] + (pts[i][0] - pts[i - 1][0]) * t, pts[i - 1][1] + (pts[i][1] - pts[i - 1][1]) * t] }
+    d -= l
+  }
+  return pts[pts.length - 1]
+}
+const locations = instances(ERA + 'PrimaryLocation').map((l) => ({ iri: l, p: middle(value(l, ERA + 'netReference')), code: value(l, ERA + 'primaryLocationCode') }))
 
 const marks = computed(() => {
   const iris = [...props.highlight]

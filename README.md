@@ -18,9 +18,9 @@ except the country IRIs is invented, and the geometries are schematic and lie in
 | `data/im-b-netherlands.ttl` | Beta Spoor: border, Eastgate |
 | `data/era-managed.ttl` | Stand-in for the reference border point that ERA manages |
 
-2,936 triples: 28 linear elements, 48 net relations, 15 switches (one double slip crossing), 19 signals,
+2,980 triples: 28 linear elements, 48 net relations, 15 switches (one double slip crossing), 20 signals,
 8 operational points (one border point delivered by both managers), 6 sections of line, 4 platform edges,
-1 tunnel, 1 level crossing, 4 primary and 3 subsidiary locations, 9 kilometre posts on 2 lines.
+1 tunnel, 1 level crossing, 9 primary locations (one per operational point, with the same net reference) and 3 subsidiary locations, 9 kilometre posts on 2 lines.
 
 The Turtle is the source of truth. `tools/build_network.py` wrote the first version and is kept for reference.
 
@@ -65,7 +65,8 @@ Nothing about the network is written in the page code. Change the Turtle and the
    operational point of type border point with the same UOPID, reference border point and coordinates.
 5. Signals are main signals for the normal running directions (Infra Alfa: track 1 eastbound, track 2 westbound,
    signals on the left; Beta Spoor: signals on the right), plus both directions on the stretch W12 - W13 that
-   trains to and from the Hillend siding use. Shunting signals and wrong-road signalling are left out.
+   trains to and from the Hillend siding use, and a westbound protection signal on track 1 east of W11 for
+   Midford Junction (the track between Midford and Dunes is therefore direction B). Shunting signals and wrong-road signalling are left out.
 6. Switches have a net point reference only. `era:connectedTo` and navigability `AB` / `BA` are not used.
 7. Contact line system, ETCS and train detection are not infrastructure elements in v3.3.4, so an "area" is the
    set of tracks that point to the same subsystem node.

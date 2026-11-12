@@ -757,8 +757,9 @@ nl:pe_EGT_2_ref_end_tc a era:TopologicalCoordinate ;
 
 ##############################################################################
 # 11. Primary and subsidiary locations
-# Location codes for the telematics messages. An operational point points to its primary location;
-# a subsidiary location points to the primary location it belongs to.
+# Location codes for the telematics messages. Every operational point points to its primary location,
+# and the primary location has the same net reference as its operational point (the same node).
+# A subsidiary location points to the primary location it belongs to.
 ##############################################################################
 
 nl:pl_EGT a era:PrimaryLocation ;
@@ -769,17 +770,18 @@ nl:pl_EGT a era:PrimaryLocation ;
     era:freightFlag false ;
     era:inCountry eu-country:NLD ;
     era:infrastructureManager orgrole:9902_IM ;
-    era:netReference nl:pl_EGT_ref .
-
-nl:pl_EGT_ref a era:NetPointReference ;
-    era:hasTopoCoordinate nl:pl_EGT_ref_tc ;
-    gsp:hasGeometry nl:pl_EGT_ref_geom .
-
-nl:pl_EGT_ref_geom a gsp:Geometry ;
-    gsp:asWKT "POINT(3.53800 52.60000)"^^gsp:wktLiteral .
-
-nl:pl_EGT_ref_tc a era:TopologicalCoordinate ;
-    era:onLinearElement nl:le_B2 ;
-    era:offsetFromOrigin "400.0"^^xsd:double .
+    era:netReference nl:op_EGT_ref .
 
 nl:op_EGT era:primaryLocation nl:pl_EGT .
+
+nl:pl_BORD a era:PrimaryLocation ;
+    rdfs:label "Dunes border"@en ;
+    era:primaryLocationCode "NL99002" ;
+    era:primaryLocationName "Dunes border"@en ;
+    era:passengerFlag false ;
+    era:freightFlag false ;
+    era:inCountry eu-country:NLD ;
+    era:infrastructureManager orgrole:9902_IM ;
+    era:netReference nl:op_BORD_ref .
+
+nl:op_BORD era:primaryLocation nl:pl_BORD .

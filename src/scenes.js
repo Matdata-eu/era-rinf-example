@@ -12,7 +12,7 @@ const TOPOLOGY_ONLY = { ops: false, sols: false, signals: false, platforms: fals
 export const scenes = [
   {
     id: 'network', title: 'The network at a glance',
-    text: `<p>A fictive piece of railway on both sides of a border: <b class="be">Infra Alfa</b> in Belgium and <b class="nl">Beta Spoor</b> in the Netherlands. It is small, but it has what a real RINF dataset has: a station split into three operational points, two junctions, a private siding, a tunnel, a level crossing and a border point.</p>
+    text: `<p>A fictive piece of railway on both sides of a border: <b class="be">Infra Alfa</b> in Belgium and <b class="nl">Beta Spoor</b> in the Netherlands. It is small, but it has what a real RINF dataset has: a station area split into three operational points, two junctions, a private siding, a tunnel, a level crossing, primary locations and a border point.</p>
 <p>The drawing is generated from the Turtle on the right. Positions come from the linear elements and offsets in the data, so when the Turtle changes, the drawing changes with it. Click anything to see its triples.</p>`,
     box: ['orgrole:9901_IM', 'orgrole:9902_IM'],
   },

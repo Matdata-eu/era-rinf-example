@@ -12,4 +12,4 @@ ok   border point records share UOPID, reference border point, canonical URI and
 ok   hasPart agrees with the area reference of the container
 ok   operational points and sections of line do not overlap
 ok   every linear element is covered by an operational point or a section of line
-2936 triples, 28 linear elements, 48 net relations, 14 checks, 0 failures
+2980 triples, 28 linear elements, 48 net relations, 14 checks, 0 failures
