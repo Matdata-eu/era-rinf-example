@@ -1208,6 +1208,12 @@ era-sn:10 a skos:Concept ;
     skos:prefLabel "Regular SoL"@en ;
     skos:topConceptOf era-sn:SoLNatures .
 
+era-sn:20 a skos:Concept ;
+    skos:inScheme era-sn:SoLNatures ;
+    skos:notation "Link"^^xsd:string ;
+    skos:prefLabel "Link"@en ;
+    skos:topConceptOf era-sn:SoLNatures .
+
 era-subloctype:05 a skos:Concept ;
     skos:definition "Place for parking rail vehicles."@en ;
     skos:inScheme era-subloctype:SubsidiaryLocationTypes ;
@@ -14335,17 +14341,6 @@ era-organisation-roles:OrgRoles a skos:ConceptScheme ;
 	"""@en ;
     skos:prefLabel "Organisation roles"@en .
 
-era-sn:SoLNatures a skos:ConceptScheme ;
-    rdfs:label "Section of Line Natures"@en ;
-    ns2:license <https://creativecommons.org/licenses/by/4.0/> ;
-    era:rinfIndex "1.1.0.0.0.6" ;
-    dcterms:issued "2020-09-01"^^xsd:date ;
-    dcterms:modified "2022-09-09"^^xsd:date,
-        "2024-09-04"^^xsd:date ;
-    dcterms:title "Concept scheme grouping section of line natures"@en ;
-    rdfs:comment "Controlled SKOS-based vocabularies defined by the European Union Agency for Railways to describe concepts related to the European railway infrastructure and the vehicles authorized to operate over it."@en ;
-    skos:prefLabel "Section of Line Natures"@en .
-
 era-tdssc:TrainDetectionSystemsSpecificChecks a skos:ConceptScheme ;
     rdfs:label "Train Detection Systems Specific Checks"@en ;
     ns2:license <https://creativecommons.org/licenses/by/4.0/> ;
@@ -14946,6 +14941,17 @@ era-orient:Sides a skos:ConceptScheme ;
     dcterms:title "Concepts for the side of a railway track-side element, in relation to a track"@en ;
     rdfs:comment "Controlled SKOS-based vocabularies defined by the European Union Agency for Railways to describe concepts related to the European railway infrastructure and the vehicles authorized to operate over it."@en ;
     skos:prefLabel "Sides"@en .
+
+era-sn:SoLNatures a skos:ConceptScheme ;
+    rdfs:label "Section of Line Natures"@en ;
+    ns2:license <https://creativecommons.org/licenses/by/4.0/> ;
+    era:rinfIndex "1.1.0.0.0.6" ;
+    dcterms:issued "2020-09-01"^^xsd:date ;
+    dcterms:modified "2022-09-09"^^xsd:date,
+        "2024-09-04"^^xsd:date ;
+    dcterms:title "Concept scheme grouping section of line natures"@en ;
+    rdfs:comment "Controlled SKOS-based vocabularies defined by the European Union Agency for Railways to describe concepts related to the European railway infrastructure and the vehicles authorized to operate over it."@en ;
+    skos:prefLabel "Section of Line Natures"@en .
 
 era-tds:TrainDetectionSystems a skos:ConceptScheme ;
     rdfs:label "Train Detection Systems"@en ;

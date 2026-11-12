@@ -11,6 +11,8 @@
 <path d="M854.2,440.0 L975.8,440.0" class="sol"/>
 <path d="M610.8,340.0 L691.9,340.0" class="sol"/>
 <path d="M691.9,440.0 L610.8,440.0" class="sol"/>
+<path d="M172.5,311.3 L178.2,340.0" class="sol"/>
+<path d="M181.0,477.9 L191.7,440.0" class="sol"/>
 <path d="M1589.1,440.0 L1442.8,440.0" class="sol"/>
 <line x1="1442.8" y1="100" x2="1442.8" y2="690" class="border"/>
 <text x="1442.8" y="70.0" text-anchor="middle" class="opname">border point EU99901, one record per IM</text>
@@ -27,7 +29,7 @@
 <path d="M854.2,440.0 L719.0,440.0" class="op" stroke="#d9f2d0"/>
 <path d="M719.0,440.0 L746.0,340.0" class="op" stroke="#d9f2d0"/>
 <path d="M827.1,340.0 L854.2,440.0" class="op" stroke="#d9f2d0"/>
-<path d="M137.6,240.0 L158.4,240.0 L178.2,340.0" class="op" stroke="#f6d5e5"/>
+<path d="M137.6,240.0 L158.4,240.0 L172.5,311.3" class="op" stroke="#f6d5e5"/>
 <path d="M137.6,240.0 L70.0,240.0" class="op" stroke="#f6d5e5"/>
 <path d="M137.6,240.0 L106.4,140.0 L70.0,140.0" class="op" stroke="#f6d5e5"/>
 <path d="M70.0,340.0 L178.2,340.0" class="op" stroke="#e3d9f7"/>
@@ -39,7 +41,7 @@
 <path d="M610.8,440.0 L191.7,440.0" class="op" stroke="#e3d9f7"/>
 <path d="M408.0,340.0 L397.6,240.0 L283.2,240.0 L272.8,340.0" class="op" stroke="#e3d9f7"/>
 <path d="M191.7,440.0 L232.2,340.0" class="op" stroke="#e3d9f7"/>
-<path d="M132.4,540.0 L163.6,540.0 L191.7,440.0" class="op" stroke="#ffd9c2"/>
+<path d="M132.4,540.0 L163.6,540.0 L181.0,477.9" class="op" stroke="#ffd9c2"/>
 <path d="M132.4,540.0 L70.0,540.0" class="op" stroke="#ffd9c2"/>
 <path d="M132.4,540.0 L111.6,640.0 L70.0,640.0" class="op" stroke="#ffd9c2"/>
 <path d="M1942.0,440.0 L1858.8,440.0" class="op" stroke="#c9ece8"/>
@@ -58,8 +60,8 @@
 <text x="298.3" y="250.0" text-anchor="end" class="small">pl. 3</text>
 <path d="M374.2,447.0 L306.6,447.0" class="pe"/>
 <text x="301.6" y="450.0" text-anchor="end" class="small">pl. 2</text>
-<path d="M1799.1,347.0 L1665.2,347.0" class="pe"/>
-<text x="1660.2" y="350.0" text-anchor="end" class="small">pl. 2</text>
+<path d="M1799.1,333.0 L1665.2,333.0" class="pe"/>
+<text x="1660.2" y="336.0" text-anchor="end" class="small">pl. 2</text>
 <path d="M70.0,340.0 L178.2,340.0" class="le" stroke="#004494"/>
 <path d="M133.1,340.0 L118.1,346.0 L118.1,334.0Z" fill="#004494"/>
 <text transform="translate(124.1,340.0) rotate(0.0)" y="-13" text-anchor="middle" class="lelab" fill="#004494">a1 · 400 m</text>
@@ -206,6 +208,8 @@
 <text x="276.8" y="472.0" text-anchor="middle" class="sigt">S2</text>
 <line x1="610.8" y1="440.0" x2="610.8" y2="455.0" class="sigl"/><path d="M602.8,455.0 L615.8,450.0 L615.8,460.0Z" class="sig"/>
 <text x="614.8" y="472.0" text-anchor="middle" class="sigt">H2</text>
+<line x1="691.9" y1="440.0" x2="691.9" y2="425.0" class="sigl"/><path d="M699.9,425.0 L686.9,430.0 L686.9,420.0Z" class="sig"/>
+<text x="687.9" y="416.0" text-anchor="middle" class="sigt">MD</text>
 <line x1="847.5" y1="340.0" x2="847.5" y2="355.0" class="sigl"/><path d="M839.5,355.0 L852.5,350.0 L852.5,360.0Z" class="sig"/>
 <text x="851.5" y="372.0" text-anchor="middle" class="sigt">MC</text>
 <line x1="989.8" y1="340.0" x2="989.8" y2="325.0" class="sigl"/><path d="M997.8,325.0 L984.8,330.0 L984.8,320.0Z" class="sig"/>
@@ -265,15 +269,15 @@
 <rect x="685.0" y="264.0" width="176" height="34" rx="5" fill="#d9f2d0"/>
 <text x="773.0" y="278.0" text-anchor="middle" class="opname">Midford Junction (BEMID)</text>
 <text x="773.0" y="292.0" text-anchor="middle" class="small">type 80</text>
-<rect x="36.1" y="64.0" width="176" height="34" rx="5" fill="#f6d5e5"/>
-<text x="124.1" y="78.0" text-anchor="middle" class="opname">Westhaven Depot (BEWHD)</text>
-<text x="124.1" y="92.0" text-anchor="middle" class="small">type 50</text>
+<rect x="33.2" y="64.0" width="176" height="34" rx="5" fill="#f6d5e5"/>
+<text x="121.2" y="78.0" text-anchor="middle" class="opname">Westhaven Depot (BEWHD)</text>
+<text x="121.2" y="92.0" text-anchor="middle" class="small">type 50</text>
 <rect x="252.4" y="164.0" width="176" height="34" rx="5" fill="#e3d9f7"/>
 <text x="340.4" y="178.0" text-anchor="middle" class="opname">Westhaven (BEWHS)</text>
 <text x="340.4" y="192.0" text-anchor="middle" class="small">type 10</text>
-<rect x="42.8" y="688.0" width="176" height="34" rx="5" fill="#ffd9c2"/>
-<text x="130.8" y="702.0" text-anchor="middle" class="opname">Westhaven Yard (BEWHY)</text>
-<text x="130.8" y="716.0" text-anchor="middle" class="small">type 40</text>
+<rect x="37.5" y="688.0" width="176" height="34" rx="5" fill="#ffd9c2"/>
+<text x="125.5" y="702.0" text-anchor="middle" class="opname">Westhaven Yard (BEWHY)</text>
+<text x="125.5" y="716.0" text-anchor="middle" class="small">type 40</text>
 <rect x="1677.5" y="264.0" width="176" height="34" rx="5" fill="#c9ece8"/>
 <text x="1765.5" y="278.0" text-anchor="middle" class="opname">Eastgate (NLEGT)</text>
 <text x="1765.5" y="292.0" text-anchor="middle" class="small">type 20</text>

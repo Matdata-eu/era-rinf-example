@@ -475,12 +475,12 @@ OPS = [
         ("5", "era:RunningTrack", "Westhaven connection 2-1", [("x1", 0, 160)], MAIN_BE + [speed(40)]),
     ]),
     ("be", "WHD", "BEWHD", "Westhaven Depot", "50", [
-        ("L", "era:Siding", "Depot lead", [("d0", 0, 120)], SIDE_BE),
+        ("L", "era:Siding", "Depot lead", [("d0", 20, 120)], SIDE_BE),
         ("D1", "era:Siding", "Depot siding D1", [("d1", 0, 150)], SIDE_BE),
         ("D2", "era:Siding", "Depot siding D2", [("d2", 0, 160)], SIDE_BE),
     ]),
     ("be", "WHY", "BEWHY", "Westhaven Yard", "40", [
-        ("L", "era:Siding", "Yard lead", [("y0", 0, 100)], SIDE_BE),
+        ("L", "era:Siding", "Yard lead", [("y0", 0, 80)], SIDE_BE),
         ("Y1", "era:Siding", "Yard siding Y1", [("y1", 0, 400)], SIDE_BE),
         ("Y2", "era:Siding", "Yard siding Y2", [("y2", 0, 420)], SIDE_BE),
     ]),
@@ -509,7 +509,14 @@ SOLS = [
     # (im, id, from op, to op, nature, line, length, tracks)
     ("be", "WHS_MID", "WHS", "MID", "10", "line_100", 300, [
         ("1", "era:RunningTrack", "Westhaven - Midford track 1", [("a5", 750, 1050)], MAIN_BE + [speed(140), *sol_track("be", "10")]),
-        ("2", "era:RunningTrack", "Westhaven - Midford track 2", [("b2", 1550, 1850)], MAIN_BE + [speed(140), *sol_track("be", "20")]),
+        ("2", "era:RunningTrack", "Westhaven - Midford track 2", [("b2", 1550, 1850)], MAIN_BE + [speed(140), *sol_track("be", "30")]),
+    ]),
+    # links inside the Westhaven station area: from the switch, along the first metres of the branching leg
+    ("be", "WHS_WHD", "WHS", "WHD", "20", "line_100", 20, [
+        ("1", "era:RunningTrack", "Westhaven - Westhaven Depot link", [("d0", 0, 20)], SIDE_BE + [speed(40), *sol_track("be", "30")]),
+    ]),
+    ("be", "WHS_WHY", "WHS", "WHY", "20", "line_100", 20, [
+        ("1", "era:RunningTrack", "Westhaven - Westhaven Yard link", [("y0", 100, 80)], SIDE_BE + [speed(40), *sol_track("be", "30")]),
     ]),
     ("be", "MID_DUN", "MID", "DUN", "10", "line_100", 5000, [
         ("1", "era:RunningTrack", "Midford - Dunes track 1", [("a6", 200, 5200)], MAIN_BE + [speed(140), *sol_track("be", "30")]),
@@ -611,6 +618,7 @@ SIG = [
     ("be", "S3", "c1", 430, "ft", "04", "Exit signal track 3"),
     ("be", "S2", "b2", 300, "tf", "04", "Exit signal track 2"),
     ("be", "H2", "b2", 1550, "tf", "01", "Home signal track 2"),
+    ("be", "MD", "b2", 1850, "ft", "08", "Midford protection signal D"),
     ("be", "MC", "a6", 200, "tf", "08", "Midford protection signal C"),
     ("be", "B1", "a6", 1600, "ft", "07", "Block signal track 1"),
     ("be", "MA", "a5", 1050, "ft", "08", "Midford protection signal A"),

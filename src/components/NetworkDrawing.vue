@@ -19,7 +19,7 @@ const OPC = ['#f6d5e5', '#e3d9f7', '#ffd9c2', '#d9f2d0', '#ffe9a8', '#cfe8ff', '
 const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1])
 const tri = (c, u, f, b) => path([[c[0] + u[0] * f, c[1] + u[1] * f], [c[0] - u[0] * b - u[1] * b, c[1] - u[1] * b + u[0] * b], [c[0] - u[0] * b + u[1] * b, c[1] - u[1] * b - u[0] * b]]) + 'Z'
 
-const sols = instances(ERA + 'SectionOfLine').map((s) => ({ iri: s, paths: stretches(value(s, ERA + 'netReference')).map(path) }))
+const sols = instances(ERA + 'SectionOfLine').map((s) => ({ iri: s, paths: stretches(value(s, ERA + 'netReference')).map(path), link: value(s, ERA + 'solNature').endsWith('/20') }))
 let ci = 0
 const ops = [], borders = []
 for (const op of instances(ERA + 'OperationalPoint')) {
@@ -54,7 +54,7 @@ const signals = instances(ERA + 'Signal').map((s) => {
   return { iri: s, p, c, d: tri(c, t, 8, 5), id: value(s, ERA + 'signalId'), tx: c[0] - t[0] * 4, ty: c[1] + n[1] * 13 + 4 }
 })
 const platforms = instances(ERA + 'PlatformEdge').map((pe) => {
-  const side = pe.endsWith('1') ? -7 : 7
+  const side = pe.endsWith('1') || pe.includes('EGT') ? -7 : 7   // Eastgate's platform is on the outside of the loop
   const st = stretches(value(pe, ERA + 'netReference')).map((s) => s.map(([x, y]) => [x, y + side]))
   const left = st.flat().reduce((a, b) => (b[0] < a[0] ? b : a))
   return { iri: pe, paths: st.map(path), id: value(pe, ERA + 'platformId'), lx: left[0] - 5, ly: left[1] + 3 }
@@ -81,6 +81,11 @@ function middle(ref) {
   }
   return pts[pts.length - 1]
 }
+// tracks: a running track or siding is a linear reference over one or more netelements
+const trackList = ['RunningTrack', 'Siding'].flatMap((c) => instances(ERA + c).map((t) => {
+  const ref = value(t, ERA + 'netReference')
+  return { iri: t, sid: c === 'Siding', id: value(t, ERA + 'trackId') ?? value(t, ERA + 'sidingId'), paths: stretches(ref).map(path), m: middle(ref) }
+}))
 const locations = instances(ERA + 'PrimaryLocation').map((l) => ({ iri: l, p: middle(value(l, ERA + 'netReference')), code: value(l, ERA + 'primaryLocationCode') }))
 
 const marks = computed(() => {
@@ -142,8 +147,8 @@ const border = borders.find((b) => b.im === 'be')
   <svg ref="svg" :viewBox="vb.join(' ')" class="net" :class="{ grabbing: dragged }" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Schematic drawing of the example network"
     @wheel.prevent="wheel" @pointerdown="down" @pointermove="moveTo" @pointerup="up" @pointerleave="up" @click.capture="swallow">
     <g v-if="on('sols')">
-      <g v-for="s in sols" :key="s.iri" class="pick" @click="pick($event, s.iri)"><title>{{ shrink(s.iri) }} · section of line {{ label(s.iri) }}</title>
-        <path v-for="(d, i) in s.paths" :key="i" :d="d" class="sol" /></g>
+      <g v-for="s in sols" :key="s.iri" class="pick" @click="pick($event, s.iri)"><title>{{ shrink(s.iri) }} · section of line {{ label(s.iri) }}{{ s.link ? ' (link)' : '' }}</title>
+        <path v-for="(d, i) in s.paths" :key="i" :d="d" class="sol" :class="{ link: s.link }" /></g>
     </g>
     <g v-if="on('ops')">
       <g v-for="o in ops" :key="o.iri" class="pick" @click="pick($event, o.iri)"><title>{{ shrink(o.iri) }} · operational point</title>
@@ -180,11 +185,20 @@ const border = borders.find((b) => b.im === 'be')
         <path v-for="(d, i) in p.paths" :key="i" :d="d" class="pe" /><text :x="p.lx" :y="p.ly" class="small" text-anchor="end">pl. {{ p.id }}</text></g>
     </g>
 
+    <g v-if="layers.tracks === true">
+      <g v-for="t in trackList" :key="t.iri" class="pick" @click="pick($event, t.iri)"><title>{{ shrink(t.iri) }} · {{ t.sid ? 'siding' : 'running track' }} {{ t.id }}</title>
+        <path v-for="(d, i) in t.paths" :key="i" :d="d" class="trk" :class="t.sid ? 'sid' : 'run'" /></g>
+    </g>
+
     <g v-for="e in lines" :key="e.iri" class="pick" @click="pick($event, e.iri)"><title>{{ shrink(e.iri) }} · linear element, {{ e.length }} m</title>
       <path :d="e.d" class="hit" /><path :d="e.d" class="le" :class="e.im" /><path :d="e.arrow" :class="'fill-' + e.im" />
       <text v-for="(t, j) in e.text" :key="j" :transform="`translate(${e.m[0]},${e.m[1]}) rotate(${e.ang})`" :y="-13 - 11 * (e.text.length - 1 - j)" class="lelab" :class="'fill-' + e.im">{{ t }}</text>
     </g>
 
+    <g v-if="layers.tracks === true">
+      <g v-for="t in trackList" :key="t.iri" class="pick" @click="pick($event, t.iri)"><title>{{ shrink(t.iri) }} · {{ t.sid ? 'siding' : 'running track' }} {{ t.id }}</title>
+        <text :x="t.m[0]" :y="t.m[1] + 12" class="trkt" :class="t.sid ? 'sid' : 'run'">{{ t.id }}</text></g>
+    </g>
     <g v-if="on('km')">
       <g v-for="k in posts" :key="k.iri" class="pick" @click="pick($event, k.iri)"><title>{{ shrink(k.iri) }}</title>
         <line :x1="k.p[0]" :y1="k.p[1] + 4" :x2="k.p[0]" :y2="k.p[1] + 15" class="kp" /><text :x="k.p[0]" :y="k.p[1] + 25" class="kpt">km {{ k.km }}</text></g>
@@ -227,6 +241,12 @@ text { font-family: var(--font); font-size: 11px; fill: var(--c-ink); text-ancho
 .lelab { font-size: 10.5px; font-weight: 700; }
 .op { fill: none; stroke-width: 30; stroke-linecap: round; stroke-linejoin: round; }
 .sol { fill: none; stroke: #e3e6ea; stroke-width: 30; stroke-linejoin: round; }
+.sol.link { stroke: #8d99ab; }
+.trk { fill: none; stroke-width: 13; stroke-linejoin: round; opacity: 0.5; }
+.trk.run { stroke: #1f9e8f; } .trk.sid { stroke: #a2679f; }
+.pick:hover .trk { opacity: 0.8; }
+.trkt { font-size: 9px; font-weight: 700; text-anchor: middle; paint-order: stroke; stroke: #fff; stroke-width: 3px; }
+.trkt.run { fill: #11695f; } .trkt.sid { fill: #7a437a; }
 .tunnel { fill: none; stroke: #555; stroke-width: 13; stroke-dasharray: 3 3; opacity: 0.45; }
 .lc { stroke: #8a4b08; stroke-width: 6; opacity: 0.8; }
 .pe { fill: none; stroke: #333; stroke-width: 4; }

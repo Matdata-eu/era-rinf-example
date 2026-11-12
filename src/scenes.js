@@ -4,7 +4,7 @@
 // { at, width } for a window around one object (default: the whole network);
 // layers: drawing layers switched off for this scene.
 export const LAYERS = [
-  ['ops', 'Operational points'], ['sols', 'Sections of line'], ['switches', 'Switches'], ['signals', 'Signals'],
+  ['ops', 'Operational points'], ['sols', 'Sections of line'], ['tracks', 'Tracks'], ['switches', 'Switches'], ['signals', 'Signals'],
   ['platforms', 'Platform edges'], ['structures', 'Tunnel, level crossing'], ['km', 'Kilometre posts'], ['locations', 'Primary locations'],
 ]
 const TOPOLOGY_ONLY = { ops: false, sols: false, signals: false, platforms: false, structures: false, km: false, locations: false }

@@ -88,7 +88,7 @@ for t in g.subjects(RDF.type, ERA.LevelCrossing):
     T(sum(xs) / len(xs), min(ys) - 30, lab(t), 'feat')
 for pe in g.subjects(RDF.type, ERA.PlatformEdge):
     for st in stretches(g.value(pe, ERA.netReference)):
-        side = -7 if loc(pe).endswith('1') else 7   # platform 3 lies between tracks 3 and 1
+        side = -7 if loc(pe).endswith('1') or 'EGT' in loc(pe) else 7   # platform 3 lies between tracks 3 and 1; Eastgate's on the outside
         st = [(x, y + side) for x, y in st]; o.append(f'<path d="{path(st)}" class="pe"/>')
         lx_ = min(st, key=lambda p: p[0]); T(lx_[0] - 5, lx_[1] + 3, 'pl. ' + str(g.value(pe, ERA.platformId)), 'small', 'end')
 

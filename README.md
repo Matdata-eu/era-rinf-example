@@ -18,8 +18,8 @@ except the country IRIs is invented, and the geometries are schematic and lie in
 | `data/im-b-netherlands.ttl` | Beta Spoor: border, Eastgate |
 | `data/era-managed.ttl` | Stand-in for the reference border point that ERA manages |
 
-2,980 triples: 28 linear elements, 48 net relations, 15 switches (one double slip crossing), 20 signals,
-8 operational points (one border point delivered by both managers), 6 sections of line, 4 platform edges,
+3,118 triples: 28 linear elements, 48 net relations, 15 switches (one double slip crossing), 21 signals,
+8 operational points (one border point delivered by both managers), 8 sections of line (two of nature Link inside the Westhaven station area), 4 platform edges,
 1 tunnel, 1 level crossing, 9 primary locations (one per operational point, with the same net reference) and 3 subsidiary locations, 9 kilometre posts on 2 lines.
 
 The Turtle is the source of truth. `tools/build_network.py` wrote the first version and is kept for reference.
