@@ -105,7 +105,11 @@ check('border point records share UOPID, reference border point, canonical URI a
 # 9 hasPart: every part of an OP or SoL has its linear reference in the container's area reference
 bad = []
 for c, p in g.subject_objects(ERA.hasPart):
-    inc = set(Collection(g, g.value(g.value(c, ERA.netReference), ERA.includes)))
+    ref = g.value(c, ERA.netReference)
+    if (ref, RDF.type, ERA.NetPointReference) in g:   # a link section of line: the track shares the point reference
+        if g.value(p, ERA.netReference) != ref: bad.append(f'{short(c)} hasPart {short(p)}')
+        continue
+    inc = set(Collection(g, g.value(ref, ERA.includes)))
     if g.value(p, ERA.netReference) not in inc: bad.append(f'{short(c)} hasPart {short(p)}')
 check('hasPart agrees with the area reference of the container', bad)
 

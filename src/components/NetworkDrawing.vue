@@ -19,7 +19,13 @@ const OPC = ['#f6d5e5', '#e3d9f7', '#ffd9c2', '#d9f2d0', '#ffe9a8', '#cfe8ff', '
 const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1])
 const tri = (c, u, f, b) => path([[c[0] + u[0] * f, c[1] + u[1] * f], [c[0] - u[0] * b - u[1] * b, c[1] - u[1] * b + u[0] * b], [c[0] - u[0] * b + u[1] * b, c[1] - u[1] * b - u[0] * b]]) + 'Z'
 
-const sols = instances(ERA + 'SectionOfLine').map((s) => ({ iri: s, paths: stretches(value(s, ERA + 'netReference')).map(path), link: value(s, ERA + 'solNature').endsWith('/20') }))
+const isPoint = (ref) => isA(ref, ERA + 'NetPointReference')
+// a section of line is an area, except a link, which is a point on the switch
+const sols = instances(ERA + 'SectionOfLine').map((s) => {
+  const ref = value(s, ERA + 'netReference')
+  if (isPoint(ref)) { const q = pos(ref); return { iri: s, paths: [], p: at(q.e, q.off).p } }
+  return { iri: s, paths: stretches(ref).map(path) }
+})
 let ci = 0
 const ops = [], borders = []
 for (const op of instances(ERA + 'OperationalPoint')) {
@@ -84,8 +90,8 @@ function middle(ref) {
 // tracks: a running track or siding is a linear reference over one or more netelements
 const trackList = ['RunningTrack', 'Siding'].flatMap((c) => instances(ERA + c).map((t) => {
   const ref = value(t, ERA + 'netReference')
-  return { iri: t, sid: c === 'Siding', id: value(t, ERA + 'trackId') ?? value(t, ERA + 'sidingId'), paths: stretches(ref).map(path), m: middle(ref) }
-}))
+  return { iri: t, sid: c === 'Siding', id: value(t, ERA + 'trackId') ?? value(t, ERA + 'sidingId'), paths: isPoint(ref) ? [] : stretches(ref).map(path), m: middle(ref), point: isPoint(ref) }
+})).filter((t) => !t.point)
 const locations = instances(ERA + 'PrimaryLocation').map((l) => ({ iri: l, p: middle(value(l, ERA + 'netReference')), code: value(l, ERA + 'primaryLocationCode') }))
 
 const marks = computed(() => {
@@ -147,8 +153,8 @@ const border = borders.find((b) => b.im === 'be')
   <svg ref="svg" :viewBox="vb.join(' ')" class="net" :class="{ grabbing: dragged }" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Schematic drawing of the example network"
     @wheel.prevent="wheel" @pointerdown="down" @pointermove="moveTo" @pointerup="up" @pointerleave="up" @click.capture="swallow">
     <g v-if="on('sols')">
-      <g v-for="s in sols" :key="s.iri" class="pick" @click="pick($event, s.iri)"><title>{{ shrink(s.iri) }} · section of line {{ label(s.iri) }}{{ s.link ? ' (link)' : '' }}</title>
-        <path v-for="(d, i) in s.paths" :key="i" :d="d" class="sol" :class="{ link: s.link }" /></g>
+      <g v-for="s in sols" :key="s.iri" class="pick" @click="pick($event, s.iri)"><title>{{ shrink(s.iri) }} · section of line {{ label(s.iri) }}{{ s.p ? ' (link)' : '' }}</title>
+        <path v-for="(d, i) in s.paths" :key="i" :d="d" class="sol" /></g>
     </g>
     <g v-if="on('ops')">
       <g v-for="o in ops" :key="o.iri" class="pick" @click="pick($event, o.iri)"><title>{{ shrink(o.iri) }} · operational point</title>
@@ -196,12 +202,17 @@ const border = borders.find((b) => b.im === 'be')
     </g>
 
     <g v-if="layers.tracks === true">
-      <g v-for="t in trackList" :key="t.iri" class="pick" @click="pick($event, t.iri)"><title>{{ shrink(t.iri) }} · {{ t.sid ? 'siding' : 'running track' }} {{ t.id }}</title>
+      <g v-for="t in trackList" :key="t.iri" class="pick" @click="pick($event, t.iri)"><title>{{ shrink(t.iri) }} · {{ t.sid ? 'siding' : 'running track' }} {{ t.id }} (click a netelement's label to select the netelement)</title>
+        <path v-for="(d, i) in t.paths" :key="i" :d="d" class="hit" />
         <text :x="t.m[0]" :y="t.m[1] + 12" class="trkt" :class="t.sid ? 'sid' : 'run'">{{ t.id }}</text></g>
     </g>
     <g v-if="on('km')">
       <g v-for="k in posts" :key="k.iri" class="pick" @click="pick($event, k.iri)"><title>{{ shrink(k.iri) }}</title>
         <line :x1="k.p[0]" :y1="k.p[1] + 4" :x2="k.p[0]" :y2="k.p[1] + 15" class="kp" /><text :x="k.p[0]" :y="k.p[1] + 25" class="kpt">km {{ k.km }}</text></g>
+    </g>
+    <g v-if="on('sols')">
+      <g v-for="s in sols.filter((x) => x.p)" :key="s.iri" class="pick" @click="pick($event, s.iri)"><title>{{ shrink(s.iri) }} · section of line {{ label(s.iri) }} (link)</title>
+        <circle :cx="s.p[0]" :cy="s.p[1]" r="11" class="link" /></g>
     </g>
     <g v-if="on('switches')">
       <g v-for="s in switches" :key="s.iri" class="pick" @click="pick($event, s.iri)"><title>{{ shrink(s.iri) }} · switch</title>
@@ -241,8 +252,9 @@ text { font-family: var(--font); font-size: 11px; fill: var(--c-ink); text-ancho
 .lelab { font-size: 10.5px; font-weight: 700; }
 .op { fill: none; stroke-width: 30; stroke-linecap: round; stroke-linejoin: round; }
 .sol { fill: none; stroke: #e3e6ea; stroke-width: 30; stroke-linejoin: round; }
-.sol.link { stroke: #8d99ab; }
-.trk { fill: none; stroke-width: 13; stroke-linejoin: round; opacity: 0.5; }
+.link { fill: none; stroke: #7b8798; stroke-width: 4; }
+.pick:hover .link { stroke-width: 6; }
+.trk { fill: none; stroke-width: 16; stroke-linecap: butt; stroke-linejoin: round; opacity: 0.5; }
 .trk.run { stroke: #1f9e8f; } .trk.sid { stroke: #a2679f; }
 .pick:hover .trk { opacity: 0.8; }
 .trkt { font-size: 9px; font-weight: 700; text-anchor: middle; paint-order: stroke; stroke: #fff; stroke-width: 3px; }

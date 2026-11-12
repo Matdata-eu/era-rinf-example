@@ -60,7 +60,10 @@ o = []; T = lambda x, y, s, c='', a='middle': o.append(f'<text x="{x:.1f}" y="{y
 # sections of line and operational points as bands under the tracks
 SOLC = ['#e9ecef']; OPC = ['#ffe9a8', '#cfe8ff', '#d9f2d0', '#f6d5e5', '#e3d9f7', '#ffd9c2', '#c9ece8']
 for s in sorted(g.subjects(RDF.type, ERA.SectionOfLine)):
-    for st in stretches(g.value(s, ERA.netReference)): o.append(f'<path d="{path(st)}" class="sol"/>')
+    ref = g.value(s, ERA.netReference)
+    if (ref, RDF.type, ERA.NetPointReference) in g:   # a link: a point on the switch
+        (x, y), _ = at(*pos(ref)); o.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="11" fill="none" stroke="#8d99ab" stroke-width="4"/>'); continue
+    for st in stretches(ref): o.append(f'<path d="{path(st)}" class="sol"/>')
 opi = 0; oplabels = []
 for op in sorted(g.subjects(RDF.type, ERA.OperationalPoint)):
     ref = g.value(op, ERA.netReference); name = f'{lab(op)} ({g.value(op, ERA.uopid)})'

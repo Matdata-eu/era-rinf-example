@@ -905,7 +905,7 @@ be:op_WHD_ref a era:NetAreaReference ;
     gsp:hasGeometry be:op_WHD_ref_geom .
 
 be:op_WHD_ref_geom a gsp:Geometry ;
-    gsp:asWKT "MULTILINESTRING((2.93942 52.60618, 2.93400 52.60960, 2.92600 52.60960), (2.92600 52.60960, 2.90000 52.60960), (2.92600 52.60960, 2.91400 52.61440, 2.90000 52.61440))"^^gsp:wktLiteral .
+    gsp:asWKT "MULTILINESTRING((2.94160 52.60480, 2.93400 52.60960, 2.92600 52.60960), (2.92600 52.60960, 2.90000 52.60960), (2.92600 52.60960, 2.91400 52.61440, 2.90000 52.61440))"^^gsp:wktLiteral .
 
 be:trk_WHD_L a era:Siding ;
     rdfs:label "Depot lead"@en ;
@@ -925,14 +925,14 @@ be:trk_WHD_L_ref a era:NetLinearReference ;
     gsp:hasGeometry be:trk_WHD_L_ref_geom .
 
 be:trk_WHD_L_ref_geom a gsp:Geometry ;
-    gsp:asWKT "LINESTRING(2.93942 52.60618, 2.93400 52.60960, 2.92600 52.60960)"^^gsp:wktLiteral .
+    gsp:asWKT "LINESTRING(2.94160 52.60480, 2.93400 52.60960, 2.92600 52.60960)"^^gsp:wktLiteral .
 
 be:trk_WHD_L_ref_start a era:NetPointReference ;
     era:hasTopoCoordinate be:trk_WHD_L_ref_start_tc .
 
 be:trk_WHD_L_ref_start_tc a era:TopologicalCoordinate ;
     era:onLinearElement be:le_d0 ;
-    era:offsetFromOrigin "100.0"^^xsd:double .
+    era:offsetFromOrigin "120.0"^^xsd:double .
 
 be:trk_WHD_L_ref_end a era:NetPointReference ;
     era:hasTopoCoordinate be:trk_WHD_L_ref_end_tc .
@@ -1032,7 +1032,7 @@ be:op_WHY_ref a era:NetAreaReference ;
     gsp:hasGeometry be:op_WHY_ref_geom .
 
 be:op_WHY_ref_geom a gsp:Geometry ;
-    gsp:asWKT "MULTILINESTRING((2.92400 52.59520, 2.93600 52.59520, 2.94271 52.59818), (2.92400 52.59520, 2.90000 52.59520), (2.92400 52.59520, 2.91600 52.59040, 2.90000 52.59040))"^^gsp:wktLiteral .
+    gsp:asWKT "MULTILINESTRING((2.92400 52.59520, 2.93600 52.59520, 2.94680 52.60000), (2.92400 52.59520, 2.90000 52.59520), (2.92400 52.59520, 2.91600 52.59040, 2.90000 52.59040))"^^gsp:wktLiteral .
 
 be:trk_WHY_L a era:Siding ;
     rdfs:label "Yard lead"@en ;
@@ -1052,7 +1052,7 @@ be:trk_WHY_L_ref a era:NetLinearReference ;
     gsp:hasGeometry be:trk_WHY_L_ref_geom .
 
 be:trk_WHY_L_ref_geom a gsp:Geometry ;
-    gsp:asWKT "LINESTRING(2.92400 52.59520, 2.93600 52.59520, 2.94271 52.59818)"^^gsp:wktLiteral .
+    gsp:asWKT "LINESTRING(2.92400 52.59520, 2.93600 52.59520, 2.94680 52.60000)"^^gsp:wktLiteral .
 
 be:trk_WHY_L_ref_start a era:NetPointReference ;
     era:hasTopoCoordinate be:trk_WHY_L_ref_start_tc .
@@ -1066,7 +1066,7 @@ be:trk_WHY_L_ref_end a era:NetPointReference ;
 
 be:trk_WHY_L_ref_end_tc a era:TopologicalCoordinate ;
     era:onLinearElement be:le_y0 ;
-    era:offsetFromOrigin "80.0"^^xsd:double .
+    era:offsetFromOrigin "100.0"^^xsd:double .
 
 be:trk_WHY_Y1 a era:Siding ;
     rdfs:label "Yard siding Y1"@en ;
@@ -1618,49 +1618,26 @@ be:sol_WHS_WHD a era:SectionOfLine ;
     era:hasPart be:trk_WHS_WHD_1 ;
     era:validity be:sol_WHS_WHD_validity .
 
-be:sol_WHS_WHD_ref a era:NetAreaReference ;
-    era:includes ( be:trk_WHS_WHD_1_ref ) ;
+# A link has no extent: a point on the switch, on the branching leg. Its track shares this reference.
+be:sol_WHS_WHD_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sol_WHS_WHD_ref_tc ;
     gsp:hasGeometry be:sol_WHS_WHD_ref_geom .
 
 be:sol_WHS_WHD_ref_geom a gsp:Geometry ;
-    gsp:asWKT "MULTILINESTRING((2.94160 52.60480, 2.93942 52.60618))"^^gsp:wktLiteral .
+    gsp:asWKT "POINT(2.94160 52.60480)"^^gsp:wktLiteral .
+
+be:sol_WHS_WHD_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_d0 ;
+    era:offsetFromOrigin "120.0"^^xsd:double .
 
 be:trk_WHS_WHD_1 a era:RunningTrack ;
     rdfs:label "Westhaven - Westhaven Depot link"@en ;
     era:trackId "1" ;
     era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
-    era:netReference be:trk_WHS_WHD_1_ref ;
-    era:wheelSetGauge era-ntg:30 ;
-    era:contactLineSystem be:cls_3kv ;
-    era:trainDetectionSystem be:tds_axle ;
-    era:notApplicable era:etcs ;
-    era:maximumPermittedSpeed "40"^^xsd:integer ;
+    era:netReference be:sol_WHS_WHD_ref ;
     era:trackDirection era-trd:30 ;
     era:linesideDistanceIndication be:ldi_km .
-
-be:trk_WHS_WHD_1_ref a era:NetLinearReference ;
-    era:hasSequence ( be:le_d0 ) ;
-    era:startsAt be:trk_WHS_WHD_1_ref_start ;
-    era:endsAt be:trk_WHS_WHD_1_ref_end ;
-    gsp:hasGeometry be:trk_WHS_WHD_1_ref_geom .
-
-be:trk_WHS_WHD_1_ref_geom a gsp:Geometry ;
-    gsp:asWKT "LINESTRING(2.94160 52.60480, 2.93942 52.60618)"^^gsp:wktLiteral .
-
-be:trk_WHS_WHD_1_ref_start a era:NetPointReference ;
-    era:hasTopoCoordinate be:trk_WHS_WHD_1_ref_start_tc .
-
-be:trk_WHS_WHD_1_ref_start_tc a era:TopologicalCoordinate ;
-    era:onLinearElement be:le_d0 ;
-    era:offsetFromOrigin "120.0"^^xsd:double .
-
-be:trk_WHS_WHD_1_ref_end a era:NetPointReference ;
-    era:hasTopoCoordinate be:trk_WHS_WHD_1_ref_end_tc .
-
-be:trk_WHS_WHD_1_ref_end_tc a era:TopologicalCoordinate ;
-    era:onLinearElement be:le_d0 ;
-    era:offsetFromOrigin "100.0"^^xsd:double .
 
 be:sol_WHS_WHY_validity a era:TemporalFeature, time:Interval ;
     time:hasBeginning be:sol_WHS_WHY_validity_begin .
@@ -1681,49 +1658,26 @@ be:sol_WHS_WHY a era:SectionOfLine ;
     era:hasPart be:trk_WHS_WHY_1 ;
     era:validity be:sol_WHS_WHY_validity .
 
-be:sol_WHS_WHY_ref a era:NetAreaReference ;
-    era:includes ( be:trk_WHS_WHY_1_ref ) ;
+# A link has no extent: a point on the switch, on the branching leg. Its track shares this reference.
+be:sol_WHS_WHY_ref a era:NetPointReference ;
+    era:hasTopoCoordinate be:sol_WHS_WHY_ref_tc ;
     gsp:hasGeometry be:sol_WHS_WHY_ref_geom .
 
 be:sol_WHS_WHY_ref_geom a gsp:Geometry ;
-    gsp:asWKT "MULTILINESTRING((2.94680 52.60000, 2.94271 52.59818))"^^gsp:wktLiteral .
+    gsp:asWKT "POINT(2.94680 52.60000)"^^gsp:wktLiteral .
+
+be:sol_WHS_WHY_ref_tc a era:TopologicalCoordinate ;
+    era:onLinearElement be:le_y0 ;
+    era:offsetFromOrigin "100.0"^^xsd:double .
 
 be:trk_WHS_WHY_1 a era:RunningTrack ;
     rdfs:label "Westhaven - Westhaven Yard link"@en ;
     era:trackId "1" ;
     era:inCountry eu-country:BEL ;
     era:infrastructureManager orgrole:9901_IM ;
-    era:netReference be:trk_WHS_WHY_1_ref ;
-    era:wheelSetGauge era-ntg:30 ;
-    era:contactLineSystem be:cls_3kv ;
-    era:trainDetectionSystem be:tds_axle ;
-    era:notApplicable era:etcs ;
-    era:maximumPermittedSpeed "40"^^xsd:integer ;
+    era:netReference be:sol_WHS_WHY_ref ;
     era:trackDirection era-trd:30 ;
     era:linesideDistanceIndication be:ldi_km .
-
-be:trk_WHS_WHY_1_ref a era:NetLinearReference ;
-    era:hasSequence ( be:le_y0 ) ;
-    era:startsAt be:trk_WHS_WHY_1_ref_start ;
-    era:endsAt be:trk_WHS_WHY_1_ref_end ;
-    gsp:hasGeometry be:trk_WHS_WHY_1_ref_geom .
-
-be:trk_WHS_WHY_1_ref_geom a gsp:Geometry ;
-    gsp:asWKT "LINESTRING(2.94680 52.60000, 2.94271 52.59818)"^^gsp:wktLiteral .
-
-be:trk_WHS_WHY_1_ref_start a era:NetPointReference ;
-    era:hasTopoCoordinate be:trk_WHS_WHY_1_ref_start_tc .
-
-be:trk_WHS_WHY_1_ref_start_tc a era:TopologicalCoordinate ;
-    era:onLinearElement be:le_y0 ;
-    era:offsetFromOrigin "100.0"^^xsd:double .
-
-be:trk_WHS_WHY_1_ref_end a era:NetPointReference ;
-    era:hasTopoCoordinate be:trk_WHS_WHY_1_ref_end_tc .
-
-be:trk_WHS_WHY_1_ref_end_tc a era:TopologicalCoordinate ;
-    era:onLinearElement be:le_y0 ;
-    era:offsetFromOrigin "80.0"^^xsd:double .
 
 be:sol_MID_DUN_validity a era:TemporalFeature, time:Interval ;
     time:hasBeginning be:sol_MID_DUN_validity_begin .
