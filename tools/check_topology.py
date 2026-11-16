@@ -102,6 +102,19 @@ ops = [o for o in g.subjects(RDF.type, ERA.OperationalPoint) if g.value(o, ERA.r
 sig = {(str(g.value(o, ERA.uopid)), g.value(o, ERA.referenceBorderPoint), g.value(o, ERA.canonicalURI), tuple(coords(g.value(o, ERA.netReference)))) for o in ops}
 check('border point records share UOPID, reference border point, canonical URI and position', [] if len(ops) == 2 and len(sig) == 1 else [str(sig)])
 
+# a track shared by several sections of line: each section's own linear reference lies within the track's
+def shared_ok(c, p, inc):
+    tr = g.value(p, ERA.netReference)
+    if (c, RDF.type, ERA.SectionOfLine) not in g or (tr, RDF.type, ERA.NetLinearReference) not in g: return False
+    tseq = set(Collection(g, g.value(tr, ERA.hasSequence)))
+    (_, a), (_, b) = pos(g.value(tr, ERA.startsAt)), pos(g.value(tr, ERA.endsAt))
+    for n in inc:
+        seq = list(Collection(g, g.value(n, ERA.hasSequence)))
+        if len(seq) != 1 or len(tseq) != 1 or seq[0] not in tseq: return False
+        (_, x), (_, y) = pos(g.value(n, ERA.startsAt)), pos(g.value(n, ERA.endsAt))
+        if not (min(a, b) - 1e-6 <= min(x, y) and max(x, y) <= max(a, b) + 1e-6): return False
+    return True
+
 # 9 hasPart: every part of an OP or SoL has its linear reference in the container's area reference
 bad = []
 for c, p in g.subject_objects(ERA.hasPart):
@@ -110,7 +123,7 @@ for c, p in g.subject_objects(ERA.hasPart):
         if g.value(p, ERA.netReference) != ref: bad.append(f'{short(c)} hasPart {short(p)}')
         continue
     inc = set(Collection(g, g.value(ref, ERA.includes)))
-    if g.value(p, ERA.netReference) not in inc: bad.append(f'{short(c)} hasPart {short(p)}')
+    if g.value(p, ERA.netReference) not in inc and not shared_ok(c, p, inc): bad.append(f'{short(c)} hasPart {short(p)}')
 check('hasPart agrees with the area reference of the container', bad)
 
 # 10 no linear element stretch belongs to two operational points or two sections of line

@@ -505,6 +505,10 @@ OPS = [
 BORDER = {"be": ("b5", 600), "nl": ("B1", 0)}
 BORDER_UOPID = "EU99901"
 
+# a track that belongs to more than one section of line: iri suffix -> (track, extent of each section of line)
+SHARED = {"EGT_BORD_1": (("1", "era:RunningTrack", "Eastgate - border", [("B1", 4500, 0)], MAIN_NL + [speed(100), *sol_track("nl", "30")]),
+                         {"EGT_SVW": [("B1", 4500, 1585)], "SVW_BORD": [("B1", 1585, 0)]})}
+
 # a section of line of nature Link has no extent: its net reference is a point on the switch, on the branching leg
 LINKS = {"WHS_WHD": ("d0", 0), "WHS_WHY": ("y0", 100)}
 
@@ -533,14 +537,10 @@ SOLS = [
     ("be", "HIL_DUN", "HIL", "DUN", "10", "line_100", 4650, [
         ("2", "era:RunningTrack", "Hillend - Dunes track 2", [("b4", 0, 4650)], MAIN_BE + [speed(140), *sol_track("be", "20")]),
     ]),
-    # the stopping point Seaview has no track of its own: a platform does not cut the track, so the tracks of the
-    # two sections of line run on under the platform edge and meet halfway along it
-    ("nl", "EGT_SVW", "EGT", "SVW", "10", "line_7", 2915, [
-        ("1", "era:RunningTrack", "Eastgate - Seaview", [("B1", 4500, 1585)], MAIN_NL + [speed(100), *sol_track("nl", "30")]),
-    ]),
-    ("nl", "SVW_BORD", "SVW", "BORD", "10", "line_7", 1585, [
-        ("1", "era:RunningTrack", "Seaview - border", [("B1", 1585, 0)], MAIN_NL + [speed(100), *sol_track("nl", "30")]),
-    ]),
+    # the stopping point Seaview has no track of its own, and a platform does not cut a track:
+    # one track runs from Eastgate to the border and belongs to both sections of line (see SHARED)
+    ("nl", "EGT_SVW", "EGT", "SVW", "10", "line_7", 2915, "EGT_BORD_1"),
+    ("nl", "SVW_BORD", "SVW", "BORD", "10", "line_7", 1585, "EGT_BORD_1"),
 ]
 
 
@@ -598,10 +598,24 @@ for im in IMS:
     sec(im, "7. Sections of line and their tracks",
         "A section of line runs from opStart to opEnd. era:trackDirection on its tracks is relative to that:\n"
         "N (10) = same direction, O (20) = opposite, B (30) = both.")
+    for key, (tr, _) in SHARED.items():
+        if im == "nl":
+            w(im, "# A track that runs on through a stopping point belongs to the sections of line on both sides.\n"
+                  "# Each section of line then has its own linear reference for its extent.")
+            tracks(im, key.rsplit("_", 1)[0], [tr])
     for (sim, sid, a, b, nature, line, length, tr) in SOLS:
         if sim != im:
             continue
         iri = f"{im}:sol_{sid}"
+        if isinstance(tr, str):   # a shared track (see SHARED)
+            emit(im, iri, ["era:SectionOfLine", ("rdfs:label", lit(f"{a} - {b}")), ("era:opStart", f"{im}:op_{a}"),
+                           ("era:opEnd", f"{im}:op_{b}"), ("era:solNature", f"era-sn:{nature}"),
+                           ("era:lengthOfSectionOfLine", dbl(length / 1000)), ("era:nationalLine", f"{im}:{line}"),
+                           *common(im), ("era:netReference", f"{iri}_ref"),
+                           ("era:hasPart", f"{im}:trk_{tr}"), validity(im, iri)])
+            nar(im, f"{iri}_ref", [f"{iri}_ref_1"])
+            nlr(im, f"{iri}_ref_1", SHARED[tr][1][sid])
+            continue
         emit(im, iri, ["era:SectionOfLine", ("rdfs:label", lit(f"{a} - {b}")), ("era:opStart", f"{im}:op_{a}"),
                        ("era:opEnd", f"{im}:op_{b}"), ("era:solNature", f"era-sn:{nature}"),
                        ("era:lengthOfSectionOfLine", dbl(length / 1000)), ("era:nationalLine", f"{im}:{line}"),
