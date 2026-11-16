@@ -468,6 +468,7 @@ nl:trk_EGT_BORD_1_ref_end_tc a era:TopologicalCoordinate ;
 # 8. Switches
 # A switch has one net point reference, at the point where its elements meet, given on the common branch.
 # v3.3.4 has no switch properties: facing or trailing follows from the net relations at that point.
+# era:appliesToDirection points from the reference towards the branches: Normal (00) at the end of the common branch, Opposite (01) at its origin.
 ##############################################################################
 
 nl:sw_101 a era:Switch ;
@@ -478,7 +479,7 @@ nl:sw_101 a era:Switch ;
 
 nl:sw_101_ref a era:NetPointReference ;
     era:hasTopoCoordinate nl:sw_101_ref_tc ;
-    era:appliesToDirection era-orient:02 ;
+    era:appliesToDirection era-orient:01 ;
     era:hasLrsCoordinate nl:sw_101_ref_lrs ;
     gsp:hasGeometry nl:sw_101_ref_geom .
 
@@ -501,7 +502,7 @@ nl:sw_102 a era:Switch ;
 
 nl:sw_102_ref a era:NetPointReference ;
     era:hasTopoCoordinate nl:sw_102_ref_tc ;
-    era:appliesToDirection era-orient:02 ;
+    era:appliesToDirection era-orient:00 ;
     era:hasLrsCoordinate nl:sw_102_ref_lrs ;
     gsp:hasGeometry nl:sw_102_ref_geom .
 

@@ -607,19 +607,20 @@ for im in IMS:
 for im in IMS:
     sec(im, "8. Switches",
         "A switch has one net point reference, at the point where its elements meet, given on the common branch.\n"
-        "v3.3.4 has no switch properties: facing or trailing follows from the net relations at that point.")
+        "v3.3.4 has no switch properties: facing or trailing follows from the net relations at that point.\n"
+        "era:appliesToDirection points from the reference towards the branches: Normal (00) at the end of the common branch, Opposite (01) at its origin.")
     for node, (label, c, l1, l2) in SW.items():
         if E[c][0] != im:
             continue
         iri = f"{im}:sw_{label}"
         d = 0 if E[c][1] == node else E[c][4]
         emit(im, iri, ["era:Switch", ("rdfs:label", lit(f"Switch {label}")), *common(im), ("era:netReference", f"{iri}_ref")])
-        npr(im, f"{iri}_ref", c, d, applies="era-orient:02")
+        npr(im, f"{iri}_ref", c, d, applies="era-orient:00" if d else "era-orient:01")
     if im == "be":
         iri = "be:sw_W5"
         emit(im, iri, ["era:Switch", ("rdfs:label", lit("Double slip crossing W5")), *common(im), ("era:netReference", f"{iri}_ref")],
              "A double slip crossing has no common branch; the reference is given on track 2 (element b1).")
-        npr(im, f"{iri}_ref", "b1", 450, applies="era-orient:02")
+        npr(im, f"{iri}_ref", "b1", 450, applies="era-orient:00")
 
 # ---------------------------------------------------------------------------
 # Signals: (im, id, element, d, travel, type, label)

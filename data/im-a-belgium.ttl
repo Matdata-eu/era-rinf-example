@@ -1936,6 +1936,7 @@ be:trk_HIL_DUN_2_ref_end_tc a era:TopologicalCoordinate ;
 # 8. Switches
 # A switch has one net point reference, at the point where its elements meet, given on the common branch.
 # v3.3.4 has no switch properties: facing or trailing follows from the net relations at that point.
+# era:appliesToDirection points from the reference towards the branches: Normal (00) at the end of the common branch, Opposite (01) at its origin.
 ##############################################################################
 
 be:sw_W1 a era:Switch ;
@@ -1946,7 +1947,7 @@ be:sw_W1 a era:Switch ;
 
 be:sw_W1_ref a era:NetPointReference ;
     era:hasTopoCoordinate be:sw_W1_ref_tc ;
-    era:appliesToDirection era-orient:02 ;
+    era:appliesToDirection era-orient:01 ;
     era:hasLrsCoordinate be:sw_W1_ref_lrs ;
     gsp:hasGeometry be:sw_W1_ref_geom .
 
@@ -1969,7 +1970,7 @@ be:sw_W6 a era:Switch ;
 
 be:sw_W6_ref a era:NetPointReference ;
     era:hasTopoCoordinate be:sw_W6_ref_tc ;
-    era:appliesToDirection era-orient:02 ;
+    era:appliesToDirection era-orient:01 ;
     era:hasLrsCoordinate be:sw_W6_ref_lrs ;
     gsp:hasGeometry be:sw_W6_ref_geom .
 
@@ -1992,7 +1993,7 @@ be:sw_W2 a era:Switch ;
 
 be:sw_W2_ref a era:NetPointReference ;
     era:hasTopoCoordinate be:sw_W2_ref_tc ;
-    era:appliesToDirection era-orient:02 ;
+    era:appliesToDirection era-orient:00 ;
     era:hasLrsCoordinate be:sw_W2_ref_lrs ;
     gsp:hasGeometry be:sw_W2_ref_geom .
 
@@ -2015,7 +2016,7 @@ be:sw_W3 a era:Switch ;
 
 be:sw_W3_ref a era:NetPointReference ;
     era:hasTopoCoordinate be:sw_W3_ref_tc ;
-    era:appliesToDirection era-orient:02 ;
+    era:appliesToDirection era-orient:01 ;
     era:hasLrsCoordinate be:sw_W3_ref_lrs ;
     gsp:hasGeometry be:sw_W3_ref_geom .
 
@@ -2038,7 +2039,7 @@ be:sw_W21 a era:Switch ;
 
 be:sw_W21_ref a era:NetPointReference ;
     era:hasTopoCoordinate be:sw_W21_ref_tc ;
-    era:appliesToDirection era-orient:02 ;
+    era:appliesToDirection era-orient:01 ;
     era:hasLrsCoordinate be:sw_W21_ref_lrs ;
     gsp:hasGeometry be:sw_W21_ref_geom .
 
@@ -2061,7 +2062,7 @@ be:sw_W31 a era:Switch ;
 
 be:sw_W31_ref a era:NetPointReference ;
     era:hasTopoCoordinate be:sw_W31_ref_tc ;
-    era:appliesToDirection era-orient:02 ;
+    era:appliesToDirection era-orient:01 ;
     gsp:hasGeometry be:sw_W31_ref_geom .
 
 be:sw_W31_ref_geom a gsp:Geometry ;
@@ -2079,7 +2080,7 @@ be:sw_W7 a era:Switch ;
 
 be:sw_W7_ref a era:NetPointReference ;
     era:hasTopoCoordinate be:sw_W7_ref_tc ;
-    era:appliesToDirection era-orient:02 ;
+    era:appliesToDirection era-orient:01 ;
     era:hasLrsCoordinate be:sw_W7_ref_lrs ;
     gsp:hasGeometry be:sw_W7_ref_geom .
 
@@ -2102,7 +2103,7 @@ be:sw_W4 a era:Switch ;
 
 be:sw_W4_ref a era:NetPointReference ;
     era:hasTopoCoordinate be:sw_W4_ref_tc ;
-    era:appliesToDirection era-orient:02 ;
+    era:appliesToDirection era-orient:01 ;
     era:hasLrsCoordinate be:sw_W4_ref_lrs ;
     gsp:hasGeometry be:sw_W4_ref_geom .
 
@@ -2125,7 +2126,7 @@ be:sw_W11 a era:Switch ;
 
 be:sw_W11_ref a era:NetPointReference ;
     era:hasTopoCoordinate be:sw_W11_ref_tc ;
-    era:appliesToDirection era-orient:02 ;
+    era:appliesToDirection era-orient:00 ;
     era:hasLrsCoordinate be:sw_W11_ref_lrs ;
     gsp:hasGeometry be:sw_W11_ref_geom .
 
@@ -2148,7 +2149,7 @@ be:sw_W12 a era:Switch ;
 
 be:sw_W12_ref a era:NetPointReference ;
     era:hasTopoCoordinate be:sw_W12_ref_tc ;
-    era:appliesToDirection era-orient:02 ;
+    era:appliesToDirection era-orient:01 ;
     era:hasLrsCoordinate be:sw_W12_ref_lrs ;
     gsp:hasGeometry be:sw_W12_ref_geom .
 
@@ -2171,7 +2172,7 @@ be:sw_W13 a era:Switch ;
 
 be:sw_W13_ref a era:NetPointReference ;
     era:hasTopoCoordinate be:sw_W13_ref_tc ;
-    era:appliesToDirection era-orient:02 ;
+    era:appliesToDirection era-orient:00 ;
     era:hasLrsCoordinate be:sw_W13_ref_lrs ;
     gsp:hasGeometry be:sw_W13_ref_geom .
 
@@ -2194,7 +2195,7 @@ be:sw_W14 a era:Switch ;
 
 be:sw_W14_ref a era:NetPointReference ;
     era:hasTopoCoordinate be:sw_W14_ref_tc ;
-    era:appliesToDirection era-orient:02 ;
+    era:appliesToDirection era-orient:01 ;
     era:hasLrsCoordinate be:sw_W14_ref_lrs ;
     gsp:hasGeometry be:sw_W14_ref_geom .
 
@@ -2218,7 +2219,7 @@ be:sw_W5 a era:Switch ;
 
 be:sw_W5_ref a era:NetPointReference ;
     era:hasTopoCoordinate be:sw_W5_ref_tc ;
-    era:appliesToDirection era-orient:02 ;
+    era:appliesToDirection era-orient:00 ;
     era:hasLrsCoordinate be:sw_W5_ref_lrs ;
     gsp:hasGeometry be:sw_W5_ref_geom .
 
