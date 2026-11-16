@@ -141,6 +141,7 @@ KP = [("be", 0, "a1", 0), ("be", 1, "a4", 250), ("be", 2, "a5", 750), ("be", 3, 
       ("nl", 0, "B4", 400), ("nl", 1, "B2", 200), ("nl", 3, "B1", 3000), ("nl", 6, "B1", 0)]
 
 out = {"be": [], "nl": [], "shared": []}
+PARENTS = {}   # filled once the operational points and sections of line are defined
 
 
 def w(im, text=""):
@@ -162,6 +163,8 @@ def emit(im, subj, po, comment=None):
             w(im, f"# {line}")
     lines = [f"{subj} a {po[0]} ;"] if not po[0].startswith("@") else [f"{subj}"]
     body = po[1:]
+    if subj in PARENTS:   # the reverse of era:hasPart, stated on the part
+        body = body + [("era:isPartOf", ", ".join(PARENTS[subj]))]
     for i, (p, o) in enumerate(body):
         end = " ." if i == len(body) - 1 else " ;"
         lines.append(f"    {p} {o}{end}")
@@ -542,6 +545,17 @@ SOLS = [
     ("nl", "EGT_SVW", "EGT", "SVW", "10", "line_7", 2915, "EGT_BORD_1"),
     ("nl", "SVW_BORD", "SVW", "BORD", "10", "line_7", 1585, "EGT_BORD_1"),
 ]
+
+
+# part -> the elements it is part of, so that every part states era:isPartOf next to the container's era:hasPart
+
+for (im, oid, *_, tr) in OPS:
+    for t in tr:
+        PARENTS.setdefault(f"{im}:trk_{oid}_{t[0]}", []).append(f"{im}:op_{oid}")
+for (im, sid, *_, tr) in SOLS:
+    for t in ([("_", tr)] if isinstance(tr, str) else [(f"{sid}_{t[0]}", None) for t in tr]):
+        PARENTS.setdefault(f"{im}:trk_{t[0] if t[1] is None else t[1]}", []).append(f"{im}:sol_{sid}")
+PARENTS["nl:pe_SVW_1"] = ["nl:op_SVW"]
 
 
 def tracks(im, owner, tr):

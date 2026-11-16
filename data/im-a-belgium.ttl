@@ -752,7 +752,8 @@ be:trk_WHS_1 a era:RunningTrack ;
     era:contactLineSystem be:cls_3kv ;
     era:etcs be:etcs_l2 ;
     era:trainDetectionSystem be:tds_axle ;
-    era:maximumPermittedSpeed "90"^^xsd:integer .
+    era:maximumPermittedSpeed "90"^^xsd:integer ;
+    era:isPartOf be:op_WHS .
 
 be:trk_WHS_1_ref a era:NetLinearReference ;
     era:hasSequence ( be:le_a1 be:le_a2 be:le_a3 be:le_a4 be:le_a5 ) ;
@@ -787,7 +788,8 @@ be:trk_WHS_2 a era:RunningTrack ;
     era:contactLineSystem be:cls_3kv ;
     era:etcs be:etcs_l2 ;
     era:trainDetectionSystem be:tds_axle ;
-    era:maximumPermittedSpeed "90"^^xsd:integer .
+    era:maximumPermittedSpeed "90"^^xsd:integer ;
+    era:isPartOf be:op_WHS .
 
 be:trk_WHS_2_ref a era:NetLinearReference ;
     era:hasSequence ( be:le_b1 be:le_b2 ) ;
@@ -822,7 +824,8 @@ be:trk_WHS_3 a era:RunningTrack ;
     era:contactLineSystem be:cls_3kv ;
     era:etcs be:etcs_l2 ;
     era:trainDetectionSystem be:tds_axle ;
-    era:maximumPermittedSpeed "40"^^xsd:integer .
+    era:maximumPermittedSpeed "40"^^xsd:integer ;
+    era:isPartOf be:op_WHS .
 
 be:trk_WHS_3_ref a era:NetLinearReference ;
     era:hasSequence ( be:le_c1 ) ;
@@ -857,7 +860,8 @@ be:trk_WHS_5 a era:RunningTrack ;
     era:contactLineSystem be:cls_3kv ;
     era:etcs be:etcs_l2 ;
     era:trainDetectionSystem be:tds_axle ;
-    era:maximumPermittedSpeed "40"^^xsd:integer .
+    era:maximumPermittedSpeed "40"^^xsd:integer ;
+    era:isPartOf be:op_WHS .
 
 be:trk_WHS_5_ref a era:NetLinearReference ;
     era:hasSequence ( be:le_x1 ) ;
@@ -916,7 +920,8 @@ be:trk_WHD_L a era:Siding ;
     era:wheelSetGauge era-ntg:30 ;
     era:contactLineSystem be:cls_3kv ;
     era:trainDetectionSystem be:tds_axle ;
-    era:notApplicable era:etcs .
+    era:notApplicable era:etcs ;
+    era:isPartOf be:op_WHD .
 
 be:trk_WHD_L_ref a era:NetLinearReference ;
     era:hasSequence ( be:le_d0 ) ;
@@ -950,7 +955,8 @@ be:trk_WHD_D1 a era:Siding ;
     era:wheelSetGauge era-ntg:30 ;
     era:contactLineSystem be:cls_3kv ;
     era:trainDetectionSystem be:tds_axle ;
-    era:notApplicable era:etcs .
+    era:notApplicable era:etcs ;
+    era:isPartOf be:op_WHD .
 
 be:trk_WHD_D1_ref a era:NetLinearReference ;
     era:hasSequence ( be:le_d1 ) ;
@@ -984,7 +990,8 @@ be:trk_WHD_D2 a era:Siding ;
     era:wheelSetGauge era-ntg:30 ;
     era:contactLineSystem be:cls_3kv ;
     era:trainDetectionSystem be:tds_axle ;
-    era:notApplicable era:etcs .
+    era:notApplicable era:etcs ;
+    era:isPartOf be:op_WHD .
 
 be:trk_WHD_D2_ref a era:NetLinearReference ;
     era:hasSequence ( be:le_d2 ) ;
@@ -1043,7 +1050,8 @@ be:trk_WHY_L a era:Siding ;
     era:wheelSetGauge era-ntg:30 ;
     era:contactLineSystem be:cls_3kv ;
     era:trainDetectionSystem be:tds_axle ;
-    era:notApplicable era:etcs .
+    era:notApplicable era:etcs ;
+    era:isPartOf be:op_WHY .
 
 be:trk_WHY_L_ref a era:NetLinearReference ;
     era:hasSequence ( be:le_y0 ) ;
@@ -1077,7 +1085,8 @@ be:trk_WHY_Y1 a era:Siding ;
     era:wheelSetGauge era-ntg:30 ;
     era:contactLineSystem be:cls_3kv ;
     era:trainDetectionSystem be:tds_axle ;
-    era:notApplicable era:etcs .
+    era:notApplicable era:etcs ;
+    era:isPartOf be:op_WHY .
 
 be:trk_WHY_Y1_ref a era:NetLinearReference ;
     era:hasSequence ( be:le_y1 ) ;
@@ -1111,7 +1120,8 @@ be:trk_WHY_Y2 a era:Siding ;
     era:wheelSetGauge era-ntg:30 ;
     era:contactLineSystem be:cls_3kv ;
     era:trainDetectionSystem be:tds_axle ;
-    era:notApplicable era:etcs .
+    era:notApplicable era:etcs ;
+    era:isPartOf be:op_WHY .
 
 be:trk_WHY_Y2_ref a era:NetLinearReference ;
     era:hasSequence ( be:le_y2 ) ;
@@ -1171,7 +1181,8 @@ be:trk_MID_1 a era:RunningTrack ;
     era:contactLineSystem be:cls_3kv ;
     era:etcs be:etcs_l2 ;
     era:trainDetectionSystem be:tds_axle ;
-    era:maximumPermittedSpeed "120"^^xsd:integer .
+    era:maximumPermittedSpeed "120"^^xsd:integer ;
+    era:isPartOf be:op_MID .
 
 be:trk_MID_1_ref a era:NetLinearReference ;
     era:hasSequence ( be:le_a5 be:le_a7 be:le_a6 ) ;
@@ -1206,7 +1217,8 @@ be:trk_MID_2 a era:RunningTrack ;
     era:contactLineSystem be:cls_3kv ;
     era:etcs be:etcs_l2 ;
     era:trainDetectionSystem be:tds_axle ;
-    era:maximumPermittedSpeed "120"^^xsd:integer .
+    era:maximumPermittedSpeed "120"^^xsd:integer ;
+    era:isPartOf be:op_MID .
 
 be:trk_MID_2_ref a era:NetLinearReference ;
     era:hasSequence ( be:le_b2 be:le_b6 ) ;
@@ -1241,7 +1253,8 @@ be:trk_MID_X1 a era:RunningTrack ;
     era:contactLineSystem be:cls_3kv ;
     era:etcs be:etcs_l2 ;
     era:trainDetectionSystem be:tds_axle ;
-    era:maximumPermittedSpeed "60"^^xsd:integer .
+    era:maximumPermittedSpeed "60"^^xsd:integer ;
+    era:isPartOf be:op_MID .
 
 be:trk_MID_X1_ref a era:NetLinearReference ;
     era:hasSequence ( be:le_x2 ) ;
@@ -1276,7 +1289,8 @@ be:trk_MID_X2 a era:RunningTrack ;
     era:contactLineSystem be:cls_3kv ;
     era:etcs be:etcs_l2 ;
     era:trainDetectionSystem be:tds_axle ;
-    era:maximumPermittedSpeed "60"^^xsd:integer .
+    era:maximumPermittedSpeed "60"^^xsd:integer ;
+    era:isPartOf be:op_MID .
 
 be:trk_MID_X2_ref a era:NetLinearReference ;
     era:hasSequence ( be:le_cx ) ;
@@ -1336,7 +1350,8 @@ be:trk_DUN_1 a era:RunningTrack ;
     era:contactLineSystem be:cls_3kv ;
     era:etcs be:etcs_l2 ;
     era:trainDetectionSystem be:tds_axle ;
-    era:maximumPermittedSpeed "100"^^xsd:integer .
+    era:maximumPermittedSpeed "100"^^xsd:integer ;
+    era:isPartOf be:op_DUN .
 
 be:trk_DUN_1_ref a era:NetLinearReference ;
     era:hasSequence ( be:le_a6 ) ;
@@ -1371,7 +1386,8 @@ be:trk_DUN_2 a era:RunningTrack ;
     era:contactLineSystem be:cls_3kv ;
     era:etcs be:etcs_l2 ;
     era:trainDetectionSystem be:tds_axle ;
-    era:maximumPermittedSpeed "100"^^xsd:integer .
+    era:maximumPermittedSpeed "100"^^xsd:integer ;
+    era:isPartOf be:op_DUN .
 
 be:trk_DUN_2_ref a era:NetLinearReference ;
     era:hasSequence ( be:le_b4 be:le_b5 ) ;
@@ -1430,7 +1446,8 @@ be:trk_HIL_S1 a era:Siding ;
     era:wheelSetGauge era-ntg:30 ;
     era:contactLineSystem be:cls_none ;
     era:trainDetectionSystem be:tds_axle ;
-    era:notApplicable era:etcs .
+    era:notApplicable era:etcs ;
+    era:isPartOf be:op_HIL .
 
 be:trk_HIL_S1_ref a era:NetLinearReference ;
     era:hasSequence ( be:le_br ) ;
@@ -1537,7 +1554,8 @@ be:trk_WHS_MID_1 a era:RunningTrack ;
     era:trainDetectionSystem be:tds_axle ;
     era:maximumPermittedSpeed "140"^^xsd:integer ;
     era:trackDirection era-trd:10 ;
-    era:linesideDistanceIndication be:ldi_km .
+    era:linesideDistanceIndication be:ldi_km ;
+    era:isPartOf be:sol_WHS_MID .
 
 be:trk_WHS_MID_1_ref a era:NetLinearReference ;
     era:hasSequence ( be:le_a5 ) ;
@@ -1574,7 +1592,8 @@ be:trk_WHS_MID_2 a era:RunningTrack ;
     era:trainDetectionSystem be:tds_axle ;
     era:maximumPermittedSpeed "140"^^xsd:integer ;
     era:trackDirection era-trd:30 ;
-    era:linesideDistanceIndication be:ldi_km .
+    era:linesideDistanceIndication be:ldi_km ;
+    era:isPartOf be:sol_WHS_MID .
 
 be:trk_WHS_MID_2_ref a era:NetLinearReference ;
     era:hasSequence ( be:le_b2 ) ;
@@ -1637,7 +1656,8 @@ be:trk_WHS_WHD_1 a era:RunningTrack ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:sol_WHS_WHD_ref ;
     era:trackDirection era-trd:30 ;
-    era:linesideDistanceIndication be:ldi_km .
+    era:linesideDistanceIndication be:ldi_km ;
+    era:isPartOf be:sol_WHS_WHD .
 
 be:sol_WHS_WHY_validity a era:TemporalFeature, time:Interval ;
     time:hasBeginning be:sol_WHS_WHY_validity_begin .
@@ -1677,7 +1697,8 @@ be:trk_WHS_WHY_1 a era:RunningTrack ;
     era:infrastructureManager orgrole:9901_IM ;
     era:netReference be:sol_WHS_WHY_ref ;
     era:trackDirection era-trd:30 ;
-    era:linesideDistanceIndication be:ldi_km .
+    era:linesideDistanceIndication be:ldi_km ;
+    era:isPartOf be:sol_WHS_WHY .
 
 be:sol_MID_DUN_validity a era:TemporalFeature, time:Interval ;
     time:hasBeginning be:sol_MID_DUN_validity_begin .
@@ -1717,7 +1738,8 @@ be:trk_MID_DUN_1 a era:RunningTrack ;
     era:trainDetectionSystem be:tds_axle ;
     era:maximumPermittedSpeed "140"^^xsd:integer ;
     era:trackDirection era-trd:30 ;
-    era:linesideDistanceIndication be:ldi_km .
+    era:linesideDistanceIndication be:ldi_km ;
+    era:isPartOf be:sol_MID_DUN .
 
 be:trk_MID_DUN_1_ref a era:NetLinearReference ;
     era:hasSequence ( be:le_a6 ) ;
@@ -1780,7 +1802,8 @@ be:trk_DUN_BORD_1 a era:RunningTrack ;
     era:trainDetectionSystem be:tds_axle ;
     era:maximumPermittedSpeed "100"^^xsd:integer ;
     era:trackDirection era-trd:30 ;
-    era:linesideDistanceIndication be:ldi_km .
+    era:linesideDistanceIndication be:ldi_km ;
+    era:isPartOf be:sol_DUN_BORD .
 
 be:trk_DUN_BORD_1_ref a era:NetLinearReference ;
     era:hasSequence ( be:le_b5 ) ;
@@ -1843,7 +1866,8 @@ be:trk_MID_HIL_2 a era:RunningTrack ;
     era:trainDetectionSystem be:tds_axle ;
     era:maximumPermittedSpeed "120"^^xsd:integer ;
     era:trackDirection era-trd:30 ;
-    era:linesideDistanceIndication be:ldi_km .
+    era:linesideDistanceIndication be:ldi_km ;
+    era:isPartOf be:sol_MID_HIL .
 
 be:trk_MID_HIL_2_ref a era:NetLinearReference ;
     era:hasSequence ( be:le_b3 ) ;
@@ -1906,7 +1930,8 @@ be:trk_HIL_DUN_2 a era:RunningTrack ;
     era:trainDetectionSystem be:tds_axle ;
     era:maximumPermittedSpeed "140"^^xsd:integer ;
     era:trackDirection era-trd:20 ;
-    era:linesideDistanceIndication be:ldi_km .
+    era:linesideDistanceIndication be:ldi_km ;
+    era:isPartOf be:sol_HIL_DUN .
 
 be:trk_HIL_DUN_2_ref a era:NetLinearReference ;
     era:hasSequence ( be:le_b4 ) ;

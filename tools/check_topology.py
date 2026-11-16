@@ -126,6 +126,10 @@ for c, p in g.subject_objects(ERA.hasPart):
     if g.value(p, ERA.netReference) not in inc and not shared_ok(c, p, inc): bad.append(f'{short(c)} hasPart {short(p)}')
 check('hasPart agrees with the area reference of the container', bad)
 
+# 9b every era:hasPart has its era:isPartOf on the part, and the other way round
+hp = set(g.subject_objects(ERA.hasPart)); ip = {(c, p) for p, c in g.subject_objects(ERA.isPartOf)}
+check('hasPart and isPartOf state the same pairs', [f'{short(c)} / {short(p)}' for c, p in hp ^ ip])
+
 # 10 no linear element stretch belongs to two operational points or two sections of line
 def windows(cls):
     res = []

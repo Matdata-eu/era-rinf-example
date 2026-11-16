@@ -10,6 +10,7 @@ ok   signal orientation agrees with its net point reference
 ok   switch is placed on a point where at least three element ends meet
 ok   border point records share UOPID, reference border point, canonical URI and position
 ok   hasPart agrees with the area reference of the container
+ok   hasPart and isPartOf state the same pairs
 ok   operational points and sections of line do not overlap (a stopping point without tracks may)
 ok   every linear element is covered by an operational point or a section of line
-3192 triples, 28 linear elements, 48 net relations, 14 checks, 0 failures
+3222 triples, 28 linear elements, 48 net relations, 15 checks, 0 failures

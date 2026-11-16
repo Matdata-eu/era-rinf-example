@@ -296,7 +296,8 @@ nl:trk_EGT_1 a era:RunningTrack ;
     era:contactLineSystem nl:cls_1500 ;
     era:trainDetectionSystem nl:tds_tc ;
     era:notYetAvailable era:etcs ;
-    era:maximumPermittedSpeed "80"^^xsd:integer .
+    era:maximumPermittedSpeed "80"^^xsd:integer ;
+    era:isPartOf nl:op_EGT .
 
 nl:trk_EGT_1_ref a era:NetLinearReference ;
     era:hasSequence ( nl:le_B4 nl:le_B2 nl:le_B1 ) ;
@@ -331,7 +332,8 @@ nl:trk_EGT_2 a era:RunningTrack ;
     era:contactLineSystem nl:cls_1500 ;
     era:trainDetectionSystem nl:tds_tc ;
     era:notYetAvailable era:etcs ;
-    era:maximumPermittedSpeed "40"^^xsd:integer .
+    era:maximumPermittedSpeed "40"^^xsd:integer ;
+    era:isPartOf nl:op_EGT .
 
 nl:trk_EGT_2_ref a era:NetLinearReference ;
     era:hasSequence ( nl:le_B3 ) ;
@@ -442,7 +444,8 @@ nl:trk_EGT_BORD_1 a era:RunningTrack ;
     era:notYetAvailable era:etcs ;
     era:maximumPermittedSpeed "100"^^xsd:integer ;
     era:trackDirection era-trd:30 ;
-    era:linesideDistanceIndication nl:ldi_km .
+    era:linesideDistanceIndication nl:ldi_km ;
+    era:isPartOf nl:sol_EGT_SVW, nl:sol_SVW_BORD .
 
 nl:trk_EGT_BORD_1_ref a era:NetLinearReference ;
     era:hasSequence ( nl:le_B1 ) ;
@@ -863,7 +866,8 @@ nl:pe_SVW_1 a era:PlatformEdge ;
     era:lengthOfPlatform "170.0"^^xsd:double ;
     era:inCountry eu-country:NLD ;
     era:infrastructureManager orgrole:9902_IM ;
-    era:netReference nl:pe_SVW_1_ref .
+    era:netReference nl:pe_SVW_1_ref ;
+    era:isPartOf nl:op_SVW .
 
 nl:pe_SVW_1_ref a era:NetLinearReference ;
     era:hasSequence ( nl:le_B1 ) ;
