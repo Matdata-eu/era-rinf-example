@@ -105,26 +105,31 @@ From the discussion on [ERA ontology work item #65](https://gitlab.com/era-europ
 which started from the old `examples/switch.ttl`. This example is meant to replace that file.
 
 **Is navigability physical or operational?**
-Physical: a net relation says whether a train can pass from the end of one netelement to the end of the other,
-whatever the operating rules. It applies to every track, main track or siding.
+
+Generally, the netrelation is a physical connection and the navigability points to the operational. 
 
 **Is there a real case of navigability in one direction only?**
-The example leaves `AB` / `BA` out on purpose: every net relation is `Both` or `None`.
+
+Yes, spring switches are an example. It is a rare case and the current example in this repo does not have them.
 
 **Does a switch have its own micro topology? Should it be a NonLinearElement?**
+
 No. In the example a switch is an `era:Switch` with one `era:NetPointReference`, and the netrelations at that
 point describe how it connects. There is no NonLinearElement. RINF does not specify this exactly, and a switch
 could also be given an area reference, but for the RINF use cases a point reference is good enough.
 
 **Why is the switch not at the end of the first linear element, where the three elements meet?**
+
 The ends of the three elements that meet at a switch are the same topological location, so the reference can
 be given on any of them. The example always uses the common branch.
 
 **Why is the switch related to one linear element only?**
+
 Through its reference it sits on one element; the three netrelations at that point relate all three. Nothing
 else is needed.
 
 **A linear element runs through an operational point and a section of line. Is that intentional?**
+
 Yes. A netelement runs between two places where the topology changes: a switch or crossing, a buffer stop or
 the end of a track, the end of the manager's network at a border, or moving track such as a turntable. An
 operational point boundary is not such a place, so the netelement continues and the tracks of the operational
@@ -132,28 +137,35 @@ point and the section of line each cover their own stretch of it (`a6` carries M
 200 to 5200 m and Dunes Junction track 1 from 5200 to 5400 m). Cutting netelements at operational point
 boundaries is allowed, but then every cut needs a net relation (navigability `Both`) or the network falls apart.
 
+However, as long as you stay consistent in the topology and locating assets on the topology, you may split the topology also at such borders.
+
 **Should there be a net relation between the netelement of the operational point and that of the section of line?**
+
 Not here: it is one netelement, and navigability along a netelement is implicit. Net relations only connect the
-ends of two different netelements.
+ends of two different netelements. If you would split the netelements at the border, then yes there is a need for a netrelation.
 
 **Why does a switch's net point reference carry `era:appliesToDirection`?**
+
 It points towards the branches (see modelling choice 6), so the reference alone tells on which side of the
 switch the branches are. The property is optional in the v3.3.4 shapes and its definition says nothing about
 switches.
 
 **Do netelements that only connect two tracks, as in a crossover, have to be tracks?**
+
 In the example they are (Midford crossovers `X1` and `X2`), because every netelement belongs to an operational
 point or a section of line through its tracks. The ontology does not require it. Without a track the topology
 and navigability stay complete, but the piece has no track parameters. `era:trackId` is mandatory on a track in
-v3.3.4, so a crossover track needs an identifier, generated if necessary.
+v3.3.4, so a crossover track needs an identifier, generated if necessary. 
 
 **How to model two consecutive switches?**
+
 Two switches in the field are two `era:Switch` objects, each with its own point reference, and a netelement
 between them, however short, with three net relations at each switch. A single three-way switch, where all
 blades start at the same point, can be one `era:Switch`: four netelement ends meet in one point, as at the
 double slip W5, with `Both` from the common branch to each branch and `None` between the branches.
 
 **Where does an operational point start and end?**
+
 RINF and the ontology have no harmonised rule; each infrastructure manager decides. In the example the boundary
 of Dunes Junction lies 200 m before switch W14, which puts signal DA outside it; that is not a deliberate rule.
 A convention that is easy to explain: at the entry signals where there are any, otherwise at the ends of the
@@ -161,7 +173,9 @@ platform or at the outermost switch. The stopping point Seaview shows the case w
 platform edge.
 
 **Why are tunnels linked to tracks only through the topology?**
+
 The topology is the precise link: it says which stretch of which netelement lies in the tunnel. To find the
 tracks through a tunnel, look for track references that overlap the tunnel's reference on the same netelement.
 v3.3.4 deprecates `era:passesThroughTunnel` (track to tunnel) and names `era:hasPart` as its replacement, so a
-direct link, if wanted, is `track era:hasPart tunnel`. The example does not state it.
+direct link, if wanted, is `track era:hasPart tunnel`. The example does not state it because `era:hasPart` implies a
+part-whole relationship, which is not the case in this example.
