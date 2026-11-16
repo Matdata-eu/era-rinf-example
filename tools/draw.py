@@ -163,7 +163,7 @@ leg = [('<path d="M0,0 L40,0" class="le" stroke="#004494"/><path d="M26,0 L14,-6
 for i, (sym, txt) in enumerate(leg):
     x, y = lx + (i % 5) * 380, ly + (i // 5) * 26
     o.append(f'<g transform="translate({x},{y})">{sym}<text x="50" y="4" class="small" text-anchor="start">{txt}</text></g>')
-W, H = int(X0 * 2 + 3600 * SX), 800
+W, H = int(X0 * 2 + 4000 * SX), 800
 css = '''text{font-family:Arial,Helvetica,sans-serif;font-size:11px;fill:#222}.le{fill:none;stroke-width:2.6;stroke-linejoin:round}
 .lelab{font-size:10.5px;font-weight:bold}.op{fill:none;stroke-width:30;stroke-linecap:round;stroke-linejoin:round;opacity:.95}
 .sol{fill:none;stroke:#e3e6ea;stroke-width:30;stroke-linecap:butt;stroke-linejoin:round}.tunnel{fill:none;stroke:#555;stroke-width:13;stroke-dasharray:3 3;opacity:.45}

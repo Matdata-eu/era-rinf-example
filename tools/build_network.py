@@ -64,7 +64,7 @@ N = {   # x is 520 units per km between km 0 and Midford, so both main tracks sh
     "Wd": (130, 80), "D1": (0, 80), "D2": (0, 120),
     "Wy": (120, -40), "Y1": (0, -40), "Y2": (0, -80),
     "HIL": (2100, -70),
-    "We1": (2940, 0), "We2": (3440, 0), "END": (3600, 0),
+    "We1": (3340, 0), "We2": (3840, 0), "END": (4000, 0),
 }
 
 E = {
@@ -99,7 +99,7 @@ E = {
     # IM B: every element has its origin at its eastern end
     "B1": ("nl", "BORD", "We1", [], 4800, True),
     "B2": ("nl", "We1", "We2", [], 800, True),
-    "B3": ("nl", "We1", "We2", [(2990, 40), (3390, 40)], 820, True),
+    "B3": ("nl", "We1", "We2", [(3390, 40), (3790, 40)], 820, True),
     "B4": ("nl", "We2", "END", [], 400, True),
 }
 
@@ -533,8 +533,12 @@ SOLS = [
     ("be", "HIL_DUN", "HIL", "DUN", "10", "line_100", 4650, [
         ("2", "era:RunningTrack", "Hillend - Dunes track 2", [("b4", 0, 4650)], MAIN_BE + [speed(140), *sol_track("be", "20")]),
     ]),
-    ("nl", "EGT_BORD", "EGT", "BORD", "10", "line_7", 4500, [
-        ("1", "era:RunningTrack", "Eastgate - border", [("B1", 4500, 0)], MAIN_NL + [speed(100), *sol_track("nl", "30")]),
+    # the stopping point Seaview has no track of its own: the sections of line end at its platform edge
+    ("nl", "EGT_SVW", "EGT", "SVW", "10", "line_7", 2830, [
+        ("1", "era:RunningTrack", "Eastgate - Seaview", [("B1", 4500, 1670)], MAIN_NL + [speed(100), *sol_track("nl", "30")]),
+    ]),
+    ("nl", "SVW_BORD", "SVW", "BORD", "10", "line_7", 1500, [
+        ("1", "era:RunningTrack", "Seaview - border", [("B1", 1500, 0)], MAIN_NL + [speed(100), *sol_track("nl", "30")]),
     ]),
 ]
 
@@ -567,6 +571,15 @@ for im in IMS:
         refs = [f"{im}:trk_{oid}_{t[0]}_ref" for t in tr]
         nar(im, f"{iri}_ref", refs)
         tracks(im, oid, tr)
+    if im == "nl":
+        iri = "nl:op_SVW"
+        w(im, "# ---------- Seaview (NLSVW)")
+        emit(im, iri, ["era:OperationalPoint", ("rdfs:label", lit("Seaview")), ("era:opName", lit("Seaview")),
+                       ("era:uopid", '"NLSVW"'), ("era:opType", "era-op-types:70"), *common(im),
+                       ("era:netReference", f"{iri}_ref"), ("era:hasPart", "nl:pe_SVW_1"), validity(im, iri)],
+             "A stopping point (type passenger stop): one platform edge on the open line, no tracks and no signals of its own.\n"
+             "Its area is the platform edge: the area reference includes the platform edge's own linear reference.")
+        nar(im, f"{iri}_ref", ["nl:pe_SVW_1_ref"])
     # border point
     e, d = BORDER[im]
     iri = f"{im}:op_BORD"
@@ -615,7 +628,7 @@ for im in IMS:
         iri = f"{im}:sw_{label}"
         d = 0 if E[c][1] == node else E[c][4]
         emit(im, iri, ["era:Switch", ("rdfs:label", lit(f"Switch {label}")), *common(im), ("era:netReference", f"{iri}_ref")])
-        npr(im, f"{iri}_ref", c, d, applies="era-orient:00" if d else "era-orient:01")
+        npr(im, f"{iri}_ref", c, d, applies="era-orient:00" if off(c, d) == E[c][4] else "era-orient:01")
     if im == "be":
         iri = "be:sw_W5"
         emit(im, iri, ["era:Switch", ("rdfs:label", lit("Double slip crossing W5")), *common(im), ("era:netReference", f"{iri}_ref")],
@@ -697,8 +710,8 @@ nlr("be", "be:lc_1_ref_1", [("a6", 4695, 4705)])
 nlr("be", "be:lc_1_ref_2", [("b4", 4145, 4155)])
 PLAT = [("be", "WHS_1", "1", [("a4", 125, 375)]), ("be", "WHS_3", "3", [("c1", 140, 380)]),
         ("be", "WHS_2", "2", [("b2", 425, 675)]),
-        ("nl", "EGT_2", "2", [("B3", 620, 220)])]
-sec("nl", "10. Platform edge")
+        ("nl", "EGT_2", "2", [("B3", 620, 220)]), ("nl", "SVW_1", "1", [("B1", 1670, 1500)])]
+sec("nl", "10. Platform edges")
 for (im, pid, label, parts) in PLAT:
     iri = f"{im}:pe_{pid}"
     L = abs(parts[0][2] - parts[0][1])
@@ -716,6 +729,7 @@ PL = [("be", "WHS", "BE99001", "Westhaven", True, False),
       ("be", "DUN", "BE99006", "Dunes Junction", False, False),
       ("be", "BORD", "BE99007", "Dunes border", False, False),
       ("nl", "EGT", "NL99001", "Eastgate", True, False),
+      ("nl", "SVW", "NL99003", "Seaview", True, False),
       ("nl", "BORD", "NL99002", "Dunes border", False, False)]
 SL = [("be", "WHS_PF", "01", "Westhaven platforms", "WHS", "39"),
       ("be", "WHY_LP", "02", "Westhaven Yard loading point", "WHY", "43"),

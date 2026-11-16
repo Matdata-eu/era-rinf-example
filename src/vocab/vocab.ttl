@@ -1095,6 +1095,14 @@ era-op-types:50 a skos:Concept ;
         "depósito o taller"@es ;
     skos:topConceptOf era-op-types:OperationalPointTypes .
 
+era-op-types:70 a skos:Concept ;
+    skos:definition "or halts - small operational point consisting of at least one platform, normally serving mostly for local passenger services, without routing, dispatching, or train management facilities"@en ;
+    skos:inScheme era-op-types:OperationalPointTypes ;
+    skos:notation "70"^^xsd:string ;
+    skos:prefLabel "passenger stop"@en,
+        "parada de pasajeros"@es ;
+    skos:topConceptOf era-op-types:OperationalPointTypes .
+
 era-op-types:80 a skos:Concept ;
     skos:definition "consists of at least one turnout, normally used mostly for changing direction of trains, with reduced or not existing other functions"@en ;
     skos:inScheme era-op-types:OperationalPointTypes ;
@@ -1135,13 +1143,6 @@ era-orient:01 a skos:Concept ;
     skos:notation "Opposite"^^xsd:string ;
     skos:note "Value collected from TWG RINF group"@en ;
     skos:prefLabel "Opposite"@en ;
-    skos:topConceptOf era-orient:Directions .
-
-era-orient:02 a skos:Concept ;
-    skos:inScheme era-orient:OrientationDirections ;
-    skos:notation "Both"^^xsd:string ;
-    skos:note "Value collected from TWG RINF group"@en ;
-    skos:prefLabel "Both"@en ;
     skos:topConceptOf era-orient:Directions .
 
 era-orient:Left a skos:Concept ;
@@ -14934,6 +14935,15 @@ era-nv:Navigabilities a skos:ConceptScheme ;
     rdfs:comment "Controlled SKOS-based vocabularies defined by the European Union Agency for Railways to describe concepts related to the European railway infrastructure and the vehicles authorized to operate over it."@en ;
     skos:prefLabel "Navigabilities"@en .
 
+era-orient:OrientationDirections a skos:ConceptScheme ;
+    rdfs:label "Directions of the orientation of a railway element"@en ;
+    ns2:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:issued "2024-09-24"^^xsd:date ;
+    dcterms:modified "2025-02-10"^^xsd:date ;
+    dcterms:title "Concept scheme grouping railway element orientation' directions"@en ;
+    rdfs:comment "Controlled SKOS-based vocabularies defined by the European Union Agency for Railways to describe concepts related to the European railway infrastructure and the vehicles authorized to operate over it."@en ;
+    skos:prefLabel "Directions of the orientation of a railway element"@en .
+
 era-orient:Sides a skos:ConceptScheme ;
     rdfs:label "Sides of a railway track-side element, in relation to a track"@en ;
     ns2:license <https://creativecommons.org/licenses/by/4.0/> ;
@@ -15078,15 +15088,6 @@ It must be used in the context of the Vehicle Registration process."""@en ;
     rdfs:subClassOf era:Compliance ;
     owl:disjointWith era:VehicleTypeAuthorisationCheck ;
     ns1:term_status "stable" .
-
-era-orient:OrientationDirections a skos:ConceptScheme ;
-    rdfs:label "Directions of the orientation of a railway element"@en ;
-    ns2:license <https://creativecommons.org/licenses/by/4.0/> ;
-    dcterms:issued "2024-09-24"^^xsd:date ;
-    dcterms:modified "2025-02-10"^^xsd:date ;
-    dcterms:title "Concept scheme grouping railway element orientation' directions"@en ;
-    rdfs:comment "Controlled SKOS-based vocabularies defined by the European Union Agency for Railways to describe concepts related to the European railway infrastructure and the vehicles authorized to operate over it."@en ;
-    skos:prefLabel "Directions of the orientation of a railway element"@en .
 
 era:etcsBaseline a owl:FunctionalProperty,
         owl:ObjectProperty ;
@@ -15762,25 +15763,6 @@ era:Vehicle a owl:Class ;
     owl:disjointWith era:VehicleType ;
     ns1:term_status "stable" .
 
-era-op-types:OperationalPointTypes a skos:ConceptScheme ;
-    rdfs:label "Operational Point Types"@en ;
-    ns2:license <https://creativecommons.org/licenses/by/4.0/> ;
-    era:rinfIndex "1.2.0.0.0.4" ;
-    dcterms:issued "2020-09-01"^^xsd:date ;
-    dcterms:modified "2022-09-09"^^xsd:date,
-        "2024-09-04"^^xsd:date,
-        "2024-12-12"^^xsd:date,
-        "2026-02-03"^^xsd:date,
-        "2026-05-28"^^xsd:date ;
-    dcterms:title "Concept scheme grouping the different existing types of Operational Points"@en ;
-    rdfs:comment "Controlled SKOS-based vocabularies defined by the European Union Agency for Railways to describe concepts related to the European railway infrastructure and the vehicles authorized to operate over it."@en ;
-    skos:changeNote """
-        Revision 28-05-2026:
-        - Added new Operational Point types: era-op-types:20, era-op-types:110, era-op-types:150.
-        - Removed legacy CCSTMS hiddenLabel references
-    """@en ;
-    skos:prefLabel "Operational Point Types"@en .
-
 era:trainDetectionSystemType a owl:FunctionalProperty,
         owl:ObjectProperty ;
     rdfs:label "Type of train detection system"@en ;
@@ -15876,6 +15858,25 @@ era:Signal a owl:Class ;
         era:Tunnel ;
     ns1:term_status "stable" ;
     skos:scopeNote "Apparatus by means of which a conventional visual or acoustic indication is given, generally concerning the movements/movement authorities of railway vehicles."@en .
+
+era-op-types:OperationalPointTypes a skos:ConceptScheme ;
+    rdfs:label "Operational Point Types"@en ;
+    ns2:license <https://creativecommons.org/licenses/by/4.0/> ;
+    era:rinfIndex "1.2.0.0.0.4" ;
+    dcterms:issued "2020-09-01"^^xsd:date ;
+    dcterms:modified "2022-09-09"^^xsd:date,
+        "2024-09-04"^^xsd:date,
+        "2024-12-12"^^xsd:date,
+        "2026-02-03"^^xsd:date,
+        "2026-05-28"^^xsd:date ;
+    dcterms:title "Concept scheme grouping the different existing types of Operational Points"@en ;
+    rdfs:comment "Controlled SKOS-based vocabularies defined by the European Union Agency for Railways to describe concepts related to the European railway infrastructure and the vehicles authorized to operate over it."@en ;
+    skos:changeNote """
+        Revision 28-05-2026:
+        - Added new Operational Point types: era-op-types:20, era-op-types:110, era-op-types:150.
+        - Removed legacy CCSTMS hiddenLabel references
+    """@en ;
+    skos:prefLabel "Operational Point Types"@en .
 
 era:contactLineSystemType a owl:FunctionalProperty,
         owl:ObjectProperty ;

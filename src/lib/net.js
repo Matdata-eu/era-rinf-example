@@ -3,7 +3,7 @@
 import { data, ERA, GSP, RDF, objects, value, instances, isA, list, subjects } from './rdf.js'
 
 export const SX = 0.52, SY = 2.5, X0 = 70, Y0 = 440
-export const W = X0 * 2 + 3600 * SX, H = 720
+export const W = X0 * 2 + 4000 * SX, H = 720
 const scr = (lon, lat) => [X0 + ((lon - 2.9) / 2e-4) * SX, Y0 - ((lat - 52.6) / 1.2e-4) * SY]
 const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1])
 const schem = (a, b) => Math.hypot((a[0] - b[0]) / SX, (a[1] - b[1]) / SY)   // lengths in schematic units, as in the WKT

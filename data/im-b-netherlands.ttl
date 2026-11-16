@@ -62,7 +62,7 @@ nl:le_B1 a era:LinearElement ;
     gsp:hasGeometry nl:le_B1_geom .
 
 nl:le_B1_geom a gsp:Geometry ;
-    gsp:asWKT "LINESTRING(3.48800 52.60000, 3.42800 52.60000)"^^gsp:wktLiteral .
+    gsp:asWKT "LINESTRING(3.56800 52.60000, 3.42800 52.60000)"^^gsp:wktLiteral .
 
 nl:le_B2 a era:LinearElement ;
     rdfs:label "B2 (We2 to We1)"@en ;
@@ -70,7 +70,7 @@ nl:le_B2 a era:LinearElement ;
     gsp:hasGeometry nl:le_B2_geom .
 
 nl:le_B2_geom a gsp:Geometry ;
-    gsp:asWKT "LINESTRING(3.58800 52.60000, 3.48800 52.60000)"^^gsp:wktLiteral .
+    gsp:asWKT "LINESTRING(3.66800 52.60000, 3.56800 52.60000)"^^gsp:wktLiteral .
 
 nl:le_B3 a era:LinearElement ;
     rdfs:label "B3 (We2 to We1)"@en ;
@@ -78,7 +78,7 @@ nl:le_B3 a era:LinearElement ;
     gsp:hasGeometry nl:le_B3_geom .
 
 nl:le_B3_geom a gsp:Geometry ;
-    gsp:asWKT "LINESTRING(3.58800 52.60000, 3.57800 52.60480, 3.49800 52.60480, 3.48800 52.60000)"^^gsp:wktLiteral .
+    gsp:asWKT "LINESTRING(3.66800 52.60000, 3.65800 52.60480, 3.57800 52.60480, 3.56800 52.60000)"^^gsp:wktLiteral .
 
 nl:le_B4 a era:LinearElement ;
     rdfs:label "B4 (END to We2)"@en ;
@@ -86,7 +86,7 @@ nl:le_B4 a era:LinearElement ;
     gsp:hasGeometry nl:le_B4_geom .
 
 nl:le_B4_geom a gsp:Geometry ;
-    gsp:asWKT "LINESTRING(3.62000 52.60000, 3.58800 52.60000)"^^gsp:wktLiteral .
+    gsp:asWKT "LINESTRING(3.70000 52.60000, 3.66800 52.60000)"^^gsp:wktLiteral .
 
 
 ##############################################################################
@@ -163,7 +163,7 @@ nl:kp_line_7_0_ref a era:NetPointReference ;
     gsp:hasGeometry nl:kp_line_7_0_ref_geom .
 
 nl:kp_line_7_0_ref_geom a gsp:Geometry ;
-    gsp:asWKT "POINT(3.62000 52.60000)"^^gsp:wktLiteral .
+    gsp:asWKT "POINT(3.70000 52.60000)"^^gsp:wktLiteral .
 
 nl:kp_line_7_0_ref_tc a era:TopologicalCoordinate ;
     era:onLinearElement nl:le_B4 ;
@@ -182,7 +182,7 @@ nl:kp_line_7_1_ref a era:NetPointReference ;
     gsp:hasGeometry nl:kp_line_7_1_ref_geom .
 
 nl:kp_line_7_1_ref_geom a gsp:Geometry ;
-    gsp:asWKT "POINT(3.51300 52.60000)"^^gsp:wktLiteral .
+    gsp:asWKT "POINT(3.59300 52.60000)"^^gsp:wktLiteral .
 
 nl:kp_line_7_1_ref_tc a era:TopologicalCoordinate ;
     era:onLinearElement nl:le_B2 ;
@@ -201,7 +201,7 @@ nl:kp_line_7_3_ref a era:NetPointReference ;
     gsp:hasGeometry nl:kp_line_7_3_ref_geom .
 
 nl:kp_line_7_3_ref_geom a gsp:Geometry ;
-    gsp:asWKT "POINT(3.46550 52.60000)"^^gsp:wktLiteral .
+    gsp:asWKT "POINT(3.51550 52.60000)"^^gsp:wktLiteral .
 
 nl:kp_line_7_3_ref_tc a era:TopologicalCoordinate ;
     era:onLinearElement nl:le_B1 ;
@@ -284,7 +284,7 @@ nl:op_EGT_ref a era:NetAreaReference ;
     gsp:hasGeometry nl:op_EGT_ref_geom .
 
 nl:op_EGT_ref_geom a gsp:Geometry ;
-    gsp:asWKT "MULTILINESTRING((3.62000 52.60000, 3.58800 52.60000, 3.48800 52.60000, 3.48425 52.60000), (3.58800 52.60000, 3.57800 52.60480, 3.49800 52.60480, 3.48800 52.60000))"^^gsp:wktLiteral .
+    gsp:asWKT "MULTILINESTRING((3.70000 52.60000, 3.66800 52.60000, 3.56800 52.60000, 3.55925 52.60000), (3.66800 52.60000, 3.65800 52.60480, 3.57800 52.60480, 3.56800 52.60000))"^^gsp:wktLiteral .
 
 nl:trk_EGT_1 a era:RunningTrack ;
     rdfs:label "Eastgate track 1"@en ;
@@ -305,7 +305,7 @@ nl:trk_EGT_1_ref a era:NetLinearReference ;
     gsp:hasGeometry nl:trk_EGT_1_ref_geom .
 
 nl:trk_EGT_1_ref_geom a gsp:Geometry ;
-    gsp:asWKT "LINESTRING(3.62000 52.60000, 3.58800 52.60000, 3.48800 52.60000, 3.48425 52.60000)"^^gsp:wktLiteral .
+    gsp:asWKT "LINESTRING(3.70000 52.60000, 3.66800 52.60000, 3.56800 52.60000, 3.55925 52.60000)"^^gsp:wktLiteral .
 
 nl:trk_EGT_1_ref_start a era:NetPointReference ;
     era:hasTopoCoordinate nl:trk_EGT_1_ref_start_tc .
@@ -340,7 +340,7 @@ nl:trk_EGT_2_ref a era:NetLinearReference ;
     gsp:hasGeometry nl:trk_EGT_2_ref_geom .
 
 nl:trk_EGT_2_ref_geom a gsp:Geometry ;
-    gsp:asWKT "LINESTRING(3.58800 52.60000, 3.57800 52.60480, 3.49800 52.60480, 3.48800 52.60000)"^^gsp:wktLiteral .
+    gsp:asWKT "LINESTRING(3.66800 52.60000, 3.65800 52.60480, 3.57800 52.60480, 3.56800 52.60000)"^^gsp:wktLiteral .
 
 nl:trk_EGT_2_ref_start a era:NetPointReference ;
     era:hasTopoCoordinate nl:trk_EGT_2_ref_start_tc .
@@ -355,6 +355,33 @@ nl:trk_EGT_2_ref_end a era:NetPointReference ;
 nl:trk_EGT_2_ref_end_tc a era:TopologicalCoordinate ;
     era:onLinearElement nl:le_B3 ;
     era:offsetFromOrigin "820.0"^^xsd:double .
+
+# ---------- Seaview (NLSVW)
+nl:op_SVW_validity a era:TemporalFeature, time:Interval ;
+    time:hasBeginning nl:op_SVW_validity_begin .
+
+nl:op_SVW_validity_begin a time:Instant ;
+    time:inXSDDate "2026-01-01"^^xsd:date .
+
+# A stopping point (type passenger stop): one platform edge on the open line, no tracks and no signals of its own.
+# Its area is the platform edge: the area reference includes the platform edge's own linear reference.
+nl:op_SVW a era:OperationalPoint ;
+    rdfs:label "Seaview"@en ;
+    era:opName "Seaview"@en ;
+    era:uopid "NLSVW" ;
+    era:opType era-op-types:70 ;
+    era:inCountry eu-country:NLD ;
+    era:infrastructureManager orgrole:9902_IM ;
+    era:netReference nl:op_SVW_ref ;
+    era:hasPart nl:pe_SVW_1 ;
+    era:validity nl:op_SVW_validity .
+
+nl:op_SVW_ref a era:NetAreaReference ;
+    era:includes ( nl:pe_SVW_1_ref ) ;
+    gsp:hasGeometry nl:op_SVW_ref_geom .
+
+nl:op_SVW_ref_geom a gsp:Geometry ;
+    gsp:asWKT "MULTILINESTRING((3.47671 52.60000, 3.47175 52.60000))"^^gsp:wktLiteral .
 
 # ---------- Border point (EU99901)
 nl:op_BORD_validity a era:TemporalFeature, time:Interval ;
@@ -400,38 +427,38 @@ nl:op_BORD_ref_lrs a era:LinearPositioningSystemCoordinate ;
 # N (10) = same direction, O (20) = opposite, B (30) = both.
 ##############################################################################
 
-nl:sol_EGT_BORD_validity a era:TemporalFeature, time:Interval ;
-    time:hasBeginning nl:sol_EGT_BORD_validity_begin .
+nl:sol_EGT_SVW_validity a era:TemporalFeature, time:Interval ;
+    time:hasBeginning nl:sol_EGT_SVW_validity_begin .
 
-nl:sol_EGT_BORD_validity_begin a time:Instant ;
+nl:sol_EGT_SVW_validity_begin a time:Instant ;
     time:inXSDDate "2026-01-01"^^xsd:date .
 
-nl:sol_EGT_BORD a era:SectionOfLine ;
-    rdfs:label "EGT - BORD"@en ;
+nl:sol_EGT_SVW a era:SectionOfLine ;
+    rdfs:label "EGT - SVW"@en ;
     era:opStart nl:op_EGT ;
-    era:opEnd nl:op_BORD ;
+    era:opEnd nl:op_SVW ;
     era:solNature era-sn:10 ;
-    era:lengthOfSectionOfLine "4.5"^^xsd:double ;
+    era:lengthOfSectionOfLine "2.8"^^xsd:double ;
     era:nationalLine nl:line_7 ;
     era:inCountry eu-country:NLD ;
     era:infrastructureManager orgrole:9902_IM ;
-    era:netReference nl:sol_EGT_BORD_ref ;
-    era:hasPart nl:trk_EGT_BORD_1 ;
-    era:validity nl:sol_EGT_BORD_validity .
+    era:netReference nl:sol_EGT_SVW_ref ;
+    era:hasPart nl:trk_EGT_SVW_1 ;
+    era:validity nl:sol_EGT_SVW_validity .
 
-nl:sol_EGT_BORD_ref a era:NetAreaReference ;
-    era:includes ( nl:trk_EGT_BORD_1_ref ) ;
-    gsp:hasGeometry nl:sol_EGT_BORD_ref_geom .
+nl:sol_EGT_SVW_ref a era:NetAreaReference ;
+    era:includes ( nl:trk_EGT_SVW_1_ref ) ;
+    gsp:hasGeometry nl:sol_EGT_SVW_ref_geom .
 
-nl:sol_EGT_BORD_ref_geom a gsp:Geometry ;
-    gsp:asWKT "MULTILINESTRING((3.48425 52.60000, 3.42800 52.60000))"^^gsp:wktLiteral .
+nl:sol_EGT_SVW_ref_geom a gsp:Geometry ;
+    gsp:asWKT "MULTILINESTRING((3.55925 52.60000, 3.47671 52.60000))"^^gsp:wktLiteral .
 
-nl:trk_EGT_BORD_1 a era:RunningTrack ;
-    rdfs:label "Eastgate - border"@en ;
+nl:trk_EGT_SVW_1 a era:RunningTrack ;
+    rdfs:label "Eastgate - Seaview"@en ;
     era:trackId "1" ;
     era:inCountry eu-country:NLD ;
     era:infrastructureManager orgrole:9902_IM ;
-    era:netReference nl:trk_EGT_BORD_1_ref ;
+    era:netReference nl:trk_EGT_SVW_1_ref ;
     era:wheelSetGauge era-ntg:30 ;
     era:contactLineSystem nl:cls_1500 ;
     era:trainDetectionSystem nl:tds_tc ;
@@ -440,26 +467,89 @@ nl:trk_EGT_BORD_1 a era:RunningTrack ;
     era:trackDirection era-trd:30 ;
     era:linesideDistanceIndication nl:ldi_km .
 
-nl:trk_EGT_BORD_1_ref a era:NetLinearReference ;
+nl:trk_EGT_SVW_1_ref a era:NetLinearReference ;
     era:hasSequence ( nl:le_B1 ) ;
-    era:startsAt nl:trk_EGT_BORD_1_ref_start ;
-    era:endsAt nl:trk_EGT_BORD_1_ref_end ;
-    gsp:hasGeometry nl:trk_EGT_BORD_1_ref_geom .
+    era:startsAt nl:trk_EGT_SVW_1_ref_start ;
+    era:endsAt nl:trk_EGT_SVW_1_ref_end ;
+    gsp:hasGeometry nl:trk_EGT_SVW_1_ref_geom .
 
-nl:trk_EGT_BORD_1_ref_geom a gsp:Geometry ;
-    gsp:asWKT "LINESTRING(3.48425 52.60000, 3.42800 52.60000)"^^gsp:wktLiteral .
+nl:trk_EGT_SVW_1_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.55925 52.60000, 3.47671 52.60000)"^^gsp:wktLiteral .
 
-nl:trk_EGT_BORD_1_ref_start a era:NetPointReference ;
-    era:hasTopoCoordinate nl:trk_EGT_BORD_1_ref_start_tc .
+nl:trk_EGT_SVW_1_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate nl:trk_EGT_SVW_1_ref_start_tc .
 
-nl:trk_EGT_BORD_1_ref_start_tc a era:TopologicalCoordinate ;
+nl:trk_EGT_SVW_1_ref_start_tc a era:TopologicalCoordinate ;
     era:onLinearElement nl:le_B1 ;
     era:offsetFromOrigin "300.0"^^xsd:double .
 
-nl:trk_EGT_BORD_1_ref_end a era:NetPointReference ;
-    era:hasTopoCoordinate nl:trk_EGT_BORD_1_ref_end_tc .
+nl:trk_EGT_SVW_1_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate nl:trk_EGT_SVW_1_ref_end_tc .
 
-nl:trk_EGT_BORD_1_ref_end_tc a era:TopologicalCoordinate ;
+nl:trk_EGT_SVW_1_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement nl:le_B1 ;
+    era:offsetFromOrigin "3130.0"^^xsd:double .
+
+nl:sol_SVW_BORD_validity a era:TemporalFeature, time:Interval ;
+    time:hasBeginning nl:sol_SVW_BORD_validity_begin .
+
+nl:sol_SVW_BORD_validity_begin a time:Instant ;
+    time:inXSDDate "2026-01-01"^^xsd:date .
+
+nl:sol_SVW_BORD a era:SectionOfLine ;
+    rdfs:label "SVW - BORD"@en ;
+    era:opStart nl:op_SVW ;
+    era:opEnd nl:op_BORD ;
+    era:solNature era-sn:10 ;
+    era:lengthOfSectionOfLine "1.5"^^xsd:double ;
+    era:nationalLine nl:line_7 ;
+    era:inCountry eu-country:NLD ;
+    era:infrastructureManager orgrole:9902_IM ;
+    era:netReference nl:sol_SVW_BORD_ref ;
+    era:hasPart nl:trk_SVW_BORD_1 ;
+    era:validity nl:sol_SVW_BORD_validity .
+
+nl:sol_SVW_BORD_ref a era:NetAreaReference ;
+    era:includes ( nl:trk_SVW_BORD_1_ref ) ;
+    gsp:hasGeometry nl:sol_SVW_BORD_ref_geom .
+
+nl:sol_SVW_BORD_ref_geom a gsp:Geometry ;
+    gsp:asWKT "MULTILINESTRING((3.47175 52.60000, 3.42800 52.60000))"^^gsp:wktLiteral .
+
+nl:trk_SVW_BORD_1 a era:RunningTrack ;
+    rdfs:label "Seaview - border"@en ;
+    era:trackId "1" ;
+    era:inCountry eu-country:NLD ;
+    era:infrastructureManager orgrole:9902_IM ;
+    era:netReference nl:trk_SVW_BORD_1_ref ;
+    era:wheelSetGauge era-ntg:30 ;
+    era:contactLineSystem nl:cls_1500 ;
+    era:trainDetectionSystem nl:tds_tc ;
+    era:notYetAvailable era:etcs ;
+    era:maximumPermittedSpeed "100"^^xsd:integer ;
+    era:trackDirection era-trd:30 ;
+    era:linesideDistanceIndication nl:ldi_km .
+
+nl:trk_SVW_BORD_1_ref a era:NetLinearReference ;
+    era:hasSequence ( nl:le_B1 ) ;
+    era:startsAt nl:trk_SVW_BORD_1_ref_start ;
+    era:endsAt nl:trk_SVW_BORD_1_ref_end ;
+    gsp:hasGeometry nl:trk_SVW_BORD_1_ref_geom .
+
+nl:trk_SVW_BORD_1_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.47175 52.60000, 3.42800 52.60000)"^^gsp:wktLiteral .
+
+nl:trk_SVW_BORD_1_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate nl:trk_SVW_BORD_1_ref_start_tc .
+
+nl:trk_SVW_BORD_1_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement nl:le_B1 ;
+    era:offsetFromOrigin "3300.0"^^xsd:double .
+
+nl:trk_SVW_BORD_1_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate nl:trk_SVW_BORD_1_ref_end_tc .
+
+nl:trk_SVW_BORD_1_ref_end_tc a era:TopologicalCoordinate ;
     era:onLinearElement nl:le_B1 ;
     era:offsetFromOrigin "4800.0"^^xsd:double .
 
@@ -484,7 +574,7 @@ nl:sw_101_ref a era:NetPointReference ;
     gsp:hasGeometry nl:sw_101_ref_geom .
 
 nl:sw_101_ref_geom a gsp:Geometry ;
-    gsp:asWKT "POINT(3.48800 52.60000)"^^gsp:wktLiteral .
+    gsp:asWKT "POINT(3.56800 52.60000)"^^gsp:wktLiteral .
 
 nl:sw_101_ref_tc a era:TopologicalCoordinate ;
     era:onLinearElement nl:le_B1 ;
@@ -507,7 +597,7 @@ nl:sw_102_ref a era:NetPointReference ;
     gsp:hasGeometry nl:sw_102_ref_geom .
 
 nl:sw_102_ref_geom a gsp:Geometry ;
-    gsp:asWKT "POINT(3.58800 52.60000)"^^gsp:wktLiteral .
+    gsp:asWKT "POINT(3.66800 52.60000)"^^gsp:wktLiteral .
 
 nl:sw_102_ref_tc a era:TopologicalCoordinate ;
     era:onLinearElement nl:le_B4 ;
@@ -549,7 +639,7 @@ nl:sig_EH_ref a era:NetPointReference ;
     gsp:hasGeometry nl:sig_EH_ref_geom .
 
 nl:sig_EH_ref_geom a gsp:Geometry ;
-    gsp:asWKT "POINT(3.48425 52.60000)"^^gsp:wktLiteral .
+    gsp:asWKT "POINT(3.55925 52.60000)"^^gsp:wktLiteral .
 
 nl:sig_EH_ref_tc a era:TopologicalCoordinate ;
     era:onLinearElement nl:le_B1 ;
@@ -581,7 +671,7 @@ nl:sig_EX1_ref a era:NetPointReference ;
     gsp:hasGeometry nl:sig_EX1_ref_geom .
 
 nl:sig_EX1_ref_geom a gsp:Geometry ;
-    gsp:asWKT "POINT(3.50050 52.60000)"^^gsp:wktLiteral .
+    gsp:asWKT "POINT(3.58050 52.60000)"^^gsp:wktLiteral .
 
 nl:sig_EX1_ref_tc a era:TopologicalCoordinate ;
     era:onLinearElement nl:le_B2 ;
@@ -613,7 +703,7 @@ nl:sig_EX2_ref a era:NetPointReference ;
     gsp:hasGeometry nl:sig_EX2_ref_geom .
 
 nl:sig_EX2_ref_geom a gsp:Geometry ;
-    gsp:asWKT "POINT(3.49807 52.60480)"^^gsp:wktLiteral .
+    gsp:asWKT "POINT(3.57807 52.60480)"^^gsp:wktLiteral .
 
 nl:sig_EX2_ref_tc a era:TopologicalCoordinate ;
     era:onLinearElement nl:le_B3 ;
@@ -645,7 +735,7 @@ nl:sig_EX3_ref a era:NetPointReference ;
     gsp:hasGeometry nl:sig_EX3_ref_geom .
 
 nl:sig_EX3_ref_geom a gsp:Geometry ;
-    gsp:asWKT "POINT(3.57550 52.60000)"^^gsp:wktLiteral .
+    gsp:asWKT "POINT(3.65550 52.60000)"^^gsp:wktLiteral .
 
 nl:sig_EX3_ref_tc a era:TopologicalCoordinate ;
     era:onLinearElement nl:le_B2 ;
@@ -677,7 +767,7 @@ nl:sig_EX4_ref a era:NetPointReference ;
     gsp:hasGeometry nl:sig_EX4_ref_geom .
 
 nl:sig_EX4_ref_geom a gsp:Geometry ;
-    gsp:asWKT "POINT(3.57277 52.60480)"^^gsp:wktLiteral .
+    gsp:asWKT "POINT(3.65277 52.60480)"^^gsp:wktLiteral .
 
 nl:sig_EX4_ref_tc a era:TopologicalCoordinate ;
     era:onLinearElement nl:le_B3 ;
@@ -709,7 +799,7 @@ nl:sig_EHE_ref a era:NetPointReference ;
     gsp:hasGeometry nl:sig_EHE_ref_geom .
 
 nl:sig_EHE_ref_geom a gsp:Geometry ;
-    gsp:asWKT "POINT(3.61200 52.60000)"^^gsp:wktLiteral .
+    gsp:asWKT "POINT(3.69200 52.60000)"^^gsp:wktLiteral .
 
 nl:sig_EHE_ref_tc a era:TopologicalCoordinate ;
     era:onLinearElement nl:le_B4 ;
@@ -721,7 +811,7 @@ nl:sig_EHE_ref_lrs a era:LinearPositioningSystemCoordinate ;
 
 
 ##############################################################################
-# 10. Platform edge
+# 10. Platform edges
 ##############################################################################
 
 nl:pe_EGT_2 a era:PlatformEdge ;
@@ -739,7 +829,7 @@ nl:pe_EGT_2_ref a era:NetLinearReference ;
     gsp:hasGeometry nl:pe_EGT_2_ref_geom .
 
 nl:pe_EGT_2_ref_geom a gsp:Geometry ;
-    gsp:asWKT "LINESTRING(3.56505 52.60480, 3.51353 52.60480)"^^gsp:wktLiteral .
+    gsp:asWKT "LINESTRING(3.64505 52.60480, 3.59353 52.60480)"^^gsp:wktLiteral .
 
 nl:pe_EGT_2_ref_start a era:NetPointReference ;
     era:hasTopoCoordinate nl:pe_EGT_2_ref_start_tc .
@@ -754,6 +844,37 @@ nl:pe_EGT_2_ref_end a era:NetPointReference ;
 nl:pe_EGT_2_ref_end_tc a era:TopologicalCoordinate ;
     era:onLinearElement nl:le_B3 ;
     era:offsetFromOrigin "600.0"^^xsd:double .
+
+nl:pe_SVW_1 a era:PlatformEdge ;
+    rdfs:label "Platform 1"@en ;
+    era:platformId "1" ;
+    era:lengthOfPlatform "170.0"^^xsd:double ;
+    era:inCountry eu-country:NLD ;
+    era:infrastructureManager orgrole:9902_IM ;
+    era:netReference nl:pe_SVW_1_ref .
+
+nl:pe_SVW_1_ref a era:NetLinearReference ;
+    era:hasSequence ( nl:le_B1 ) ;
+    era:startsAt nl:pe_SVW_1_ref_start ;
+    era:endsAt nl:pe_SVW_1_ref_end ;
+    gsp:hasGeometry nl:pe_SVW_1_ref_geom .
+
+nl:pe_SVW_1_ref_geom a gsp:Geometry ;
+    gsp:asWKT "LINESTRING(3.47671 52.60000, 3.47175 52.60000)"^^gsp:wktLiteral .
+
+nl:pe_SVW_1_ref_start a era:NetPointReference ;
+    era:hasTopoCoordinate nl:pe_SVW_1_ref_start_tc .
+
+nl:pe_SVW_1_ref_start_tc a era:TopologicalCoordinate ;
+    era:onLinearElement nl:le_B1 ;
+    era:offsetFromOrigin "3130.0"^^xsd:double .
+
+nl:pe_SVW_1_ref_end a era:NetPointReference ;
+    era:hasTopoCoordinate nl:pe_SVW_1_ref_end_tc .
+
+nl:pe_SVW_1_ref_end_tc a era:TopologicalCoordinate ;
+    era:onLinearElement nl:le_B1 ;
+    era:offsetFromOrigin "3300.0"^^xsd:double .
 
 
 ##############################################################################
@@ -774,6 +895,18 @@ nl:pl_EGT a era:PrimaryLocation ;
     era:netReference nl:op_EGT_ref .
 
 nl:op_EGT era:primaryLocation nl:pl_EGT .
+
+nl:pl_SVW a era:PrimaryLocation ;
+    rdfs:label "Seaview"@en ;
+    era:primaryLocationCode "NL99003" ;
+    era:primaryLocationName "Seaview"@en ;
+    era:passengerFlag true ;
+    era:freightFlag false ;
+    era:inCountry eu-country:NLD ;
+    era:infrastructureManager orgrole:9902_IM ;
+    era:netReference nl:op_SVW_ref .
+
+nl:op_SVW era:primaryLocation nl:pl_SVW .
 
 nl:pl_BORD a era:PrimaryLocation ;
     rdfs:label "Dunes border"@en ;
