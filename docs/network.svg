@@ -13,8 +13,8 @@
 <path d="M691.9,440.0 L610.8,440.0" class="sol"/>
 <circle cx="178.2" cy="340.0" r="11" fill="none" stroke="#8d99ab" stroke-width="4"/>
 <circle cx="191.7" cy="440.0" r="11" fill="none" stroke="#8d99ab" stroke-width="4"/>
-<path d="M1784.1,440.0 L1569.4,440.0" class="sol"/>
-<path d="M1556.6,440.0 L1442.8,440.0" class="sol"/>
+<path d="M1784.1,440.0 L1563.0,440.0" class="sol"/>
+<path d="M1563.0,440.0 L1442.8,440.0" class="sol"/>
 <line x1="1442.8" y1="100" x2="1442.8" y2="690" class="border"/>
 <text x="1442.8" y="70.0" text-anchor="middle" class="opname">border point EU99901, one record per IM</text>
 <text x="1430.8" y="92.0" text-anchor="end" class="imbe">Infra Alfa (BE)</text>
@@ -52,9 +52,11 @@
 <path d="M1569.4,440.0 L1556.6,440.0" class="op" stroke="#ffe9a8"/>
 <path d="M1061.0,340.0 L1183.1,340.0" class="tunnel"/>
 <path d="M1118.1,440.0 L1215.6,440.0" class="tunnel"/>
+<rect x="1098.2" y="299.0" width="92.4" height="16" rx="4" fill="#e2e2e2"/>
 <text x="1144.4" y="310.0" text-anchor="middle" class="feat">Midford tunnel</text>
 <line x1="1305.1" y1="326.0" x2="1305.1" y2="354.0" class="lc"/>
 <line x1="1313.1" y1="426.0" x2="1313.1" y2="454.0" class="lc"/>
+<rect x="1234.9" y="299.0" width="148.4" height="16" rx="4" fill="#f0dcc4"/>
 <text x="1309.1" y="310.0" text-anchor="middle" class="feat">Dune road level crossing</text>
 <path d="M306.6,333.0 L374.2,333.0" class="pe"/>
 <text x="301.6" y="336.0" text-anchor="end" class="small">pl. 1</text>
@@ -272,9 +274,9 @@
 <rect x="980.9" y="663.0" width="176" height="34" rx="5" fill="#cfe8ff"/>
 <text x="1068.9" y="677.0" text-anchor="middle" class="opname">Hillend siding (BEHIL)</text>
 <text x="1068.9" y="691.0" text-anchor="middle" class="small">type 130</text>
-<rect x="685.0" y="264.0" width="176" height="34" rx="5" fill="#d9f2d0"/>
-<text x="773.0" y="278.0" text-anchor="middle" class="opname">Midford Junction (BEMID)</text>
-<text x="773.0" y="292.0" text-anchor="middle" class="small">type 80</text>
+<rect x="685.0" y="488.0" width="176" height="34" rx="5" fill="#d9f2d0"/>
+<text x="773.0" y="502.0" text-anchor="middle" class="opname">Midford Junction (BEMID)</text>
+<text x="773.0" y="516.0" text-anchor="middle" class="small">type 80</text>
 <rect x="36.1" y="64.0" width="176" height="34" rx="5" fill="#f6d5e5"/>
 <text x="124.1" y="78.0" text-anchor="middle" class="opname">Westhaven Depot (BEWHD)</text>
 <text x="124.1" y="92.0" text-anchor="middle" class="small">type 50</text>

@@ -81,14 +81,17 @@ for op in sorted(g.subjects(RDF.type, ERA.OperationalPoint)):
             T(x - 12, 92, 'Infra Alfa (BE)', 'imbe', 'end'); T(x + 12, 92, 'Beta Spoor (NL)', 'imnl', 'start')
 
 # tunnels, level crossings, platform edges
+def BG(x, y, text, fill):   # a feature label on a coloured background, as the operational point labels
+    w = len(text) * 5.6 + 14
+    o.append(f'<rect x="{x - w / 2:.1f}" y="{y - 11:.1f}" width="{w:.1f}" height="16" rx="4" fill="{fill}"/>'); T(x, y, text, 'feat')
 for t in g.subjects(RDF.type, ERA.Tunnel):
     sts = stretches(g.value(t, ERA.netReference))
     for st in sts: o.append(f'<path d="{path(st)}" class="tunnel"/>')
-    T(sum(p[0] for st in sts for p in st) / sum(len(st) for st in sts), min(p[1] for st in sts for p in st) - 30, lab(t), 'feat')
+    BG(sum(p[0] for st in sts for p in st) / sum(len(st) for st in sts), min(p[1] for st in sts for p in st) - 30, lab(t), '#e2e2e2')
 for t in g.subjects(RDF.type, ERA.LevelCrossing):
     sts = stretches(g.value(t, ERA.netReference)); xs = [(st[0][0] + st[-1][0]) / 2 for st in sts]; ys = [st[0][1] for st in sts]
     for x, y in zip(xs, ys): o.append(f'<line x1="{x:.1f}" y1="{y-14:.1f}" x2="{x:.1f}" y2="{y+14:.1f}" class="lc"/>')
-    T(sum(xs) / len(xs), min(ys) - 30, lab(t), 'feat')
+    BG(sum(xs) / len(xs), min(ys) - 30, lab(t), '#f0dcc4')
 for pe in g.subjects(RDF.type, ERA.PlatformEdge):
     for st in stretches(g.value(pe, ERA.netReference)):
         side = -7 if loc(pe).endswith('1') or 'EGT' in loc(pe) else 7   # platform 3 lies between tracks 3 and 1; Eastgate's on the outside
@@ -146,7 +149,7 @@ for pl in g.subjects(RDF.type, ERA.PrimaryLocation):
     T(x, y - 9, 'PLC ' + str(g.value(pl, ERA.primaryLocationCode)), 'plt')
 
 for x, y0, y1, name, typ, c in oplabels:
-    above = name.startswith(('Westhaven Depot', 'Midford', 'Westhaven (', 'Eastgate'))
+    above = name.startswith(('Westhaven Depot', 'Westhaven (', 'Eastgate'))   # Midford's label goes below its lower track
     y = y0 - 62 if above else y1 + 62
     o.append(f'<rect x="{x-88:.1f}" y="{y-14:.1f}" width="176" height="34" rx="5" fill="{c}"/>'); T(x, y, name, 'opname'); T(x, y + 14, typ, 'small')
 

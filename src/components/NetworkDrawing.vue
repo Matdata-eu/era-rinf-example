@@ -27,6 +27,7 @@ const sols = instances(ERA + 'SectionOfLine').map((s) => {
   return { iri: s, paths: stretches(ref).map(path) }
 })
 let ci = 0
+const LABEL_BELOW = ['BEMID', 'BEDUN']   // labels drawn below the lowest track of the area
 const ops = [], borders = []
 for (const op of instances(ERA + 'OperationalPoint')) {
   const refIri = value(op, ERA + 'netReference')
@@ -35,7 +36,7 @@ for (const op of instances(ERA + 'OperationalPoint')) {
     const st = stretches(refIri), all = st.flat()
     const xs = all.map((p) => p[0]), ys = all.map((p) => p[1])
     const y0 = Math.min(...ys), y1 = Math.max(...ys)
-    const below = y1 > Y0 + 10
+    const below = y1 > Y0 + 10 || LABEL_BELOW.includes(value(op, ERA + 'uopid'))
     ops.push({ iri: op, paths: st.map(path), color: OPC[ci++ % OPC.length], name: value(op, ERA + 'opName'), uopid: value(op, ERA + 'uopid'), type,
       x: (Math.min(...xs) + Math.max(...xs)) / 2, y: below ? y1 + 62 : y0 - 62 })
   } else {
@@ -67,11 +68,11 @@ const platforms = instances(ERA + 'PlatformEdge').map((pe) => {
 })
 const tunnels = instances(ERA + 'Tunnel').map((t) => {
   const st = stretches(value(t, ERA + 'netReference')), all = st.flat()
-  return { iri: t, paths: st.map(path), name: label(t), x: all.reduce((a, p) => a + p[0], 0) / all.length, y: Math.min(...all.map((p) => p[1])) - 30 }
+  return { iri: t, paths: st.map(path), name: label(t), w: label(t).length * 5.6 + 14, x: all.reduce((a, p) => a + p[0], 0) / all.length, y: Math.min(...all.map((p) => p[1])) - 30 }
 })
 const crossings = instances(ERA + 'LevelCrossing').map((t) => {
   const pts = stretches(value(t, ERA + 'netReference')).map((s) => [(s[0][0] + s[s.length - 1][0]) / 2, s[0][1]])
-  return { iri: t, pts, name: label(t), x: pts.reduce((a, p) => a + p[0], 0) / pts.length, y: Math.min(...pts.map((p) => p[1])) - 30 }
+  return { iri: t, pts, name: label(t), w: label(t).length * 5.6 + 14, x: pts.reduce((a, p) => a + p[0], 0) / pts.length, y: Math.min(...pts.map((p) => p[1])) - 30 }
 })
 const posts = instances(ERA + 'KilometricPost').map((k) => { const q = pos(value(k, ERA + 'netReference')); return { iri: k, p: at(q.e, q.off).p, km: parseFloat(value(k, ERA + 'kilometer')) } })
 // a primary location shares the net reference of its operational point: its mark sits halfway along the longest stretch
@@ -182,9 +183,9 @@ const border = borders.find((b) => b.im === 'be')
 
     <g v-if="on('structures')">
       <g v-for="t in tunnels" :key="t.iri" class="pick" @click="pick($event, t.iri)"><title>{{ shrink(t.iri) }}</title>
-        <path v-for="(d, i) in t.paths" :key="i" :d="d" class="tunnel" /><text :x="t.x" :y="t.y" class="feat">{{ t.name }}</text></g>
+        <path v-for="(d, i) in t.paths" :key="i" :d="d" class="tunnel" /><rect :x="t.x - t.w / 2" :y="t.y - 11" :width="t.w" height="16" rx="4" class="featbg tunnelbg" /><text :x="t.x" :y="t.y" class="feat">{{ t.name }}</text></g>
       <g v-for="t in crossings" :key="t.iri" class="pick" @click="pick($event, t.iri)"><title>{{ shrink(t.iri) }}</title>
-        <line v-for="(p, i) in t.pts" :key="i" :x1="p[0]" :y1="p[1] - 14" :x2="p[0]" :y2="p[1] + 14" class="lc" /><text :x="t.x" :y="t.y" class="feat">{{ t.name }}</text></g>
+        <line v-for="(p, i) in t.pts" :key="i" :x1="p[0]" :y1="p[1] - 14" :x2="p[0]" :y2="p[1] + 14" class="lc" /><rect :x="t.x - t.w / 2" :y="t.y - 11" :width="t.w" height="16" rx="4" class="featbg lcbg" /><text :x="t.x" :y="t.y" class="feat">{{ t.name }}</text></g>
     </g>
     <g v-if="on('platforms')">
       <g v-for="p in platforms" :key="p.iri" class="pick" @click="pick($event, p.iri)"><title>{{ shrink(p.iri) }}</title>
@@ -271,6 +272,8 @@ text { font-family: var(--font); font-size: 11px; fill: var(--c-ink); text-ancho
 .small { font-size: 10px; fill: #333; }
 .opname { font-weight: 700; font-size: 12px; }
 .feat { font-size: 10px; font-style: italic; }
+.tunnelbg { fill: #e2e2e2; }
+.lcbg { fill: #f0dcc4; }
 .border { stroke: #111; stroke-width: 1.5; stroke-dasharray: 7 5; }
 .imbe { fill: var(--c-be); font-weight: 700; font-size: 14px; } .imnl { fill: var(--c-nl); font-weight: 700; font-size: 14px; }
 .marks path { fill: none; stroke: var(--c-hl); stroke-width: 15; stroke-linecap: round; stroke-linejoin: round; opacity: 0.85; }

@@ -133,12 +133,16 @@ def windows(cls):
                     lo, hi = (0.0, eo) if enter_origin else (eo, length[e])
                 res.append((c, e, lo, hi))
     return res
+# an operational point without tracks (a stopping point) lies on top of the tracks of its sections of line
+def trackless(c):
+    return (c, RDF.type, ERA.OperationalPoint) in g and not any(
+        (p, RDF.type, t) in g for p in g.objects(c, ERA.hasPart) for t in (ERA.Track, ERA.RunningTrack, ERA.Siding))
 cover = collections.defaultdict(list); bad = []
 for c, e, lo, hi in windows(ERA.OperationalPoint) + windows(ERA.SectionOfLine):
     for c2, lo2, hi2 in cover[e]:
-        if c2 != c and min(hi, hi2) - max(lo, lo2) > 1e-6: bad.append(f'{short(e)}: {short(c)} overlaps {short(c2)}')
+        if c2 != c and min(hi, hi2) - max(lo, lo2) > 1e-6 and not (trackless(c) or trackless(c2)): bad.append(f'{short(e)}: {short(c)} overlaps {short(c2)}')
     cover[e].append((c, lo, hi))
-check('operational points and sections of line do not overlap', bad)
+check('operational points and sections of line do not overlap (a stopping point without tracks may)', bad)
 gaps = []
 for e in elems:
     segs = sorted((lo, hi) for _, lo, hi in cover[e]); p = 0.0
