@@ -169,8 +169,8 @@ const border = borders.find((b) => b.im === 'be')
       <line :x1="border.x" y1="100" :x2="border.x" y2="690" class="border" />
       <line :x1="border.x" y1="100" :x2="border.x" y2="690" class="hit" />
       <text :x="border.x" y="70" class="opname">border point {{ border.uopid }}</text>
-      <text :x="border.x - 12" y="92" class="imbe" text-anchor="end">Infra Alfa (BE)</text>
-      <text :x="border.x + 12" y="92" class="imnl" text-anchor="start">Beta Spoor (NL)</text>
+      <text :x="border.x - 12" y="92" class="imbe" style="text-anchor: end">Infra Alfa (BE)</text>
+      <text :x="border.x + 12" y="92" class="imnl" style="text-anchor: start">Beta Spoor (NL)</text>
     </g>
 
     <g class="marks">
@@ -189,7 +189,7 @@ const border = borders.find((b) => b.im === 'be')
     </g>
     <g v-if="on('platforms')">
       <g v-for="p in platforms" :key="p.iri" class="pick" @click="pick($event, p.iri)"><title>{{ shrink(p.iri) }}</title>
-        <path v-for="(d, i) in p.paths" :key="i" :d="d" class="pe" /><text :x="p.lx" :y="p.ly" class="small" text-anchor="end">pl. {{ p.id }}</text></g>
+        <path v-for="(d, i) in p.paths" :key="i" :d="d" class="pe" /><text :x="p.lx" :y="p.ly" class="small" style="text-anchor: end">pl. {{ p.id }}</text></g>
     </g>
 
     <g v-if="layers.tracks === true">
@@ -218,7 +218,7 @@ const border = borders.find((b) => b.im === 'be')
     <g v-if="on('switches')">
       <g v-for="s in switches" :key="s.iri" class="pick" @click="pick($event, s.iri)"><title>{{ shrink(s.iri) }} · switch</title>
         <circle :cx="s.p[0]" :cy="s.p[1]" r="5" class="sw" />
-        <text :x="s.p[0] + (s.im === 'nl' ? 8 : -8)" :y="s.p[1] + 17" class="swt" :text-anchor="s.im === 'nl' ? 'start' : 'end'">{{ s.id }}</text></g>
+        <text :x="s.p[0] + (s.im === 'nl' ? 8 : -8)" :y="s.p[1] + 17" class="swt" :style="{ textAnchor: s.im === 'nl' ? 'start' : 'end' }">{{ s.id }}</text></g>
     </g>
     <g v-if="on('signals')">
       <g v-for="s in signals" :key="s.iri" class="pick" @click="pick($event, s.iri)"><title>{{ shrink(s.iri) }} · signal</title>
