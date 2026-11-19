@@ -104,9 +104,26 @@ Nothing about the network is written in the page code. Change the Turtle and the
 From the discussion on [ERA ontology work item #65](https://gitlab.com/era-europa-eu/public/interoperable-data-programme/era-ontology/era-ontology/-/work_items/65),
 which started from the old `examples/switch.ttl`. This example is meant to replace that file.
 
-**Is navigability physical or operational?**
+**Is navigability physical, functional or operational?**
 
-Generally, the netrelation is a physical connection and the navigability points to the operational. 
+A netrelation in RailTopoModel works on two levels:
+
+- the *physical* level only says which netelement ends touch each other. It has no notion of passing through: at
+  a switch it just says that three ends meet;
+- the *functional* level adds, for each pair of netelements, whether a vehicle can go from one to the other
+  through that connection point. At a switch the common branch can be reached from both legs, but a vehicle
+  cannot go from one leg to the other without reversing.
+
+In the ERA ontology, `era:NetRelation` together with `era:navigability` covers both levels.
+
+Functional is not the same as operational, in the sense of interlocking train routes. A yard typically has no
+signalled routes, yet its netrelations are navigable wherever a vehicle can pass: in Westhaven Depot, `d0`–`d1`
+and `d0`–`d2` are `Both`, and only the two legs of switch W21, `d1`–`d2`, are `None`. Neither a netrelation nor
+RailTopoModel itself holds information about train routes. RailTopoModel models them as a `NetEntity` subclass
+`Route`, as railML does with [`route`](https://wiki3.railml.org/wiki/IL:route). The ERA ontology has no route
+class.
+
+See the discussion in [note 4276774586](https://gitlab.com/era-europa-eu/public/interoperable-data-programme/era-ontology/era-ontology/-/work_items/65#note_4276774586).
 
 **Is there a real case of navigability in one direction only?**
 

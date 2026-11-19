@@ -45,8 +45,9 @@ export const scenes = [
   },
   {
     id: 'relation', title: 'Netrelations: a topology connection defining navigability',
-    text: `<p>Netelements do not know their neighbours. A netrelation, <code>era:NetRelation</code>, says that an end of netelement A touches an end of netelement B, and whether a train can pass from one to the other.</p>
-<p><code>era:isOnOriginOfElementA true</code> means: the connection is at the <em>origin</em> of A, here <code>b5</code>. <code>era:isOnOriginOfElementB false</code>: it is at the <em>end</em> of B, here <code>b4</code>. <code>era:navigability</code> is <code>Both</code>: trains pass in both directions.</p>`,
+    text: `<p>Netelements do not know their neighbours. A netrelation, <code>era:NetRelation</code>, says that an end of netelement A touches an end of netelement B, and whether a vehicle can pass from one to the other.</p>
+<p><code>era:isOnOriginOfElementA true</code> means: the connection is at the <em>origin</em> of A, here <code>b5</code>. <code>era:isOnOriginOfElementB false</code>: it is at the <em>end</em> of B, here <code>b4</code>. <code>era:navigability</code> is <code>Both</code>: a vehicle can pass in both directions.</p>
+<p>That covers the two levels of a netrelation in RailTopoModel. The <em>physical</em> level says which netelement ends touch. The <em>functional</em> level, <code>era:navigability</code>, says whether a vehicle can go from one netelement to the other through that point. Functional is not operational: navigability says nothing about interlocking train routes. A yard without signalled routes still has navigable netrelations wherever a vehicle can pass.</p>`,
     box: ['be:nr_Wg_b5_b4'], focus: { at: 'be:sw_W14', width: 420 }, layers: { ...TOPOLOGY_ONLY, switches: true },
   },
   {
